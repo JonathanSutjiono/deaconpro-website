@@ -15,6 +15,7 @@ export type CompanyInfo = {
   socialLinks: { label: string; href: string; handle?: string }[];
   projectFocus: string[];
   heroSubtitle: string;
+  aboutSummary: string;
   about: string;
   vision: string;
   missionsIntro: string;
@@ -50,10 +51,12 @@ export const company: CompanyInfo = {
   projectFocus: ["Office & Commercial (1)", "Residential (1)"],
   heroSubtitle:
     "Build New, Renovation, and Home Maintenance services across Jabodetabek, Bali, and Makassar.",
+  aboutSummary:
+    "PT Deacon Pro Konstruksi Indonesia is a creative-innovative architectural building contractor and interior design furnishings company based in Kelapa Gading, Jakarta. We help clients build, renovate, and maintain properties through disciplined project execution, refined design sensibility, and reliable project management.",
   about:
     "PT Deacon Pro Konstruksi Indonesia is a creative-innovative Architectural Building Contractor and Interior Design Furnishings company in Kelapa Gading Jakarta, Indonesia. We are really passionate about helping others to understand about construction and furnishings through architectural and interior design that appropriate to clients property needs. To make it happens, we are focusing on Exterior and Interior Building Construction. Both of those areas should be covered by Project Management knowledge. We want to convince our valuable clients that their projects will be finished due to on the planned time, within budget and have a good quality control.",
   vision:
-    "Be the world's premier building construction and interior design services organization",
+    "Be the world's premier building construction and interior design services organization.",
   missionsIntro:
     "Deacon Projects Contractor is built on honesty and integrity - created to provide you with a builder who listens to you and cares about your needs which based on our missions:",
   missions: [

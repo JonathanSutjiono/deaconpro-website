@@ -38,12 +38,7 @@ export default function Home() {
             title="Construction, renovation, and maintenance with a premium standard."
           />
           <p className="max-w-3xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
-            PT Deacon Pro Konstruksi Indonesia is a creative-innovative
-            architectural building contractor and interior design furnishings
-            company based in Kelapa Gading, Jakarta. We help clients build,
-            renovate, and maintain properties through disciplined project
-            execution, refined design sensibility, and reliable project
-            management.
+            {company.aboutSummary}
           </p>
           <a
             href="#company-detail"

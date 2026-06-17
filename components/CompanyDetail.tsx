@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { Globe, MapPin, Phone } from "lucide-react";
+import { BriefcaseBusiness, Building2, Globe, MapPin, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { company } from "@/data/company";
@@ -50,6 +50,11 @@ function DetailRow({
 }
 
 export default function CompanyDetail() {
+  const instagram = company.socialLinks.find((item) => item.label === "Instagram");
+  const facebook = company.socialLinks.find((item) => item.label === "Facebook");
+  const twitter = company.socialLinks.find((item) => item.label === "Twitter/X");
+  const linkedIn = company.socialLinks.find((item) => item.label === "LinkedIn");
+
   return (
     <section id="company-detail" className="bg-white py-20 text-neutral-950 md:py-28">
       <div className="container-x">
@@ -67,28 +72,43 @@ export default function CompanyDetail() {
 
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="border border-neutral-200 bg-neutral-50 p-6 shadow-sm md:p-8">
-            <div className="border-b border-neutral-200 pb-6">
-              <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
-                Location
-              </p>
-              <h3 className="mt-3 text-2xl font-black uppercase text-neutral-950">
-                {company.location}
-              </h3>
-              <p className="mt-4 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
-                {company.address}
-              </p>
+            <div className="border-b border-neutral-200 pb-7">
+              <div className="flex gap-4">
+                <MapPin className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
+                <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
+                    Location
+                  </p>
+                  <h3 className="mt-2 text-2xl font-black uppercase text-neutral-950">
+                    {company.location}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="mt-6 flex gap-4">
+                <MapPin className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
+                <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
+                    Address
+                  </p>
+                  <p className="mt-2 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
+                    {company.address}
+                  </p>
+                </div>
+              </div>
+
               <a
                 href={company.googleMapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 bg-neutral-950 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-gold md:text-sm"
+                className="ml-9 mt-5 inline-flex min-h-11 items-center justify-center gap-2 bg-neutral-950 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-gold md:text-sm"
               >
                 <MapPin className="h-4 w-4" aria-hidden="true" />
                 Open in Google Maps
               </a>
             </div>
 
-            <DetailRow label="Company Name" value={company.name} Icon={Globe} />
+            <DetailRow label="Company Name" value={company.name} Icon={Building2} />
             <DetailRow label="Service Area" value={company.serviceArea} Icon={MapPin} />
             <DetailRow label="Phone Number" value={company.phone} href={company.phoneHref} Icon={Phone} />
             <DetailRow
@@ -107,27 +127,27 @@ export default function CompanyDetail() {
             />
             <DetailRow
               label="Instagram"
-              value={company.socialLinks[0].handle ?? company.socialLinks[0].label}
-              href={company.socialLinks[0].href}
+              value={instagram?.handle ?? "Instagram"}
+              href={instagram?.href}
               Icon={FaInstagram}
               external
             />
             <DetailRow
               label="Facebook"
               value="Facebook"
-              href={company.socialLinks[1].href}
+              href={facebook?.href}
               Icon={FaFacebookF}
             />
             <DetailRow
               label="Twitter/X"
               value="Twitter/X"
-              href={company.socialLinks[2].href}
+              href={twitter?.href}
               Icon={FaXTwitter}
             />
             <DetailRow
               label="LinkedIn"
               value="LinkedIn"
-              href={company.socialLinks[3].href}
+              href={linkedIn?.href}
               Icon={FaLinkedinIn}
             />
 
@@ -139,8 +159,9 @@ export default function CompanyDetail() {
                 {company.projectFocus.map((item) => (
                   <span
                     key={item}
-                    className="border border-neutral-300 bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-neutral-950"
+                    className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-neutral-950"
                   >
+                    <BriefcaseBusiness className="h-4 w-4 text-gold" aria-hidden="true" />
                     {item}
                   </span>
                 ))}

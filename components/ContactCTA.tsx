@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { MapPin, Phone } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { company } from "@/data/company";
 
 export default function ContactCTA() {
+  const instagram = company.socialLinks.find((item) => item.label === "Instagram");
+
   return (
     <section id="contact" className="bg-white py-20 text-neutral-950 md:py-28">
       <div className="container-x bg-neutral-950 p-8 text-white shadow-2xl md:p-14">
@@ -22,6 +24,15 @@ export default function ContactCTA() {
             <p className="mt-4 max-w-3xl text-base leading-8 text-white/72 md:text-[18px] md:leading-9">
               {company.location}: {company.address}
             </p>
+            <a
+              href={company.googleMapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 border border-white/20 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:border-champagne hover:text-champagne"
+            >
+              <MapPin className="h-4 w-4" aria-hidden="true" />
+              Open in Google Maps
+            </a>
             <div className="mt-5 flex flex-col gap-3 text-base font-semibold text-white/82 sm:flex-row sm:gap-6 md:text-[18px]">
               <a href={company.phoneHref} className="inline-flex items-center gap-2 transition hover:text-champagne">
                 <Phone className="h-5 w-5" aria-hidden="true" />
@@ -36,16 +47,18 @@ export default function ContactCTA() {
                 <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
                 WhatsApp: {company.whatsapp}
               </a>
+              {instagram ? (
+                <a
+                  href={instagram.href}
+                  className="inline-flex items-center gap-2 transition hover:text-champagne"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram className="h-5 w-5" aria-hidden="true" />
+                  {instagram.handle}
+                </a>
+              ) : null}
             </div>
-            <a
-              href={company.googleMapsHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 border border-white/20 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:border-champagne hover:text-champagne"
-            >
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-              Open in Google Maps
-            </a>
           </div>
           <Link
             href={company.whatsappHref}

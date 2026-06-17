@@ -61,6 +61,11 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
                   {item.description}
                 </p>
               ) : null}
+              {href ? (
+                <p className="mt-5 text-sm font-black uppercase tracking-widest text-champagne">
+                  View Project
+                </p>
+              ) : null}
             </div>
           </article>
         );
