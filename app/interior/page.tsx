@@ -5,7 +5,16 @@ import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
 import { company } from "@/data/company";
+import { interiorProjects } from "@/data/projects";
 import { interiorServices } from "@/data/services";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata = createPageMetadata({
+  title: `Deacon Pro Interior | ${company.name}`,
+  description:
+    "Interior design, interior fit-out, office interior, residential interior, and custom furniture services in Jakarta and service areas.",
+  path: "/interior",
+});
 
 export default function InteriorPage() {
   return (
@@ -49,14 +58,7 @@ export default function InteriorPage() {
             title="Explore interior project references."
           />
           <PortfolioCards
-            items={[
-              {
-                title: "Interior Projects",
-                href: "/portfolio/interior",
-                category: "Interior Portfolio",
-                description: `${company.name} interior design, fit-out, and furniture work.`,
-              },
-            ]}
+            items={interiorProjects.slice(0, 3)}
           />
         </div>
       </section>

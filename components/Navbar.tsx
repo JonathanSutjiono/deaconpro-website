@@ -119,7 +119,7 @@ export default function Navbar() {
           <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/#process">
             Process
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/#insight">
+          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/insight">
             Insight
           </Link>
           <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/#contact">
@@ -167,7 +167,7 @@ export default function Navbar() {
             <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#process">
               Process
             </Link>
-            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#insight">
+            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/insight">
               Insight
             </Link>
             <Link className="block py-4 text-base font-bold text-neutral-900" href="/#contact">

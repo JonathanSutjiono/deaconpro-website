@@ -10,6 +10,14 @@ import SectionTitle from "@/components/SectionTitle";
 import ServiceCards from "@/components/ServiceCards";
 import { company } from "@/data/company";
 import { homepagePortfolio } from "@/data/portfolio";
+import { featuredProjects } from "@/data/projects";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata = createPageMetadata({
+  title: `${company.name} | Build New, Renovation, Home Maintenance`,
+  description:
+    "PT Deacon Pro Konstruksi Indonesia provides kontraktor rumah Jakarta, interior design Kelapa Gading, renovation, and home maintenance services.",
+});
 
 export default function Home() {
   return (
@@ -19,6 +27,8 @@ export default function Home() {
         title={["DESIGN.", "CONSTRUCT.", "INSPIRE."]}
         highlight="INSPIRE."
         description={company.heroSubtitle}
+        tertiaryLabel="Chat WhatsApp"
+        tertiaryHref={company.whatsappHref}
       />
 
       <section id="about" className="bg-white py-20 text-neutral-950 md:py-28">
@@ -28,10 +38,17 @@ export default function Home() {
             title="Construction, renovation, and maintenance with a premium standard."
           />
           <p className="text-base leading-8 text-neutral-600">
-            {company.about} We combine disciplined project execution, refined
-            design sensibility, and responsive maintenance support for clients
-            who need practical delivery with a clean corporate standard.
+            {company.about.slice(0, 315)}... We combine disciplined project
+            execution, refined design sensibility, and responsive maintenance
+            support for clients who need practical delivery with a clean
+            corporate standard.
           </p>
+          <a
+            href="#company-detail"
+            className="inline-flex w-fit bg-neutral-950 px-5 py-3 text-xs font-black uppercase tracking-widest text-white transition hover:bg-gold"
+          >
+            Company Detail
+          </a>
         </div>
       </section>
 
@@ -53,6 +70,9 @@ export default function Home() {
             title="Project categories ready for official case studies."
           />
           <PortfolioCards items={homepagePortfolio} />
+          <div className="mt-8">
+            <PortfolioCards items={featuredProjects} />
+          </div>
         </div>
       </section>
 
@@ -73,7 +93,13 @@ export default function Home() {
             title="Project thinking for construction and interiors."
             light
           />
-          <InsightCards />
+          <InsightCards limit={3} />
+          <a
+            href="/insight"
+            className="mt-8 inline-flex bg-gold px-6 py-4 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-neutral-950"
+          >
+            View All Insights
+          </a>
         </div>
       </section>
 

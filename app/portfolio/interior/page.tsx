@@ -5,7 +5,15 @@ import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
 import { company } from "@/data/company";
-import { interiorProjects } from "@/data/portfolio";
+import { interiorProjects } from "@/data/projects";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata = createPageMetadata({
+  title: `Interior Projects | ${company.name}`,
+  description:
+    "Interior design and fit-out project samples for residential, office, retail, and custom furniture scopes.",
+  path: "/portfolio/interior",
+});
 
 export default function InteriorPortfolioPage() {
   return (

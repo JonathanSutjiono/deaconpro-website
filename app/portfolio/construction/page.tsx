@@ -5,7 +5,15 @@ import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
 import { company } from "@/data/company";
-import { constructionProjects } from "@/data/portfolio";
+import { constructionProjects } from "@/data/projects";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata = createPageMetadata({
+  title: `Construction Projects | ${company.name}`,
+  description:
+    "Construction project samples for Build New, renovation, contractor, and construction management services.",
+  path: "/portfolio/construction",
+});
 
 export default function ConstructionPortfolioPage() {
   return (

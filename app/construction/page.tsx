@@ -5,7 +5,16 @@ import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
 import { company } from "@/data/company";
+import { constructionProjects } from "@/data/projects";
 import { constructionServices } from "@/data/services";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata = createPageMetadata({
+  title: `Deacon Pro Construction | ${company.name}`,
+  description:
+    "General contractor, Design & Build, renovation, and construction management services across Jabodetabek, Bali, and Makassar.",
+  path: "/construction",
+});
 
 export default function ConstructionPage() {
   return (
@@ -49,15 +58,7 @@ export default function ConstructionPage() {
             title="Explore construction project references."
           />
           <PortfolioCards
-            items={[
-              {
-                title: "Construction Projects",
-                href: "/portfolio/construction",
-                category: "Construction Portfolio",
-                description:
-                  `${company.name} Build New, renovation, contractor, and construction management references.`,
-              },
-            ]}
+            items={constructionProjects.slice(0, 3)}
           />
         </div>
       </section>

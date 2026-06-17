@@ -11,6 +11,8 @@ type HeroProps = {
   primaryHref?: string;
   secondaryLabel?: string;
   secondaryHref?: string;
+  tertiaryLabel?: string;
+  tertiaryHref?: string;
 };
 
 export default function Hero({
@@ -22,10 +24,13 @@ export default function Hero({
   primaryHref = "/#services",
   secondaryLabel = "View Projects",
   secondaryHref = "/#portfolio",
+  tertiaryLabel,
+  tertiaryHref,
 }: HeroProps) {
   const lines = Array.isArray(title) ? title : [title];
   const primaryExternal = primaryHref.startsWith("http");
   const secondaryExternal = secondaryHref.startsWith("http");
+  const tertiaryExternal = tertiaryHref?.startsWith("http") ?? false;
 
   return (
     <section className="relative min-h-[88vh] overflow-hidden pt-20">
@@ -78,6 +83,16 @@ export default function Hero({
             >
               {secondaryLabel}
             </Link>
+            {tertiaryLabel && tertiaryHref ? (
+              <Link
+                href={tertiaryHref}
+                className="inline-flex min-h-12 items-center justify-center border border-champagne/70 bg-black/20 px-7 text-sm font-black uppercase tracking-[0.18em] text-champagne transition hover:bg-champagne hover:text-neutral-950"
+                target={tertiaryExternal ? "_blank" : undefined}
+                rel={tertiaryExternal ? "noopener noreferrer" : undefined}
+              >
+                {tertiaryLabel}
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>
