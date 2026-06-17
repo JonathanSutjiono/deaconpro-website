@@ -1,4 +1,5 @@
 import ContactCTA from "@/components/ContactCTA";
+import CompanyDetail from "@/components/CompanyDetail";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import InsightCards from "@/components/InsightCards";
@@ -76,6 +77,7 @@ export default function Home() {
         </div>
       </section>
 
+      <CompanyDetail />
       <ContactCTA />
       <Footer />
     </main>
