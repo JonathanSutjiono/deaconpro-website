@@ -1,15 +1,20 @@
-import { Eye, MapPin } from "lucide-react";
+import type { ComponentType } from "react";
+import { Globe, MapPin, Phone } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { company } from "@/data/company";
 
 function DetailRow({
   label,
   value,
   href,
+  Icon,
   external = false,
 }: {
   label: string;
   value: string;
   href?: string;
+  Icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
   external?: boolean;
 }) {
   const content = (
@@ -20,7 +25,7 @@ function DetailRow({
 
   return (
     <div className="flex gap-4 border-b border-neutral-200 py-4">
-      <Eye className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
+      <Icon className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden={true} />
       <div>
         <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
           {label}
@@ -30,12 +35,12 @@ function DetailRow({
             href={href}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
-            className="mt-2 block text-base leading-8 md:text-[17px]"
+            className="mt-2 block text-base leading-8 md:text-[18px] md:leading-9"
           >
             {content}
           </a>
         ) : (
-          <p className="mt-2 text-base font-medium leading-8 text-neutral-900 md:text-[17px]">
+          <p className="mt-2 text-base font-medium leading-8 text-neutral-800 md:text-[18px] md:leading-9">
             {value}
           </p>
         )}
@@ -69,7 +74,7 @@ export default function CompanyDetail() {
               <h3 className="mt-3 text-2xl font-black uppercase text-neutral-950">
                 {company.location}
               </h3>
-              <p className="mt-4 text-base leading-8 text-neutral-600 md:text-[17px]">
+              <p className="mt-4 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
                 {company.address}
               </p>
               <a
@@ -83,30 +88,48 @@ export default function CompanyDetail() {
               </a>
             </div>
 
-            <DetailRow label="Company Name" value={company.name} />
-            <DetailRow label="Service Area" value={company.serviceArea} />
-            <DetailRow label="Phone Number" value={company.phone} href={company.phoneHref} />
+            <DetailRow label="Company Name" value={company.name} Icon={Globe} />
+            <DetailRow label="Service Area" value={company.serviceArea} Icon={MapPin} />
+            <DetailRow label="Phone Number" value={company.phone} href={company.phoneHref} Icon={Phone} />
             <DetailRow
               label="WhatsApp"
               value={company.whatsapp}
               href={company.whatsappHref}
+              Icon={FaWhatsapp}
               external
             />
             <DetailRow
               label="Website"
               value={company.website}
               href={company.websiteHref}
+              Icon={Globe}
               external
             />
-            {company.socialLinks.map((item) => (
-              <DetailRow
-                key={item.label}
-                label={item.label}
-                value={item.label}
-                href={item.href}
-                external={item.href !== "#"}
-              />
-            ))}
+            <DetailRow
+              label="Instagram"
+              value={company.socialLinks[0].handle ?? company.socialLinks[0].label}
+              href={company.socialLinks[0].href}
+              Icon={FaInstagram}
+              external
+            />
+            <DetailRow
+              label="Facebook"
+              value="Facebook"
+              href={company.socialLinks[1].href}
+              Icon={FaFacebookF}
+            />
+            <DetailRow
+              label="Twitter/X"
+              value="Twitter/X"
+              href={company.socialLinks[2].href}
+              Icon={FaXTwitter}
+            />
+            <DetailRow
+              label="LinkedIn"
+              value="LinkedIn"
+              href={company.socialLinks[3].href}
+              Icon={FaLinkedinIn}
+            />
 
             <div className="pt-6">
               <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
@@ -129,7 +152,7 @@ export default function CompanyDetail() {
             <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               About
             </p>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-600 md:text-[17px]">
+            <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
               {company.about}
             </p>
 
@@ -147,7 +170,7 @@ export default function CompanyDetail() {
             <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               Missions
             </p>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-neutral-600 md:text-[17px]">
+            <p className="mt-4 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
               {company.missionsIntro}
             </p>
             <div className="mt-6 space-y-4">
@@ -156,7 +179,7 @@ export default function CompanyDetail() {
                   <span className="grid h-8 w-8 shrink-0 place-items-center bg-gold text-xs font-black text-white">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-base leading-8 text-neutral-700 md:text-[17px]">
+                  <p className="text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
                     {mission}
                   </p>
                 </div>

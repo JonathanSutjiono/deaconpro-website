@@ -27,7 +27,7 @@ export default function InsightCards({ limit }: { limit?: number }) {
               <h3 className="mt-6 text-2xl font-black uppercase leading-tight text-white">
                 {item.title}
               </h3>
-              <p className="mt-4 text-base leading-7 text-white/70">
+              <p className="mt-4 text-base leading-8 text-white/76 md:text-[18px] md:leading-9">
                 {item.excerpt}
               </p>
               <p className="mt-6 text-sm font-bold uppercase tracking-[0.18em] text-white/45">

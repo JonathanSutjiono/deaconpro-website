@@ -75,7 +75,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
           <div className="container-x max-w-4xl">
             <div className="space-y-7">
               {insight.content.map((paragraph) => (
-                <p key={paragraph} className="text-base leading-8 text-neutral-700 md:text-[17px]">
+                <p key={paragraph} className="text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
                   {paragraph}
                 </p>
               ))}

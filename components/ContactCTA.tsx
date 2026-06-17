@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { company } from "@/data/company";
 
 export default function ContactCTA() {
@@ -14,23 +15,25 @@ export default function ContactCTA() {
             <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight md:text-6xl">
               Ready to build, renovate, or maintain your property?
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-white/74">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-white/80 md:text-[18px] md:leading-9">
               Talk with {company.name} about {company.tagline} services across{" "}
               {company.serviceArea}.
             </p>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-white/64">
+            <p className="mt-4 max-w-3xl text-base leading-8 text-white/72 md:text-[18px] md:leading-9">
               {company.location}: {company.address}
             </p>
-            <div className="mt-5 flex flex-col gap-2 text-sm font-semibold text-white/75 sm:flex-row sm:gap-6">
-              <a href={company.phoneHref} className="transition hover:text-champagne">
+            <div className="mt-5 flex flex-col gap-3 text-base font-semibold text-white/82 sm:flex-row sm:gap-6 md:text-[18px]">
+              <a href={company.phoneHref} className="inline-flex items-center gap-2 transition hover:text-champagne">
+                <Phone className="h-5 w-5" aria-hidden="true" />
                 Phone: {company.phone}
               </a>
               <a
                 href={company.whatsappHref}
-                className="transition hover:text-champagne"
+                className="inline-flex items-center gap-2 transition hover:text-champagne"
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
                 WhatsApp: {company.whatsapp}
               </a>
             </div>
@@ -50,6 +53,7 @@ export default function ContactCTA() {
             target="_blank"
             rel="noopener noreferrer"
           >
+            <FaWhatsapp className="mr-2 h-5 w-5" aria-hidden="true" />
             WhatsApp
           </Link>
         </div>

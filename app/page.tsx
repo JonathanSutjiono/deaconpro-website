@@ -37,11 +37,13 @@ export default function Home() {
             eyebrow="About Us"
             title="Construction, renovation, and maintenance with a premium standard."
           />
-          <p className="text-base leading-8 text-neutral-600">
-            {company.about.slice(0, 315)}... We combine disciplined project
-            execution, refined design sensibility, and responsive maintenance
-            support for clients who need practical delivery with a clean
-            corporate standard.
+          <p className="max-w-3xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
+            PT Deacon Pro Konstruksi Indonesia is a creative-innovative
+            architectural building contractor and interior design furnishings
+            company based in Kelapa Gading, Jakarta. We help clients build,
+            renovate, and maintain properties through disciplined project
+            execution, refined design sensibility, and reliable project
+            management.
           </p>
           <a
             href="#company-detail"

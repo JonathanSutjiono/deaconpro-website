@@ -121,7 +121,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ))}
             </div>
 
-            <p className="mt-10 text-base leading-8 text-neutral-600 md:text-[17px]">
+            <p className="mt-10 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
               {project.description}
             </p>
 

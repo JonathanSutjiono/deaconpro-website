@@ -57,7 +57,7 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
                 </p>
               ) : null}
               {item.description ? (
-                <p className="mt-3 text-base leading-7 text-white/74">
+                <p className="mt-3 text-base leading-8 text-white/78 md:text-[18px] md:leading-9">
                   {item.description}
                 </p>
               ) : null}

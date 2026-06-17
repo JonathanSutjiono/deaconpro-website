@@ -15,9 +15,13 @@ export const company = {
   googleMapsHref:
     "https://www.google.com/maps/search/Gading%20Square%2C%20Perkantoran%20Gading%20River%20View%20Apartemen%20Santa%20Monica%20Bay%20Lantai%201%20Unit%20K03%2C%20Kelapa%2C%20Jl.%20Boulevard%20Bar.%20Raya%20No.18%2C%20RT.18%2FRW.8%2C%20Klp.%20Gading%20Bar.%2C%20Kec.%20Klp.%20Gading%2C%20Jkt%20Utara%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2014240",
   socialLinks: [
-    { label: "Instagram", href: "#" },
+    {
+      label: "Instagram",
+      handle: "@deaconprocontractor",
+      href: "https://www.instagram.com/deaconprocontractor",
+    },
     { label: "Facebook", href: "#" },
-    { label: "Twitter", href: "#" },
+    { label: "Twitter/X", href: "#" },
     { label: "LinkedIn", href: "#" },
   ],
   projectFocus: ["Office & Commercial (1)", "Residential (1)"],
