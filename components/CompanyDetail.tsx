@@ -13,7 +13,7 @@ function DetailRow({
   external?: boolean;
 }) {
   const content = (
-    <span className="font-semibold text-neutral-900 transition hover:text-gold">
+    <span className="font-medium text-neutral-900 transition hover:text-gold">
       {value}
     </span>
   );
@@ -22,7 +22,7 @@ function DetailRow({
     <div className="flex gap-4 border-b border-neutral-200 py-4">
       <Eye className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
       <div>
-        <p className="text-xs font-black uppercase tracking-[0.22em] text-gold">
+        <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
           {label}
         </p>
         {href ? (
@@ -30,12 +30,12 @@ function DetailRow({
             href={href}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
-            className="mt-1 block text-sm leading-6"
+            className="mt-2 block text-base leading-8 md:text-[17px]"
           >
             {content}
           </a>
         ) : (
-          <p className="mt-1 text-sm font-semibold leading-6 text-neutral-900">
+          <p className="mt-2 text-base font-medium leading-8 text-neutral-900 md:text-[17px]">
             {value}
           </p>
         )}
@@ -63,20 +63,20 @@ export default function CompanyDetail() {
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="border border-neutral-200 bg-neutral-50 p-6 shadow-sm md:p-8">
             <div className="border-b border-neutral-200 pb-6">
-              <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
+              <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
                 Location
               </p>
               <h3 className="mt-3 text-2xl font-black uppercase text-neutral-950">
                 {company.location}
               </h3>
-              <p className="mt-4 text-sm leading-7 text-neutral-600">
+              <p className="mt-4 text-base leading-8 text-neutral-600 md:text-[17px]">
                 {company.address}
               </p>
               <a
                 href={company.googleMapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 bg-neutral-950 px-5 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-gold"
+                className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 bg-neutral-950 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-gold md:text-sm"
               >
                 <MapPin className="h-4 w-4" aria-hidden="true" />
                 Open in Google Maps
@@ -109,14 +109,14 @@ export default function CompanyDetail() {
             ))}
 
             <div className="pt-6">
-              <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
+              <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
                 Project Focus
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 {company.projectFocus.map((item) => (
                   <span
                     key={item}
-                    className="border border-neutral-300 bg-white px-4 py-3 text-xs font-black uppercase tracking-[0.14em] text-neutral-950"
+                    className="border border-neutral-300 bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-neutral-950"
                   >
                     {item}
                   </span>
@@ -126,16 +126,16 @@ export default function CompanyDetail() {
           </div>
 
           <div className="border border-neutral-200 bg-white p-6 shadow-sm md:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
+            <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               About
             </p>
-            <p className="mt-5 text-base leading-8 text-neutral-600">
+            <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-600 md:text-[17px]">
               {company.about}
             </p>
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
 
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
+            <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               Vision
             </p>
             <blockquote className="mt-4 border-l-4 border-gold pl-5 text-2xl font-black uppercase leading-tight text-neutral-950">
@@ -144,10 +144,10 @@ export default function CompanyDetail() {
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
 
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
+            <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               Missions
             </p>
-            <p className="mt-4 text-sm leading-7 text-neutral-600">
+            <p className="mt-4 max-w-3xl text-base leading-8 text-neutral-600 md:text-[17px]">
               {company.missionsIntro}
             </p>
             <div className="mt-6 space-y-4">
@@ -156,7 +156,9 @@ export default function CompanyDetail() {
                   <span className="grid h-8 w-8 shrink-0 place-items-center bg-gold text-xs font-black text-white">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-sm leading-7 text-neutral-700">{mission}</p>
+                  <p className="text-base leading-8 text-neutral-700 md:text-[17px]">
+                    {mission}
+                  </p>
                 </div>
               ))}
             </div>
