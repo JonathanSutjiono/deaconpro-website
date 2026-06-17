@@ -88,7 +88,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200 bg-white text-neutral-950 shadow-sm">
-      <nav className="mx-auto flex h-20 w-full max-w-[1440px] flex-nowrap items-center justify-between gap-4 px-4 sm:px-6 xl:gap-5 xl:px-8">
+      <nav className="mx-auto flex h-20 w-full max-w-[1536px] flex-nowrap items-center justify-between gap-4 px-4 sm:px-6 xl:gap-4 xl:px-8 2xl:gap-5">
         <Link
           href="/"
           className="flex min-w-0 shrink-0 items-center gap-3"
@@ -97,17 +97,20 @@ export default function Navbar() {
           <span className="grid h-10 w-10 shrink-0 place-items-center bg-neutral-950 text-[12px] font-black tracking-[0.12em] text-champagne xl:h-11 xl:w-11 xl:text-[13px]">
             DP
           </span>
-          <span className="min-w-0 leading-none">
+          <span className="leading-none">
             <span className="block whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] sm:text-sm xl:tracking-[0.22em]">
               {company.shortName}
             </span>
-            <span className="mt-1 hidden max-w-[180px] truncate whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.16em] text-gold sm:block xl:max-w-[230px] xl:text-[10px] xl:tracking-[0.22em]">
+            <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] text-gold xl:block 2xl:hidden">
+              {company.shortTagline}
+            </span>
+            <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-gold 2xl:block">
               {company.tagline}
             </span>
           </span>
         </Link>
 
-        <div className="hidden h-full flex-nowrap items-center gap-5 xl:flex 2xl:gap-6">
+        <div className="hidden h-full flex-nowrap items-center gap-4 xl:flex 2xl:gap-5">
           <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/">
             Home
           </Link>
@@ -129,14 +132,14 @@ export default function Navbar() {
 
         <Link
           href={company.phoneHref}
-          className="hidden whitespace-nowrap text-xs font-black uppercase tracking-[0.1em] text-neutral-800 transition hover:text-gold xl:inline-flex 2xl:tracking-[0.14em]"
+          className="hidden whitespace-nowrap text-xs font-black uppercase tracking-[0.08em] text-neutral-800 transition hover:text-gold xl:inline-flex 2xl:tracking-[0.12em]"
         >
           {company.phone}
         </Link>
 
         <Link
           href={company.whatsappHref}
-          className="hidden whitespace-nowrap bg-gold px-5 py-3 text-xs font-black uppercase tracking-[0.14em] text-white transition hover:bg-neutral-950 md:inline-flex xl:ml-1"
+          className="hidden whitespace-nowrap bg-gold px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-neutral-950 md:inline-flex xl:ml-1 2xl:px-5 2xl:tracking-[0.14em]"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -2,6 +2,7 @@ export type CompanyInfo = {
   name: string;
   shortName: string;
   tagline: string;
+  shortTagline: string;
   location: string;
   address: string;
   serviceArea: string;
@@ -26,6 +27,7 @@ export const company: CompanyInfo = {
   name: "PT Deacon Pro Konstruksi Indonesia",
   shortName: "Deacon Pro",
   tagline: "Build New · Renovation · Home Maintenance",
+  shortTagline: "Build New · Renovation · Maintenance",
   location: "Mall Of Indonesia",
   address:
     "Gading Square, Perkantoran Gading River View Apartemen Santa Monica Bay Lantai 1 Unit K03, Kelapa, Jl. Boulevard Bar. Raya No.18, RT.18/RW.8, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240",
