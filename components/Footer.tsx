@@ -2,22 +2,22 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-white/10 bg-black py-12 text-white">
+    <footer className="bg-neutral-950 py-12 text-white">
       <div className="container-x grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <p className="text-lg font-black uppercase tracking-[0.28em]">
             Deacon <span className="text-champagne">Pro</span>
           </p>
-          <p className="mt-5 max-w-md text-sm leading-7 text-white/62">
-            Modern construction and interior delivery for spaces that demand clarity,
-            craft, and lasting presence.
+          <p className="mt-5 max-w-md text-sm leading-7 text-white/60">
+            Integrated construction and interior solution provider for premium
+            residential, commercial, and hospitality spaces.
           </p>
         </div>
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-champagne">
-            Divisions
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-champagne">
+            Services
           </p>
-          <div className="mt-5 flex flex-col gap-3 text-sm text-white/70">
+          <div className="mt-5 flex flex-col gap-3 text-sm text-white/68">
             <Link href="/construction" className="transition hover:text-champagne">
               Deacon Construction
             </Link>
@@ -27,12 +27,16 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-champagne">
-            Contact
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-champagne">
+            Portfolio
           </p>
-          <div className="mt-5 space-y-3 text-sm text-white/70">
-            <p>hello@deaconpro.com</p>
-            <p>Jakarta, Indonesia</p>
+          <div className="mt-5 flex flex-col gap-3 text-sm text-white/68">
+            <Link href="/portfolio/construction" className="transition hover:text-champagne">
+              Construction Projects
+            </Link>
+            <Link href="/portfolio/interior" className="transition hover:text-champagne">
+              Interior Projects
+            </Link>
           </div>
         </div>
       </div>
