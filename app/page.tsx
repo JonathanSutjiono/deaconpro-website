@@ -7,21 +7,8 @@ import PortfolioCards from "@/components/PortfolioCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import SectionTitle from "@/components/SectionTitle";
 import ServiceCards from "@/components/ServiceCards";
-
-const portfolioItems = [
-  {
-    title: "Construction Projects",
-    href: "/portfolio/construction",
-    category: "Construction",
-    description: "Premium build, renovation, and site execution portfolio.",
-  },
-  {
-    title: "Interior Projects",
-    href: "/portfolio/interior",
-    category: "Interior",
-    description: "Interior design, fit-out, and custom furniture portfolio.",
-  },
-];
+import { company } from "@/data/company";
+import { homepagePortfolio } from "@/data/portfolio";
 
 export default function Home() {
   return (
@@ -30,20 +17,19 @@ export default function Home() {
       <Hero
         title={["DESIGN.", "CONSTRUCT.", "INSPIRE."]}
         highlight="INSPIRE."
-        description="Integrated construction and interior solutions for refined residential, commercial, and hospitality environments."
+        description={company.heroSubtitle}
       />
 
       <section id="about" className="bg-white py-20 text-neutral-950 md:py-28">
         <div className="container-x grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <SectionTitle
             eyebrow="About Us"
-            title="Luxury delivery from concept to handover."
+            title="Construction, renovation, and maintenance with a premium standard."
           />
           <p className="text-base leading-8 text-neutral-600">
-            Deacon Pro is an integrated construction and interior solution
-            provider, combining disciplined project execution with refined design
-            sensibility. We support clients from consultation, planning, budgeting,
-            and site execution through final handover.
+            {company.about} We combine disciplined project execution, refined
+            design sensibility, and responsive maintenance support for clients
+            who need practical delivery with a clean corporate standard.
           </p>
         </div>
       </section>
@@ -52,8 +38,8 @@ export default function Home() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
-            title="Two specialist divisions. One precise standard."
-            description="Choose construction, interior, or a complete integrated delivery path."
+            title="Build New, Renovation, Home Maintenance, and specialist divisions."
+            description={`${company.tagline} for clients across ${company.serviceArea}.`}
           />
           <ServiceCards />
         </div>
@@ -63,9 +49,9 @@ export default function Home() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Portfolio"
-            title="Project categories ready for real case studies."
+            title="Project categories ready for official case studies."
           />
-          <PortfolioCards items={portfolioItems} />
+          <PortfolioCards items={homepagePortfolio} />
         </div>
       </section>
 

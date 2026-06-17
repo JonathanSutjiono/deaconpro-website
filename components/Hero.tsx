@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { company } from "@/data/company";
 
 type HeroProps = {
   title: string | string[];
@@ -15,7 +16,7 @@ type HeroProps = {
 export default function Hero({
   title,
   highlight,
-  eyebrow = "Deacon Pro",
+  eyebrow = company.shortName,
   description,
   primaryLabel = "Our Services",
   primaryHref = "/#services",
@@ -23,6 +24,8 @@ export default function Hero({
   secondaryHref = "/#portfolio",
 }: HeroProps) {
   const lines = Array.isArray(title) ? title : [title];
+  const primaryExternal = primaryHref.startsWith("http");
+  const secondaryExternal = secondaryHref.startsWith("http");
 
   return (
     <section className="relative min-h-[88vh] overflow-hidden pt-20">
@@ -62,12 +65,16 @@ export default function Hero({
             <Link
               href={primaryHref}
               className="inline-flex min-h-12 items-center justify-center bg-gold px-7 text-sm font-black uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-neutral-950"
+              target={primaryExternal ? "_blank" : undefined}
+              rel={primaryExternal ? "noopener noreferrer" : undefined}
             >
               {primaryLabel}
             </Link>
             <Link
               href={secondaryHref}
               className="inline-flex min-h-12 items-center justify-center border border-white/50 px-7 text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-champagne hover:text-champagne"
+              target={secondaryExternal ? "_blank" : undefined}
+              rel={secondaryExternal ? "noopener noreferrer" : undefined}
             >
               {secondaryLabel}
             </Link>

@@ -4,14 +4,8 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
-
-const services = [
-  "Interior Design",
-  "Interior Fit-Out",
-  "Office Interior",
-  "Residential Interior",
-  "Custom Furniture",
-];
+import { company } from "@/data/company";
+import { interiorServices } from "@/data/services";
 
 export default function InteriorPage() {
   return (
@@ -31,10 +25,10 @@ export default function InteriorPage() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
-            title="Interior services for refined everyday spaces."
+            title="Interior services for refined residential and commercial spaces."
           />
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
+            {interiorServices.map((service, index) => (
               <article key={service} className="border border-neutral-200 bg-neutral-50 p-7 shadow-sm">
                 <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
                   {String(index + 1).padStart(2, "0")}
@@ -60,7 +54,7 @@ export default function InteriorPage() {
                 title: "Interior Projects",
                 href: "/portfolio/interior",
                 category: "Interior Portfolio",
-                description: "Interior design, fit-out, and furniture work.",
+                description: `${company.name} interior design, fit-out, and furniture work.`,
               },
             ]}
           />

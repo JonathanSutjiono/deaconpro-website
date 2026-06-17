@@ -2,16 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
-const services = [
-  { label: "Deacon Construction", href: "/construction" },
-  { label: "Deacon Interior", href: "/interior" },
-];
-
-const portfolio = [
-  { label: "Construction Projects", href: "/portfolio/construction" },
-  { label: "Interior Projects", href: "/portfolio/interior" },
-];
+import { company } from "@/data/company";
+import { portfolioNavigation } from "@/data/portfolio";
+import { serviceNavigation } from "@/data/services";
 
 function Chevron({ open }: { open?: boolean }) {
   return (
@@ -97,15 +90,15 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200 bg-white text-neutral-950 shadow-sm">
       <nav className="container-x flex h-20 items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-3" aria-label="Deacon Pro home">
-          <span className="grid h-11 w-11 place-items-center bg-neutral-950 text-[13px] font-black tracking-[0.12em] text-champagne">
+          <span className="grid h-11 w-11 shrink-0 place-items-center bg-neutral-950 text-[13px] font-black tracking-[0.12em] text-champagne">
             DP
           </span>
           <span className="leading-none">
-            <span className="block text-sm font-black uppercase tracking-[0.24em]">
-              Deacon Pro
+            <span className="block text-xs font-black uppercase tracking-[0.18em] sm:text-sm sm:tracking-[0.24em]">
+              {company.shortName}
             </span>
-            <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.34em] text-gold">
-              Construction & Interior
+            <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-gold sm:text-[10px] sm:tracking-[0.28em]">
+              {company.tagline}
             </span>
           </span>
         </Link>
@@ -117,8 +110,8 @@ export default function Navbar() {
           <Link className="text-sm font-semibold transition hover:text-gold" href="/#about">
             About Us
           </Link>
-          <DesktopDropdown label="Services" items={services} />
-          <DesktopDropdown label="Portfolio" items={portfolio} />
+          <DesktopDropdown label="Services" items={serviceNavigation} />
+          <DesktopDropdown label="Portfolio" items={portfolioNavigation} />
           <Link className="text-sm font-semibold transition hover:text-gold" href="/#process">
             Process
           </Link>
@@ -131,10 +124,19 @@ export default function Navbar() {
         </div>
 
         <Link
-          href="/#contact"
-          className="hidden bg-gold px-5 py-3 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-neutral-950 md:inline-flex lg:ml-1"
+          href={company.phoneHref}
+          className="hidden text-xs font-black uppercase tracking-[0.14em] text-neutral-800 transition hover:text-gold xl:inline-flex"
         >
-          Get in Touch
+          {company.phone}
+        </Link>
+
+        <Link
+          href={company.whatsappHref}
+          className="hidden bg-gold px-5 py-3 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-neutral-950 md:inline-flex lg:ml-1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp
         </Link>
 
         <button
@@ -156,8 +158,8 @@ export default function Navbar() {
             <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#about">
               About Us
             </Link>
-            <MobileGroup label="Services" items={services} />
-            <MobileGroup label="Portfolio" items={portfolio} />
+            <MobileGroup label="Services" items={serviceNavigation} />
+            <MobileGroup label="Portfolio" items={portfolioNavigation} />
             <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#process">
               Process
             </Link>
@@ -167,6 +169,20 @@ export default function Navbar() {
             <Link className="block py-4 text-base font-bold text-neutral-900" href="/#contact">
               Contact
             </Link>
+            <a
+              className="block border-t border-neutral-200 py-4 text-base font-bold text-neutral-900"
+              href={company.phoneHref}
+            >
+              Phone: {company.phone}
+            </a>
+            <a
+              className="mt-3 flex min-h-12 items-center justify-center bg-gold px-5 text-sm font-black uppercase tracking-[0.16em] text-white"
+              href={company.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
           </div>
         </div>
       ) : null}

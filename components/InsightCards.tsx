@@ -1,17 +1,4 @@
-const insights = [
-  {
-    title: "How Design Build Keeps Premium Projects Aligned",
-    meta: "Construction",
-  },
-  {
-    title: "Material Selection for Timeless Interior Fit-Out",
-    meta: "Interior",
-  },
-  {
-    title: "What Clients Should Prepare Before Renovation",
-    meta: "Planning",
-  },
-];
+import { insights } from "@/data/insights";
 
 export default function InsightCards() {
   return (

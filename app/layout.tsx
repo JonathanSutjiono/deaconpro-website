@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { company } from "@/data/company";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -9,9 +10,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Deacon Pro | Design. Construct. Inspire.",
-  description:
-    "Luxury modern construction and interior services by Deacon Pro.",
+  title: `${company.name} | ${company.tagline}`,
+  description: `${company.name} provides ${company.tagline} services across ${company.serviceArea}.`,
 };
 
 export default function RootLayout({

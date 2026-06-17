@@ -4,14 +4,8 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
-
-const services = [
-  "Design & Build",
-  "General Contractor",
-  "Project Management",
-  "Renovation",
-  "Construction Management",
-];
+import { company } from "@/data/company";
+import { constructionServices } from "@/data/services";
 
 export default function ConstructionPage() {
   return (
@@ -31,10 +25,10 @@ export default function ConstructionPage() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
-            title="Construction services for premium project delivery."
+            title="Construction services for Build New and Renovation delivery."
           />
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
+            {constructionServices.map((service, index) => (
               <article key={service} className="border border-neutral-200 bg-neutral-50 p-7 shadow-sm">
                 <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
                   {String(index + 1).padStart(2, "0")}
@@ -60,7 +54,8 @@ export default function ConstructionPage() {
                 title: "Construction Projects",
                 href: "/portfolio/construction",
                 category: "Construction Portfolio",
-                description: "Builds, renovations, and construction management work.",
+                description:
+                  `${company.name} Build New, renovation, contractor, and construction management references.`,
               },
             ]}
           />
