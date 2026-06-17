@@ -23,7 +23,7 @@ export default function InteriorPage() {
       <Hero
         eyebrow="Interior"
         title="DEACON PRO INTERIOR"
-        description="Interior Design & Fit-Out Specialist"
+        description="Interior design, furnishings, fit-out, and custom furniture for residential and commercial spaces."
         primaryLabel="View Services"
         primaryHref="#services"
         secondaryLabel="Interior Projects"
@@ -35,6 +35,7 @@ export default function InteriorPage() {
           <SectionTitle
             eyebrow="Services"
             title="Interior services for refined residential and commercial spaces."
+            description="Design-led interior delivery with practical fit-out coordination, furniture detail, and project management."
           />
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {interiorServices.map((service, index) => (

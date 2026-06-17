@@ -23,7 +23,7 @@ export default function ConstructionPage() {
       <Hero
         eyebrow="Construction"
         title="DEACON PRO CONSTRUCTION"
-        description="General Contractor & Design Build Services"
+        description="Architectural building contractor for Build New, Renovation, Design & Build, and project management."
         primaryLabel="View Services"
         primaryHref="#services"
         secondaryLabel="Construction Projects"
@@ -35,6 +35,7 @@ export default function ConstructionPage() {
           <SectionTitle
             eyebrow="Services"
             title="Construction services for Build New and Renovation delivery."
+            description="From planning and budgeting to site execution, construction management, and quality control."
           />
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {constructionServices.map((service, index) => (

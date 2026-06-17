@@ -14,58 +14,76 @@ export type Insight = {
 // CMS-ready static insight source. Replace this array with a CMS fetch later.
 export const insights: Insight[] = [
   {
-    title: "Planning a Build New Project in Jabodetabek",
-    slug: "planning-build-new-project-jabodetabek",
-    category: "Build New",
+    title: "Tips Memilih Kontraktor Rumah di Jakarta",
+    slug: "tips-memilih-kontraktor-rumah-di-jakarta",
+    category: "Construction",
     excerpt:
-      "Key planning points before starting a new residential or commercial construction project in Jabodetabek.",
+      "Cara menilai kontraktor rumah Jakarta dari sisi komunikasi, perencanaan, budgeting, kualitas kerja, dan project management.",
     content: [
-      "A Build New project begins with clear requirements, realistic budgeting, and a project schedule that all stakeholders understand.",
-      "For clients in Jabodetabek, Deacon Pro recommends aligning design, contractor coordination, procurement, and quality control from the earliest planning stage.",
-      "This approach helps reduce late changes and keeps construction decisions connected to property needs, safety, and long-term value.",
+      "Memilih kontraktor rumah di Jakarta membutuhkan penilaian yang lebih luas daripada harga awal. Klien perlu melihat cara kontraktor memahami kebutuhan properti, menyusun tahapan kerja, dan menjelaskan risiko proyek.",
+      "Kontraktor yang baik membantu menyelaraskan desain, budgeting, material, jadwal, dan kualitas lapangan sejak awal. Transparansi pada proses ini akan membuat keputusan konstruksi lebih terkendali.",
+      "PT Deacon Pro Konstruksi Indonesia mendukung klien melalui pendekatan project management agar pekerjaan dapat berjalan sesuai rencana, kualitas, dan kebutuhan properti.",
     ],
     coverImage: "/images/hero-architecture.png",
     publishedAt: "2026-06-01",
-    seoTitle: "Planning a Build New Project in Jabodetabek",
+    seoTitle: "Tips Memilih Kontraktor Rumah di Jakarta",
     seoDescription:
-      "Planning guidance for Build New construction projects in Jabodetabek by PT Deacon Pro Konstruksi Indonesia.",
-    imageAlt: "Planning a modern construction project in Jabodetabek",
+      "Tips memilih kontraktor rumah Jakarta untuk proyek Build New, renovasi, dan construction management.",
+    imageAlt: "Tips memilih kontraktor rumah Jakarta",
   },
   {
-    title: "Renovation Priorities Before Choosing Finishes",
-    slug: "renovation-priorities-before-finishes",
+    title: "Checklist Sebelum Renovasi Rumah",
+    slug: "checklist-sebelum-renovasi-rumah",
     category: "Renovation",
     excerpt:
-      "Before choosing surface finishes, renovation planning should clarify structure, function, timeline, and budget.",
+      "Hal penting yang perlu disiapkan sebelum renovasi rumah, mulai dari kondisi bangunan, prioritas ruang, budget, hingga jadwal kerja.",
     content: [
-      "Renovation work should begin with the condition of the existing property, not only visual references.",
-      "Clients should review layout, mechanical needs, structural constraints, and maintenance priorities before finalizing finishes.",
-      "A controlled renovation process helps keep the project within budget while still achieving a refined final result.",
+      "Renovasi rumah sebaiknya dimulai dengan pemeriksaan kondisi eksisting. Struktur, instalasi, kebocoran, kelembapan, dan kebutuhan ruang harus dipahami sebelum memilih finishing.",
+      "Checklist renovasi juga perlu mencakup prioritas pekerjaan, batas budget, target waktu, dan area yang tetap harus bisa digunakan selama proyek berjalan.",
+      "Dengan perencanaan yang rapi, jasa renovasi rumah Kelapa Gading dan Jakarta dapat menghasilkan ruang yang lebih fungsional tanpa kehilangan kontrol biaya dan kualitas.",
     ],
     coverImage: "/images/hero-architecture.png",
     publishedAt: "2026-05-20",
-    seoTitle: "Renovation Priorities Before Choosing Finishes",
+    seoTitle: "Checklist Sebelum Renovasi Rumah",
     seoDescription:
-      "Renovation planning insight for clients seeking jasa renovasi rumah Kelapa Gading and Jakarta.",
-    imageAlt: "Renovation planning and interior finish coordination",
+      "Checklist renovasi rumah untuk klien yang membutuhkan jasa renovasi rumah Kelapa Gading dan Jakarta.",
+    imageAlt: "Checklist sebelum renovasi rumah",
   },
   {
-    title: "Home Maintenance Checks for Long-Term Comfort",
-    slug: "home-maintenance-checks-long-term-comfort",
-    category: "Home Maintenance",
+    title: "Perbedaan Design and Build dengan Kontraktor Umum",
+    slug: "perbedaan-design-and-build-dengan-kontraktor-umum",
+    category: "Design & Build",
     excerpt:
-      "Routine home maintenance protects comfort, safety, and the long-term quality of residential spaces.",
+      "Design and Build menyatukan desain dan pelaksanaan, sementara kontraktor umum biasanya fokus pada eksekusi konstruksi.",
     content: [
-      "Home maintenance is most effective when handled before small issues become disruptive repair work.",
-      "Routine checks can include surface condition, water leakage, electrical points, doors, windows, built-in furniture, and finish durability.",
-      "For homeowners in Jakarta and surrounding areas, a consistent maintenance rhythm supports comfort and protects property value.",
+      "Design and Build mengintegrasikan proses desain, budgeting, koordinasi material, dan pelaksanaan dalam satu alur yang lebih terpadu.",
+      "Kontraktor umum biasanya menjalankan pekerjaan berdasarkan gambar dan spesifikasi yang sudah tersedia. Keduanya bisa tepat, tergantung kebutuhan proyek.",
+      "Untuk klien yang ingin proses lebih ringkas, Design and Build dapat membantu mengurangi gap antara konsep, biaya, dan realisasi lapangan.",
     ],
     coverImage: "/images/hero-architecture.png",
-    publishedAt: "2026-05-05",
-    seoTitle: "Home Maintenance Checks for Long-Term Comfort",
+    publishedAt: "2026-05-10",
+    seoTitle: "Perbedaan Design and Build dengan Kontraktor Umum",
     seoDescription:
-      "Home maintenance guidance for Jakarta property owners by PT Deacon Pro Konstruksi Indonesia.",
-    imageAlt: "Home maintenance checks for a modern residential property",
+      "Penjelasan perbedaan Design and Build dan kontraktor umum untuk proyek konstruksi dan renovasi.",
+    imageAlt: "Perbedaan design and build dengan kontraktor umum",
+  },
+  {
+    title: "Tips Desain Interior Kantor Komersial",
+    slug: "tips-desain-interior-kantor-komersial",
+    category: "Interior",
+    excerpt:
+      "Interior kantor komersial perlu menyeimbangkan produktivitas, identitas brand, sirkulasi, material, dan kebutuhan maintenance.",
+    content: [
+      "Desain interior kantor komersial tidak hanya mengejar tampilan visual. Ruang harus membantu produktivitas, koordinasi tim, kenyamanan, dan pengalaman tamu.",
+      "Pemilihan material, lighting, akustik, storage, dan furniture perlu disesuaikan dengan intensitas penggunaan harian.",
+      "Kontraktor interior Jakarta yang memahami fit-out dan project management dapat membantu kantor selesai dengan rapi, tepat waktu, dan mudah dirawat.",
+    ],
+    coverImage: "/images/hero-architecture.png",
+    publishedAt: "2026-05-01",
+    seoTitle: "Tips Desain Interior Kantor Komersial",
+    seoDescription:
+      "Tips desain interior kantor komersial dan fit-out untuk klien di Jakarta.",
+    imageAlt: "Tips desain interior kantor komersial",
   },
 ];
 

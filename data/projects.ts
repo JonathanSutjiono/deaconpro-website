@@ -16,147 +16,131 @@ export type Project = {
   imageAlt: string;
 };
 
+export const imageUploadGuidelines = {
+  allowedFormats: ["JPG", "PNG", "WebP"],
+  recommendedProjectImageWidth: "minimum 1920px",
+  recommendedHeroImageWidth: "minimum 2400px",
+  recommendedFileSize: "2-5MB",
+  futureMaxUploadTarget: "10MB",
+  futureOutputQuality: "WebP quality 85-90",
+};
+
 // CMS-ready static project source. Replace this array with a CMS fetch later.
-// Image upload guidance for future CMS:
-// JPG, PNG, WebP; minimum width 1920px; hero minimum width 2400px;
-// target 2-5MB files, later max upload 10MB, WebP quality 85-90.
 export const projects: Project[] = [
   {
-    title: "Private Residence Build",
-    slug: "private-residence-build",
+    title: "Modern Residence BSD",
+    slug: "modern-residence-bsd",
     category: "construction",
-    location: "Jabodetabek",
+    location: "BSD, Jabodetabek",
     year: "2026",
-    scopeOfWork: ["Build New", "Project Management", "Quality Control"],
+    scopeOfWork: ["Build New", "Design & Build", "Project Management"],
     description:
-      "Premium residential construction prepared as a sample case study for Build New services with structured planning, budgeting, execution, and handover.",
+      "A modern residential construction sample showing how Deacon Pro manages Build New work from planning and budgeting through execution, quality control, and handover.",
     coverImage: "/images/hero-architecture.png",
-    gallery: [
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-    ],
+    gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
-    seoTitle: "Private Residence Build | Deacon Pro Construction Project",
+    seoTitle: "Modern Residence BSD | Kontraktor Rumah Jakarta",
     seoDescription:
-      "Sample Build New residential construction project by PT Deacon Pro Konstruksi Indonesia across Jabodetabek.",
-    imageAlt: "Modern private residence construction project by Deacon Pro",
+      "Modern residential Build New construction sample by PT Deacon Pro Konstruksi Indonesia for Jabodetabek clients.",
+    imageAlt: "Modern residence construction project in BSD by Deacon Pro",
   },
   {
-    title: "Commercial Renovation",
-    slug: "commercial-renovation",
+    title: "Commercial Building Kelapa Gading",
+    slug: "commercial-building-kelapa-gading",
     category: "construction",
     location: "Kelapa Gading, Jakarta",
     year: "2025",
-    scopeOfWork: ["Renovation", "General Contractor", "Site Coordination"],
+    scopeOfWork: ["General Contractor", "Renovation", "Construction Management"],
     description:
-      "Commercial renovation reference for clients seeking jasa renovasi rumah Kelapa Gading, office improvement, and controlled contractor delivery.",
+      "A commercial building project reference in Kelapa Gading focused on contractor coordination, renovation planning, site management, and controlled delivery.",
     coverImage: "/images/hero-architecture.png",
-    gallery: [
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-    ],
+    gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
-    seoTitle: "Commercial Renovation | Kontraktor Bangunan Jabodetabek",
+    seoTitle: "Commercial Building Kelapa Gading | Kontraktor Bangunan Jabodetabek",
     seoDescription:
-      "Commercial renovation and contractor project structure by PT Deacon Pro Konstruksi Indonesia in Jakarta.",
-    imageAlt: "Commercial renovation project with dark modern construction finish",
+      "Commercial construction and renovation sample for Kelapa Gading by PT Deacon Pro Konstruksi Indonesia.",
+    imageAlt: "Commercial building construction project in Kelapa Gading",
   },
   {
-    title: "Hospitality Development",
-    slug: "hospitality-development",
+    title: "Villa Renovation Bali",
+    slug: "villa-renovation-bali",
     category: "construction",
     location: "Bali",
     year: "2025",
-    scopeOfWork: ["Design & Build", "Construction Management"],
+    scopeOfWork: ["Renovation", "Design & Build", "Quality Control"],
     description:
-      "Hospitality development placeholder for future construction portfolio content in Bali with emphasis on project management and quality control.",
+      "A villa renovation sample for Bali service area, combining architectural construction planning, exterior improvement, and refined project control.",
     coverImage: "/images/hero-architecture.png",
-    gallery: [
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-    ],
+    gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: false,
-    seoTitle: "Hospitality Development | Kontraktor Bali",
+    seoTitle: "Villa Renovation Bali | Kontraktor Bali",
     seoDescription:
-      "Sample hospitality construction project by Deacon Pro for Bali service area presentation.",
-    imageAlt: "Luxury hospitality construction development placeholder",
+      "Villa renovation sample project by Deacon Pro for Bali construction and renovation service area.",
+    imageAlt: "Villa renovation construction project in Bali",
   },
   {
-    title: "Executive Office Interior",
-    slug: "executive-office-interior",
-    category: "interior",
-    location: "Jakarta",
-    year: "2026",
-    scopeOfWork: ["Interior Design", "Interior Fit-Out", "Custom Furniture"],
-    description:
-      "Executive office interior reference for a refined commercial workspace with structured design, fit-out execution, and furniture coordination.",
-    coverImage: "/images/hero-architecture.png",
-    gallery: [
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-    ],
-    featured: true,
-    seoTitle: "Executive Office Interior | Kontraktor Interior Jakarta",
-    seoDescription:
-      "Office interior design and fit-out project reference by PT Deacon Pro Konstruksi Indonesia in Jakarta.",
-    imageAlt: "Executive office interior fit-out project by Deacon Pro",
-  },
-  {
-    title: "Luxury Apartment Suite",
-    slug: "luxury-apartment-suite",
+    title: "Apartment Interior Kelapa Gading",
+    slug: "apartment-interior-kelapa-gading",
     category: "interior",
     location: "Kelapa Gading, Jakarta",
-    year: "2025",
-    scopeOfWork: ["Residential Interior", "Custom Furniture"],
+    year: "2026",
+    scopeOfWork: ["Residential Interior", "Interior Fit-Out", "Custom Furniture"],
     description:
-      "Residential interior project reference for apartment living with refined material selection, custom furniture, and practical daily function.",
+      "A residential apartment interior sample with warm materials, practical storage, custom furnishings, and a polished living atmosphere.",
     coverImage: "/images/hero-architecture.png",
-    gallery: [
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-    ],
+    gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
-    seoTitle: "Luxury Apartment Suite | Interior Design Kelapa Gading",
+    seoTitle: "Apartment Interior Kelapa Gading | Interior Design Kelapa Gading",
     seoDescription:
-      "Residential interior design and custom furniture reference by Deacon Pro in Kelapa Gading.",
-    imageAlt: "Luxury apartment suite interior design project",
+      "Residential apartment interior design and fit-out sample in Kelapa Gading by PT Deacon Pro Konstruksi Indonesia.",
+    imageAlt: "Apartment interior design project in Kelapa Gading",
   },
   {
-    title: "Retail Boutique Fit-Out",
-    slug: "retail-boutique-fit-out",
+    title: "Office Interior Jakarta",
+    slug: "office-interior-jakarta",
+    category: "interior",
+    location: "Jakarta",
+    year: "2025",
+    scopeOfWork: ["Office Interior", "Interior Design", "Interior Fit-Out"],
+    description:
+      "A commercial office interior sample designed for productivity, brand presentation, material clarity, and efficient fit-out execution.",
+    coverImage: "/images/hero-architecture.png",
+    gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
+    featured: true,
+    seoTitle: "Office Interior Jakarta | Kontraktor Interior Jakarta",
+    seoDescription:
+      "Office interior design and fit-out sample by PT Deacon Pro Konstruksi Indonesia in Jakarta.",
+    imageAlt: "Office interior design and fit-out project in Jakarta",
+  },
+  {
+    title: "Residential Living Room Makassar",
+    slug: "residential-living-room-makassar",
     category: "interior",
     location: "Makassar",
     year: "2025",
-    scopeOfWork: ["Interior Fit-Out", "Project Management"],
+    scopeOfWork: ["Residential Interior", "Custom Furniture", "Project Management"],
     description:
-      "Retail boutique fit-out placeholder for Makassar service area with compact planning, clean execution, and commercial interior detailing.",
+      "A residential living room interior sample for Makassar, balancing furniture detail, finish selection, comfort, and everyday function.",
     coverImage: "/images/hero-architecture.png",
-    gallery: [
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-      "/images/hero-architecture.png",
-    ],
+    gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: false,
-    seoTitle: "Retail Boutique Fit-Out | Kontraktor Makassar",
+    seoTitle: "Residential Living Room Makassar | Kontraktor Makassar",
     seoDescription:
-      "Interior fit-out project structure for Makassar service area by PT Deacon Pro Konstruksi Indonesia.",
-    imageAlt: "Retail boutique interior fit-out project placeholder",
+      "Residential interior and custom furniture sample for Makassar service area by Deacon Pro.",
+    imageAlt: "Residential living room interior project in Makassar",
   },
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);
-export const constructionProjects = projects.filter(
-  (project) => project.category === "construction",
-);
-export const interiorProjects = projects.filter(
-  (project) => project.category === "interior",
-);
+export const constructionProjects = projects.filter((project) => project.category === "construction");
+export const interiorProjects = projects.filter((project) => project.category === "interior");
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
+}
+
+export function getRelatedProjects(project: Project, limit = 3) {
+  return projects
+    .filter((item) => item.category === project.category && item.slug !== project.slug)
+    .slice(0, limit);
 }

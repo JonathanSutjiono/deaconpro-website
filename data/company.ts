@@ -1,4 +1,27 @@
-export const company = {
+export type CompanyInfo = {
+  name: string;
+  shortName: string;
+  tagline: string;
+  location: string;
+  address: string;
+  serviceArea: string;
+  phone: string;
+  phoneHref: string;
+  whatsapp: string;
+  whatsappHref: string;
+  website: string;
+  websiteHref: string;
+  googleMapsHref: string;
+  socialLinks: { label: string; href: string; handle?: string }[];
+  projectFocus: string[];
+  heroSubtitle: string;
+  about: string;
+  vision: string;
+  missionsIntro: string;
+  missions: string[];
+};
+
+export const company: CompanyInfo = {
   name: "PT Deacon Pro Konstruksi Indonesia",
   shortName: "Deacon Pro",
   tagline: "Build New · Renovation · Home Maintenance",

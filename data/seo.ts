@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { company } from "@/data/company";
 
-export const siteUrl = company.websiteHref;
+export const siteUrl = "https://deaconpro-website.vercel.app";
 
 export const seoKeywords = [
   "kontraktor rumah Jakarta",

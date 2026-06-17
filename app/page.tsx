@@ -88,6 +88,8 @@ export default function Home() {
         </div>
       </section>
 
+      <CompanyDetail />
+
       <section id="insight" className="bg-neutral-950 py-20 text-white md:py-28">
         <div className="container-x">
           <SectionTitle
@@ -105,7 +107,6 @@ export default function Home() {
         </div>
       </section>
 
-      <CompanyDetail />
       <ContactCTA />
       <Footer />
     </main>

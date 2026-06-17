@@ -4,8 +4,9 @@ import { notFound } from "next/navigation";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import PortfolioCards from "@/components/PortfolioCards";
 import { company } from "@/data/company";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { getProjectBySlug, getRelatedProjects, projects } from "@/data/projects";
 import { createPageMetadata } from "@/data/seo";
 
 type PageProps = {
@@ -41,6 +42,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const project = getProjectBySlug(slug);
 
   if (!project) notFound();
+  const relatedProjects = getRelatedProjects(project);
 
   return (
     <main>
@@ -102,7 +104,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               rel="noopener noreferrer"
               className="mt-8 inline-flex min-h-12 w-full items-center justify-center bg-gold px-6 text-sm font-black uppercase tracking-widest text-white transition hover:bg-neutral-950"
             >
-              Chat WhatsApp
+              Consult Your Project
             </Link>
           </aside>
 
@@ -145,6 +147,22 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {relatedProjects.length > 0 ? (
+        <section className="bg-neutral-100 py-20 text-neutral-950 md:py-28">
+          <div className="container-x">
+            <p className="text-xs font-black uppercase tracking-widest text-gold">
+              Related Projects
+            </p>
+            <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight md:text-6xl">
+              More {project.category} references.
+            </h2>
+            <div className="mt-10">
+              <PortfolioCards items={relatedProjects} />
+            </div>
+          </div>
+        </section>
+      ) : null}
       <ContactCTA />
       <Footer />
     </main>

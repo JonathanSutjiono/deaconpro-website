@@ -1,41 +1,41 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Building2, Hammer, Paintbrush, ShieldCheck, Wrench } from "lucide-react";
 import { homepageServices } from "@/data/services";
+
+const icons = {
+  building: Building2,
+  interior: Paintbrush,
+  build: Hammer,
+  renovation: Wrench,
+  maintenance: ShieldCheck,
+};
 
 export default function ServiceCards() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {homepageServices.map((service) => {
-        const card = (
-          <article className="group relative min-h-[340px] overflow-hidden bg-neutral-950 shadow-xl">
-          <Image
-            src="/images/hero-architecture.png"
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/66 to-black/20" />
-          <div className="absolute inset-0 flex flex-col justify-end p-7 md:p-9">
-            <p className="mb-3 text-xs font-black uppercase tracking-[0.3em] text-champagne">
-              {service.label}
-            </p>
-            <h3 className="text-3xl font-black uppercase leading-tight text-white md:text-4xl">
-              {service.title}
-            </h3>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-white/72">
-              {service.description}
-            </p>
-          </div>
-          </article>
-        );
+        const Icon = icons[service.icon];
 
-        return service.href ? (
-          <Link key={service.title} href={service.href}>
-            {card}
+        return (
+          <Link key={service.title} href={service.href} className="group">
+            <article className="min-h-[330px] border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
+              <div className="grid h-14 w-14 place-items-center bg-neutral-950 text-champagne transition group-hover:bg-gold group-hover:text-white">
+                <Icon className="h-7 w-7" aria-hidden="true" />
+              </div>
+              <p className="mt-9 text-xs font-black uppercase tracking-[0.28em] text-gold">
+                {service.label}
+              </p>
+              <h3 className="mt-4 text-3xl font-black uppercase leading-tight text-neutral-950">
+                {service.title}
+              </h3>
+              <p className="mt-5 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
+                {service.description}
+              </p>
+              <p className="mt-7 text-sm font-black uppercase tracking-widest text-neutral-950 transition group-hover:text-gold">
+                {service.cta}
+              </p>
+            </article>
           </Link>
-        ) : (
-          <div key={service.title}>{card}</div>
         );
       })}
     </div>
