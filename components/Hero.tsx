@@ -33,7 +33,7 @@ export default function Hero({
   const tertiaryExternal = tertiaryHref?.startsWith("http") ?? false;
 
   return (
-    <section className="relative min-h-[88vh] overflow-hidden pt-20">
+    <section className="relative min-h-[86vh] overflow-hidden pt-20 md:min-h-[88vh]">
       <Image
         src="/images/hero-architecture.png"
         alt=""
@@ -46,12 +46,12 @@ export default function Hero({
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/76 to-black/20" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-neutral-950 to-transparent" />
 
-      <div className="container-x relative z-10 flex min-h-[calc(88vh-80px)] items-center py-16">
+      <div className="container-x relative z-10 flex min-h-[calc(86vh-80px)] items-center py-14 md:min-h-[calc(88vh-80px)] md:py-16">
         <div className="max-w-4xl">
-          <p className="mb-6 text-xs font-black uppercase tracking-[0.42em] text-champagne">
+          <p className="mb-5 text-xs font-black uppercase tracking-[0.32em] text-champagne sm:tracking-[0.42em] md:mb-6">
             {eyebrow}
           </p>
-          <h1 className="text-[clamp(3.1rem,8.8vw,8.6rem)] font-black uppercase leading-[0.88] tracking-normal text-white">
+          <h1 className="text-[clamp(2.75rem,13vw,8.6rem)] font-black uppercase leading-[0.9] tracking-normal text-white sm:leading-[0.88]">
             {lines.map((line) => (
               <span
                 key={line}
@@ -66,10 +66,10 @@ export default function Hero({
               {description}
             </p>
           ) : null}
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href={primaryHref}
-              className="inline-flex min-h-12 items-center justify-center bg-gold px-7 text-sm font-black uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-neutral-950"
+              className="inline-flex min-h-12 items-center justify-center bg-gold px-7 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-white hover:text-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30 sm:tracking-[0.18em]"
               target={primaryExternal ? "_blank" : undefined}
               rel={primaryExternal ? "noopener noreferrer" : undefined}
             >
@@ -77,7 +77,7 @@ export default function Hero({
             </Link>
             <Link
               href={secondaryHref}
-              className="inline-flex min-h-12 items-center justify-center border border-white/50 px-7 text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-champagne hover:text-champagne"
+              className="inline-flex min-h-12 items-center justify-center border border-white/50 px-7 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:border-champagne hover:text-champagne focus:outline-none focus-visible:ring-4 focus-visible:ring-white/20 sm:tracking-[0.18em]"
               target={secondaryExternal ? "_blank" : undefined}
               rel={secondaryExternal ? "noopener noreferrer" : undefined}
             >
@@ -86,7 +86,7 @@ export default function Hero({
             {tertiaryLabel && tertiaryHref ? (
               <Link
                 href={tertiaryHref}
-                className="inline-flex min-h-12 items-center justify-center border border-champagne/70 bg-black/20 px-7 text-sm font-black uppercase tracking-[0.18em] text-champagne transition hover:bg-champagne hover:text-neutral-950"
+                className="inline-flex min-h-12 items-center justify-center border border-champagne/70 bg-black/20 px-7 text-sm font-black uppercase tracking-[0.14em] text-champagne transition hover:bg-champagne hover:text-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30 sm:tracking-[0.18em]"
                 target={tertiaryExternal ? "_blank" : undefined}
                 rel={tertiaryExternal ? "noopener noreferrer" : undefined}
               >

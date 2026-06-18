@@ -8,9 +8,9 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-[60] grid h-14 w-14 place-items-center rounded-full bg-gold text-white shadow-2xl shadow-black/25 transition hover:scale-105 hover:bg-neutral-950 focus:outline-none focus:ring-4 focus:ring-gold/30"
+      className="fixed bottom-4 right-4 z-[60] grid h-12 w-12 place-items-center rounded-full bg-gold text-white shadow-2xl shadow-black/25 transition hover:scale-105 hover:bg-neutral-950 focus:outline-none focus:ring-4 focus:ring-gold/30 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
     >
-      <FaWhatsapp className="h-7 w-7" aria-hidden="true" />
+      <FaWhatsapp className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />
     </a>
   );
 }

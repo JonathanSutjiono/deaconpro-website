@@ -17,8 +17,8 @@ export default function ServiceCards() {
         const Icon = icons[service.icon];
 
         return (
-          <Link key={service.title} href={service.href} className="group">
-            <article className="min-h-[330px] border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
+          <Link key={service.title} href={service.href} className="group block focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
+            <article className="flex min-h-[330px] flex-col border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
               <div className="grid h-14 w-14 place-items-center bg-neutral-950 text-champagne transition group-hover:bg-gold group-hover:text-white">
                 <Icon className="h-7 w-7" aria-hidden="true" />
               </div>
@@ -31,7 +31,7 @@ export default function ServiceCards() {
               <p className="mt-5 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
                 {service.description}
               </p>
-              <p className="mt-7 text-sm font-black uppercase tracking-widest text-neutral-950 transition group-hover:text-gold">
+              <p className="mt-auto pt-7 text-sm font-black uppercase tracking-widest text-neutral-950 transition group-hover:text-gold">
                 {service.cta}
               </p>
             </article>

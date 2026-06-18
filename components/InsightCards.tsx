@@ -8,8 +8,8 @@ export default function InsightCards({ limit }: { limit?: number }) {
   return (
     <div className="grid gap-6 md:grid-cols-3">
       {items.map((item) => (
-        <Link key={item.slug} href={`/insight/${item.slug}`} className="group border border-neutral-800 bg-neutral-900">
-          <article>
+        <Link key={item.slug} href={`/insight/${item.slug}`} className="group block border border-neutral-800 bg-neutral-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
+          <article className="flex h-full flex-col">
             <div className="relative h-52 overflow-hidden">
               <Image
                 src={item.coverImage}
@@ -20,7 +20,7 @@ export default function InsightCards({ limit }: { limit?: number }) {
               />
               <div className="absolute inset-0 bg-black/45" />
             </div>
-            <div className="p-7">
+            <div className="flex flex-1 flex-col p-7">
               <p className="text-xs font-black uppercase tracking-[0.28em] text-champagne">
                 {item.category}
               </p>
@@ -30,7 +30,7 @@ export default function InsightCards({ limit }: { limit?: number }) {
               <p className="mt-4 text-base leading-8 text-white/76 md:text-[18px] md:leading-9">
                 {item.excerpt}
               </p>
-              <p className="mt-6 text-sm font-bold uppercase tracking-[0.18em] text-white/45">
+              <p className="mt-auto pt-6 text-sm font-bold uppercase tracking-[0.18em] text-white/45">
                 Read Insight
               </p>
             </div>

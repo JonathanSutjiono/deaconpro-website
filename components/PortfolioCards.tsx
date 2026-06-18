@@ -30,8 +30,13 @@ function getCategory(item: Item) {
 }
 
 export default function PortfolioCards({ items }: { items: Item[] }) {
+  const gridClass =
+    items.length === 2
+      ? "grid gap-6 md:grid-cols-2"
+      : "grid gap-6 md:grid-cols-2 lg:grid-cols-3";
+
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className={gridClass}>
       {items.map((item) => {
         const href = getCardHref(item);
         const content = (
@@ -44,11 +49,11 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
               className="object-cover transition duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/66 to-transparent" />
-            <div className="absolute inset-0 flex flex-col justify-end p-7">
+            <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-7">
               <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-champagne">
                 {getCategory(item)}
               </p>
-              <h3 className="text-2xl font-black uppercase leading-tight text-white">
+              <h3 className="text-2xl font-black uppercase leading-tight text-white md:text-[26px]">
                 {item.title}
               </h3>
               {"location" in item && item.location ? (
@@ -71,7 +76,7 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
         );
 
         return href ? (
-          <Link key={item.title} href={href}>
+          <Link key={item.title} href={href} className="block focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
             {content}
           </Link>
         ) : (

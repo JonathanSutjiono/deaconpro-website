@@ -28,16 +28,20 @@ function DesktopDropdown({
 }) {
   return (
     <div className="group relative">
-      <button className="flex h-20 items-center whitespace-nowrap text-sm font-semibold text-neutral-800 transition hover:text-gold">
+      <button
+        className="flex h-20 items-center whitespace-nowrap text-sm font-semibold text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold"
+        type="button"
+        aria-haspopup="true"
+      >
         {label}
         <Chevron />
       </button>
-      <div className="invisible absolute left-0 top-full w-64 translate-y-2 border border-neutral-200 bg-white opacity-0 shadow-2xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+      <div className="invisible absolute left-0 top-full z-20 w-64 translate-y-2 border border-neutral-200 bg-white opacity-0 shadow-2xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
         {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="block border-b border-neutral-100 px-5 py-4 text-sm font-semibold text-neutral-700 transition last:border-b-0 hover:bg-neutral-950 hover:text-champagne"
+            className="block border-b border-neutral-100 px-5 py-4 text-sm font-semibold text-neutral-700 transition last:border-b-0 hover:bg-neutral-950 hover:text-champagne focus:outline-none focus-visible:bg-neutral-950 focus-visible:text-champagne"
           >
             {item.label}
           </Link>
@@ -50,9 +54,11 @@ function DesktopDropdown({
 function MobileGroup({
   label,
   items,
+  onNavigate,
 }: {
   label: string;
   items: { label: string; href: string }[];
+  onNavigate: () => void;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -62,6 +68,7 @@ function MobileGroup({
         className="flex w-full items-center justify-between py-4 text-left text-base font-bold text-neutral-900"
         onClick={() => setOpen((value) => !value)}
         type="button"
+        aria-expanded={open}
       >
         {label}
         <Chevron open={open} />
@@ -72,7 +79,8 @@ function MobileGroup({
             <Link
               key={item.href}
               href={item.href}
-              className="block py-3 pl-4 text-sm font-semibold text-neutral-600"
+              className="block py-3 pl-4 text-base font-semibold text-neutral-700"
+              onClick={onNavigate}
             >
               {item.label}
             </Link>
@@ -101,7 +109,7 @@ export default function Navbar() {
             <span className="block whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] sm:text-sm xl:tracking-[0.22em]">
               {company.shortName}
             </span>
-            <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] text-gold xl:block 2xl:hidden">
+            <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] text-gold 2xl:hidden">
               {company.shortTagline}
             </span>
             <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-gold 2xl:block">
@@ -111,35 +119,35 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden h-full flex-nowrap items-center gap-4 xl:flex 2xl:gap-5">
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/">
+          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/">
             Home
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/#about">
+          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#about">
             About Us
           </Link>
           <DesktopDropdown label="Services" items={serviceNavigation} />
           <DesktopDropdown label="Portfolio" items={portfolioNavigation} />
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/#process">
+          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#process">
             Process
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/insight">
+          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/insight">
             Insight
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold" href="/#contact">
+          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#contact">
             Contact
           </Link>
         </div>
 
         <Link
           href={company.phoneHref}
-          className="hidden whitespace-nowrap text-xs font-black uppercase tracking-[0.08em] text-neutral-800 transition hover:text-gold xl:inline-flex 2xl:tracking-[0.12em]"
+          className="hidden whitespace-nowrap text-xs font-black uppercase tracking-[0.08em] text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold xl:inline-flex 2xl:tracking-[0.12em]"
         >
           {company.phone}
         </Link>
 
         <Link
           href={company.whatsappHref}
-          className="hidden whitespace-nowrap bg-gold px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-neutral-950 md:inline-flex xl:ml-1 2xl:px-5 2xl:tracking-[0.14em]"
+          className="hidden whitespace-nowrap bg-gold px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:inline-flex xl:ml-1 2xl:px-5 2xl:tracking-[0.14em]"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -151,29 +159,30 @@ export default function Navbar() {
           onClick={() => setOpen((value) => !value)}
           type="button"
           aria-label="Toggle navigation"
+          aria-expanded={open}
         >
           {open ? "×" : "☰"}
         </button>
       </nav>
 
       {open ? (
-        <div className="border-t border-neutral-200 bg-white xl:hidden">
+        <div className="max-h-[calc(100vh-80px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
           <div className="container-x py-3">
-            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/">
+            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/" onClick={() => setOpen(false)}>
               Home
             </Link>
-            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#about">
+            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#about" onClick={() => setOpen(false)}>
               About Us
             </Link>
-            <MobileGroup label="Services" items={serviceNavigation} />
-            <MobileGroup label="Portfolio" items={portfolioNavigation} />
-            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#process">
+            <MobileGroup label="Services" items={serviceNavigation} onNavigate={() => setOpen(false)} />
+            <MobileGroup label="Portfolio" items={portfolioNavigation} onNavigate={() => setOpen(false)} />
+            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/#process" onClick={() => setOpen(false)}>
               Process
             </Link>
-            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/insight">
+            <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/insight" onClick={() => setOpen(false)}>
               Insight
             </Link>
-            <Link className="block py-4 text-base font-bold text-neutral-900" href="/#contact">
+            <Link className="block py-4 text-base font-bold text-neutral-900" href="/#contact" onClick={() => setOpen(false)}>
               Contact
             </Link>
             <a
