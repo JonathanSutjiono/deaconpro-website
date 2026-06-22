@@ -71,8 +71,24 @@ export default function CompanyDetail({
     : companyInfo.missions;
 
   return (
-    <section id="company-detail" className="bg-white py-20 text-neutral-950 md:py-28">
-      <div className="container-x">
+    <section
+      id="company-detail"
+      className="relative overflow-hidden bg-[#fcfbf8] py-20 text-neutral-950 md:py-28"
+    >
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 8% 10%, rgba(184, 138, 42, 0.10), transparent 34%), radial-gradient(circle at 92% 88%, rgba(214, 178, 94, 0.08), transparent 32%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent"
+        aria-hidden="true"
+      />
+
+      <div className="container-x relative z-10">
         <div className="mb-12 max-w-3xl">
           <p className="text-xs font-black uppercase tracking-[0.36em] text-gold">
             Company Detail
@@ -86,7 +102,7 @@ export default function CompanyDetail({
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="border border-neutral-200 bg-neutral-50 p-6 shadow-sm md:p-8">
+          <div className="border border-gold/15 bg-white/95 p-6 shadow-[0_22px_70px_rgba(184,138,42,0.08)] md:p-8">
             <div className="border-b border-neutral-200 pb-7">
               <div className="flex gap-4">
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
@@ -184,7 +200,7 @@ export default function CompanyDetail({
             </div>
           </div>
 
-          <div className="border border-neutral-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="border border-gold/15 bg-white/95 p-6 shadow-[0_22px_70px_rgba(184,138,42,0.08)] md:p-8">
             <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               About
             </p>
