@@ -62,12 +62,47 @@ export const fallbackProjects = projects;
 export const fallbackInsights = insights;
 
 export const fallbackProcessSteps: ProcessStepContent[] = [
-  "Consultation",
-  "Site Survey",
-  "Proposal",
-  "Execution",
-  "Handover",
-].map((title, index) => ({ title, order: index + 1 }));
+  {
+    title: "Consultation",
+    description:
+      "Initial discussion to understand project needs, site condition, budget direction, and expected timeline.",
+    output: "Project brief",
+    iconLabel: "consultation",
+    order: 1,
+  },
+  {
+    title: "Site Survey",
+    description:
+      "On-site review to measure, document, and identify technical requirements before proposal.",
+    output: "Survey notes",
+    iconLabel: "survey",
+    order: 2,
+  },
+  {
+    title: "Proposal",
+    description:
+      "Scope, work plan, material direction, and budget estimation are prepared for approval.",
+    output: "Proposal & estimate",
+    iconLabel: "proposal",
+    order: 3,
+  },
+  {
+    title: "Execution",
+    description:
+      "Work begins based on approved scope, timeline, coordination, and field supervision.",
+    output: "Construction progress",
+    iconLabel: "execution",
+    order: 4,
+  },
+  {
+    title: "Handover",
+    description:
+      "Final checking, finishing review, and project handover after agreed works are completed.",
+    output: "Completed work",
+    iconLabel: "handover",
+    order: 5,
+  },
+];
 
 export const fallbackContact: ContactContent = {
   heading: fallbackHomepage.contactTitle,

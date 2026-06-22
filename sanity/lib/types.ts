@@ -43,6 +43,7 @@ export type ProcessStepContent = {
   description?: string;
   order: number;
   iconLabel?: string;
+  output?: string;
 };
 
 export type ContactContent = {

@@ -114,7 +114,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="process" className="bg-neutral-100 py-20 text-neutral-950 md:py-28">
+      <section id="process" className="bg-neutral-100 py-16 text-neutral-950 md:py-20">
         <div className="container-x">
           <SectionTitle
             eyebrow="Process"
