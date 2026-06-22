@@ -65,12 +65,10 @@ export default async function Home() {
         description={homepage.heroSubtitle}
         imageSrc={homepage.heroImage}
         imageAlt={`${companyInfo.shortName} construction and interior`}
-        primaryLabel={homepage.primaryButtonLabel}
-        primaryHref={homepage.primaryButtonLink}
+        primaryLabel={homepage.primaryButtonLink.includes("wa.me") ? homepage.primaryButtonLabel : "WhatsApp"}
+        primaryHref={companyInfo.whatsappHref}
         secondaryLabel={homepage.secondaryButtonLabel}
         secondaryHref={homepage.secondaryButtonLink}
-        tertiaryLabel="Chat WhatsApp"
-        tertiaryHref={companyInfo.whatsappHref}
       />
 
       <section id="about" className="bg-white py-20 text-neutral-950 md:py-28">
@@ -133,7 +131,7 @@ export default async function Home() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Insight"
-            title="Project thinking for construction and interiors."
+            title="Practical notes from planning to handover."
             light
           />
           <InsightCards limit={3} insights={insights} />

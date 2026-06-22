@@ -58,21 +58,21 @@ export const company: CompanyInfo = {
     { label: "Twitter/X", href: "#" },
     { label: "LinkedIn", href: "#" },
   ],
-  projectFocus: ["Office & Commercial (1)", "Residential (1)"],
+  projectFocus: ["Office & Commercial", "Residential"],
   heroSubtitle:
-    "Build New, Renovation, and Home Maintenance services across Jabodetabek, Bali, and Makassar.",
+    "Construction, renovation, home maintenance, and interior work for homes and businesses across JABODETABEK, Bali, and Makassar.",
   aboutSummary:
-    "PT Deacon Pro Konstruksi Indonesia is a creative-innovative architectural building contractor and interior design furnishings company based in Kelapa Gading, Jakarta. We help clients build, renovate, and maintain properties through disciplined project execution, refined design sensibility, and reliable project management.",
+    "PT Deacon Pro Konstruksi Indonesia is a contractor and interior specialist based in Kelapa Gading, Jakarta. We handle new builds, renovations, fit-outs, and property maintenance with clear planning, coordinated site work, and practical project control across JABODETABEK, Bali, and Makassar.",
   about:
-    "PT Deacon Pro Konstruksi Indonesia is a creative-innovative Architectural Building Contractor and Interior Design Furnishings company in Kelapa Gading Jakarta, Indonesia. We are really passionate about helping others to understand about construction and furnishings through architectural and interior design that appropriate to clients property needs. To make it happens, we are focusing on Exterior and Interior Building Construction. Both of those areas should be covered by Project Management knowledge. We want to convince our valuable clients that their projects will be finished due to on the planned time, within budget and have a good quality control.",
+    "PT Deacon Pro Konstruksi Indonesia provides construction, renovation, interior fit-out, and home maintenance services from Kelapa Gading, Jakarta. Each project is planned around the property condition, client priorities, budget, and working schedule. Our team coordinates design, procurement, site execution, and quality checks so decisions remain clear from the first survey through handover.",
   vision:
-    "Be the world's premier building construction and interior design services organization.",
+    "To be a dependable construction and interior partner for every property we handle.",
   missionsIntro:
-    "Deacon Projects Contractor is built on honesty and integrity - created to provide you with a builder who listens to you and cares about your needs which based on our missions:",
+    "Our working principles are straightforward:",
   missions: [
-    "We are committed achieving extraordinary results for our stakeholders towards global sustainability, safety, quality excellence and value creation.",
-    "We establish partnerships with strategic players.",
-    "We deliver projects by delivering clients' satisfaction.",
-    "We are a progressive organization that fosters a people-excellence culture based on merit and equal opportunity.",
+    "Listen carefully and define the project scope before work begins.",
+    "Set a realistic budget, schedule, and site coordination plan.",
+    "Maintain clear communication during execution and quality checks.",
+    "Complete each project with an accountable handover process.",
   ],
 };

@@ -46,8 +46,8 @@ export default async function ConstructionPortfolioPage() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Construction Portfolio"
-            title="Luxury dark project cards with image overlays."
-            description="Placeholder cards reuse available project imagery until final site assets are provided."
+            title="Construction work organized by scope and location."
+            description="Open a project to review its service scope, delivery context, and available project imagery."
             light
           />
           <PortfolioCards items={constructionProjects} />

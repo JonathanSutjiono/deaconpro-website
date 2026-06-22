@@ -18,14 +18,14 @@ export default function ServiceCards({ services = homepageServices }: { services
 
         return (
           <Link key={service.title} href={service.href} className="group block focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
-            <article className="flex min-h-[330px] flex-col border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
+            <article className="flex min-h-[310px] flex-col border border-neutral-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
               <div className="grid h-14 w-14 place-items-center bg-neutral-950 text-champagne transition group-hover:bg-gold group-hover:text-white">
                 <Icon className="h-7 w-7" aria-hidden="true" />
               </div>
               <p className="mt-9 text-xs font-black uppercase tracking-[0.28em] text-gold">
                 {service.label}
               </p>
-              <h3 className="mt-4 text-3xl font-black uppercase leading-tight text-neutral-950">
+              <h3 className="mt-4 text-2xl font-black uppercase leading-tight text-neutral-950 md:text-3xl">
                 {service.title}
               </h3>
               <p className="mt-5 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">

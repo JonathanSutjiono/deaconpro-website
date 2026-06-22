@@ -2,8 +2,8 @@ import type { ProcessStepContent } from "@/sanity/lib/types";
 
 const defaultSteps: ProcessStepContent[] = [
   "Consultation",
-  "Concept & Planning",
-  "Budgeting",
+  "Site Survey",
+  "Proposal",
   "Execution",
   "Handover",
 ].map((title, index) => ({ title, order: index + 1 }));

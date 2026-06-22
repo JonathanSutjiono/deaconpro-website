@@ -14,49 +14,49 @@ export const serviceNavigation = [
 
 export const homepageServices: ServiceItem[] = [
   {
-    title: "Deacon Construction",
+    title: "Construction",
     href: "/construction",
     label: "Construction",
     icon: "building",
-    cta: "Explore Construction",
+    cta: "Construction Services",
     description:
-      "Construction delivery, contractor coordination, renovation, and site management for premium projects.",
+      "General contracting, site coordination, and project control for residential and commercial work.",
   },
   {
-    title: "Deacon Interior",
+    title: "Interior",
     href: "/interior",
     label: "Interior",
     icon: "interior",
-    cta: "Explore Interior",
+    cta: "Interior Services",
     description:
-      "Interior design, fit-out, office interiors, residential interiors, and custom furniture execution.",
+      "Interior design and fit-out for homes, offices, retail spaces, and custom furniture needs.",
   },
   {
     title: "Build New",
     href: "/construction",
     label: "Build",
     icon: "build",
-    cta: "Plan a Build",
+    cta: "Discuss a New Build",
     description:
-      "New construction planning and execution for homes, commercial spaces, and hospitality environments.",
+      "Planning and construction for new homes, commercial buildings, and hospitality spaces.",
   },
   {
     title: "Renovation",
     href: "/construction",
     label: "Renovation",
     icon: "renovation",
-    cta: "Discuss Renovation",
+    cta: "Plan a Renovation",
     description:
-      "Renovation services for structural upgrades, space improvements, and finish refreshes.",
+      "Measured renovation work for layout changes, building repairs, and finish upgrades.",
   },
   {
     title: "Home Maintenance",
     href: "/#contact",
     label: "Maintenance",
     icon: "maintenance",
-    cta: "Request Support",
+    cta: "Request Maintenance",
     description:
-      "Reliable home maintenance support to keep properties functional, refined, and well cared for.",
+      "Scheduled and responsive maintenance to keep the property safe, functional, and well cared for.",
   },
 ];
 

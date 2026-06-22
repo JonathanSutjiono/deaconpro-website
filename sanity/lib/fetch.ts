@@ -233,6 +233,7 @@ function mapProject(doc: SanityDocument): Project | undefined {
     imageAlt: `${title} - ${text(doc.location, "Deacon Pro project")}`,
     clientName: optionalText(doc.clientName),
     status: optionalText(doc.status),
+    isSample: false,
   };
 }
 

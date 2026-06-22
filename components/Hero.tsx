@@ -55,7 +55,7 @@ export default function Hero({
           <p className="mb-5 text-xs font-black uppercase tracking-[0.32em] text-champagne sm:tracking-[0.42em] md:mb-6">
             {eyebrow}
           </p>
-          <h1 className="text-[clamp(2.75rem,13vw,8.6rem)] font-black uppercase leading-[0.9] tracking-normal text-white sm:leading-[0.88]">
+          <h1 className="text-[clamp(2.75rem,10vw,7.75rem)] font-black uppercase leading-[0.92] tracking-normal text-white sm:leading-[0.9]">
             {lines.map((line) => (
               <span
                 key={line}
@@ -66,7 +66,7 @@ export default function Hero({
             ))}
           </h1>
           {description ? (
-            <p className="mt-8 max-w-2xl text-base font-medium leading-8 text-white/82 md:text-lg">
+            <p className="mt-7 max-w-xl text-base font-medium leading-8 text-white/82 md:text-lg">
               {description}
             </p>
           ) : null}

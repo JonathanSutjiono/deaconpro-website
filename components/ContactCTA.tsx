@@ -31,11 +31,14 @@ export default function ContactCTA({
             <p className="text-xs font-black uppercase tracking-[0.36em] text-champagne">
               Contact
             </p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight md:text-6xl">
+            <h2 className="mt-4 max-w-3xl text-3xl font-black uppercase leading-tight sm:text-4xl md:text-5xl">
               {heading ?? contact?.heading ?? "Ready to build, renovate, or maintain your property?"}
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/80 md:text-[18px] md:leading-9">
               {description ?? contact?.description ?? `Talk with ${companyInfo.name} about ${companyInfo.tagline} services across ${companyInfo.serviceArea}.`}
+            </p>
+            <p className="mt-4 text-sm font-black uppercase tracking-[0.18em] text-champagne">
+              Service area: {contact?.areaCoverage ?? companyInfo.serviceArea}
             </p>
             <p className="mt-4 max-w-3xl text-base leading-8 text-white/72 md:text-[18px] md:leading-9">
               {companyInfo.location}: {address}

@@ -46,8 +46,8 @@ export default async function InteriorPortfolioPage() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Interior Portfolio"
-            title="Luxury dark project cards with image overlays."
-            description="Placeholder cards reuse available project imagery until final site assets are provided."
+            title="Interior work for residential and commercial spaces."
+            description="Open a project to review its location, fit-out scope, and available project imagery."
             light
           />
           <PortfolioCards items={interiorProjects} />

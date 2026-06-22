@@ -75,6 +75,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="container-x relative z-10 flex min-h-[calc(72vh-80px)] items-end py-16">
           <div className="max-w-4xl">
             <p className="text-xs font-black uppercase tracking-[0.38em] text-champagne">
+              {project.isSample ? "Sample Project · " : ""}
               {project.category} · {project.location} · {project.year}
             </p>
             <h1 className="mt-5 text-5xl font-black uppercase leading-tight text-white md:text-7xl">
@@ -93,6 +94,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <p className="text-xs font-black uppercase tracking-widest text-gold">
               Project Detail
             </p>
+            {project.isSample ? (
+              <p className="mt-4 text-sm leading-6 text-neutral-600">
+                Sample project reference used to present Deacon Pro&apos;s service scope and case-study format.
+              </p>
+            ) : null}
             <dl className="mt-6 space-y-5">
               <div>
                 <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
@@ -165,7 +171,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             )}
 
             <p className="mt-12 text-xs font-black uppercase tracking-widest text-gold">
-              Gallery Placeholder
+              Project Gallery
             </p>
             <div className="mt-5 grid gap-5 md:grid-cols-3">
               {project.gallery.map((image, index) => (

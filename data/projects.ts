@@ -23,6 +23,7 @@ export type Project = {
   clientName?: string;
   status?: string;
   portableDescription?: PortableTextBlock[];
+  isSample?: boolean;
 };
 
 export const imageUploadGuidelines = {
@@ -44,14 +45,15 @@ export const projects: Project[] = [
     year: "2026",
     scopeOfWork: ["Build New", "Design & Build", "Project Management"],
     description:
-      "A modern residential construction sample showing how Deacon Pro manages Build New work from planning and budgeting through execution, quality control, and handover.",
+      "Sample case-study format for a new residence in BSD, covering early planning, budget alignment, site coordination, quality checks, and handover.",
     coverImage: "/images/hero-architecture.png",
     gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
+    isSample: true,
     seoTitle: "Modern Residence BSD | Kontraktor Rumah Jakarta",
     seoDescription:
       "Modern residential Build New construction sample by PT Deacon Pro Konstruksi Indonesia for Jabodetabek clients.",
-    imageAlt: "Modern residence construction project in BSD by Deacon Pro",
+    imageAlt: "Sample modern residence construction reference in BSD",
   },
   {
     title: "Commercial Building Kelapa Gading",
@@ -61,14 +63,15 @@ export const projects: Project[] = [
     year: "2025",
     scopeOfWork: ["General Contractor", "Renovation", "Construction Management"],
     description:
-      "A commercial building project reference in Kelapa Gading focused on contractor coordination, renovation planning, site management, and controlled delivery.",
+      "Sample commercial reference for Kelapa Gading, showing a practical scope for contractor coordination, renovation planning, and controlled site delivery.",
     coverImage: "/images/hero-architecture.png",
     gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
+    isSample: true,
     seoTitle: "Commercial Building Kelapa Gading | Kontraktor Bangunan Jabodetabek",
     seoDescription:
       "Commercial construction and renovation sample for Kelapa Gading by PT Deacon Pro Konstruksi Indonesia.",
-    imageAlt: "Commercial building construction project in Kelapa Gading",
+    imageAlt: "Sample commercial building construction reference in Kelapa Gading",
   },
   {
     title: "Villa Renovation Bali",
@@ -78,14 +81,15 @@ export const projects: Project[] = [
     year: "2025",
     scopeOfWork: ["Renovation", "Design & Build", "Quality Control"],
     description:
-      "A villa renovation sample for Bali service area, combining architectural construction planning, exterior improvement, and refined project control.",
+      "Sample renovation reference for Bali, outlining architectural updates, exterior work, finish coordination, and quality control.",
     coverImage: "/images/hero-architecture.png",
     gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: false,
+    isSample: true,
     seoTitle: "Villa Renovation Bali | Kontraktor Bali",
     seoDescription:
       "Villa renovation sample project by Deacon Pro for Bali construction and renovation service area.",
-    imageAlt: "Villa renovation construction project in Bali",
+    imageAlt: "Sample villa renovation reference in Bali",
   },
   {
     title: "Apartment Interior Kelapa Gading",
@@ -95,14 +99,15 @@ export const projects: Project[] = [
     year: "2026",
     scopeOfWork: ["Residential Interior", "Interior Fit-Out", "Custom Furniture"],
     description:
-      "A residential apartment interior sample with warm materials, practical storage, custom furnishings, and a polished living atmosphere.",
+      "Sample apartment interior reference focused on efficient storage, durable finishes, custom furniture, and comfortable daily use.",
     coverImage: "/images/hero-architecture.png",
     gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
+    isSample: true,
     seoTitle: "Apartment Interior Kelapa Gading | Interior Design Kelapa Gading",
     seoDescription:
       "Residential apartment interior design and fit-out sample in Kelapa Gading by PT Deacon Pro Konstruksi Indonesia.",
-    imageAlt: "Apartment interior design project in Kelapa Gading",
+    imageAlt: "Sample apartment interior reference in Kelapa Gading",
   },
   {
     title: "Office Interior Jakarta",
@@ -112,14 +117,15 @@ export const projects: Project[] = [
     year: "2025",
     scopeOfWork: ["Office Interior", "Interior Design", "Interior Fit-Out"],
     description:
-      "A commercial office interior sample designed for productivity, brand presentation, material clarity, and efficient fit-out execution.",
+      "Sample office fit-out reference for Jakarta, covering workspace planning, material selection, brand application, and execution coordination.",
     coverImage: "/images/hero-architecture.png",
     gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: true,
+    isSample: true,
     seoTitle: "Office Interior Jakarta | Kontraktor Interior Jakarta",
     seoDescription:
       "Office interior design and fit-out sample by PT Deacon Pro Konstruksi Indonesia in Jakarta.",
-    imageAlt: "Office interior design and fit-out project in Jakarta",
+    imageAlt: "Sample office interior and fit-out reference in Jakarta",
   },
   {
     title: "Residential Living Room Makassar",
@@ -129,14 +135,15 @@ export const projects: Project[] = [
     year: "2025",
     scopeOfWork: ["Residential Interior", "Custom Furniture", "Project Management"],
     description:
-      "A residential living room interior sample for Makassar, balancing furniture detail, finish selection, comfort, and everyday function.",
+      "Sample residential interior reference for Makassar, balancing furniture detail, finish selection, comfort, and everyday function.",
     coverImage: "/images/hero-architecture.png",
     gallery: ["/images/hero-architecture.png", "/images/hero-architecture.png", "/images/hero-architecture.png"],
     featured: false,
+    isSample: true,
     seoTitle: "Residential Living Room Makassar | Kontraktor Makassar",
     seoDescription:
       "Residential interior and custom furniture sample for Makassar service area by Deacon Pro.",
-    imageAlt: "Residential living room interior project in Makassar",
+    imageAlt: "Sample residential living room interior reference in Makassar",
   },
 ];
 
