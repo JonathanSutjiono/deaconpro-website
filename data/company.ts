@@ -39,7 +39,7 @@ export const company: CompanyInfo = {
   location: "Mall Of Indonesia",
   address:
     "Gading Square, Perkantoran Gading River View Apartemen Santa Monica Bay Lantai 1 Unit K03, Kelapa, Jl. Boulevard Bar. Raya No.18, RT.18/RW.8, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240",
-  serviceArea: "Jabodetabek · Bali · Makassar",
+  serviceArea: "JABODETABEK · Bali · Makassar",
   phone: "021-22459116",
   phoneHref: "tel:02122459116",
   whatsapp: "081299375577",
@@ -62,7 +62,7 @@ export const company: CompanyInfo = {
   heroSubtitle:
     "Construction, renovation, home maintenance, and interior work for homes and businesses across JABODETABEK, Bali, and Makassar.",
   aboutSummary:
-    "PT Deacon Pro Konstruksi Indonesia is a contractor and interior specialist based in Kelapa Gading, Jakarta. We handle new builds, renovations, fit-outs, and property maintenance with clear planning, coordinated site work, and practical project control across JABODETABEK, Bali, and Makassar.",
+    "PT Deacon Pro Konstruksi Indonesia is a contractor and interior specialist based in Kelapa Gading, Jakarta. We support residential and commercial work across JABODETABEK, Bali, and Makassar through construction, interior fit-out, renovation, maintenance, and hands-on project management.",
   about:
     "PT Deacon Pro Konstruksi Indonesia provides construction, renovation, interior fit-out, and home maintenance services from Kelapa Gading, Jakarta. Each project is planned around the property condition, client priorities, budget, and working schedule. Our team coordinates design, procurement, site execution, and quality checks so decisions remain clear from the first survey through handover.",
   vision:

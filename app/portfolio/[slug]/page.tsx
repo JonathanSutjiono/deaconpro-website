@@ -75,7 +75,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="container-x relative z-10 flex min-h-[calc(72vh-80px)] items-end py-16">
           <div className="max-w-4xl">
             <p className="text-xs font-black uppercase tracking-[0.38em] text-champagne">
-              {project.isSample ? "Sample Project · " : ""}
+              {project.isSample ? "Representative Visual · " : ""}
               {project.category} · {project.location} · {project.year}
             </p>
             <h1 className="mt-5 text-5xl font-black uppercase leading-tight text-white md:text-7xl">
@@ -96,7 +96,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </p>
             {project.isSample ? (
               <p className="mt-4 text-sm leading-6 text-neutral-600">
-                Sample project reference used to present Deacon Pro&apos;s service scope and case-study format.
+                Representative visual used to present Deacon Pro&apos;s service scope and case-study format. It is not presented as a completed client project.
               </p>
             ) : null}
             <dl className="mt-6 space-y-5">

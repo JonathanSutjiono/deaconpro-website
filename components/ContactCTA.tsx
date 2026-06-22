@@ -40,9 +40,10 @@ export default function ContactCTA({
             <p className="mt-4 text-sm font-black uppercase tracking-[0.18em] text-champagne">
               Service area: {contact?.areaCoverage ?? companyInfo.serviceArea}
             </p>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-white/72 md:text-[18px] md:leading-9">
-              {companyInfo.location}: {address}
-            </p>
+            <div className="mt-4 flex max-w-3xl items-start gap-3 text-base leading-8 text-white/72 md:text-[18px] md:leading-9">
+              <MapPin className="mt-1 h-5 w-5 shrink-0 text-champagne" aria-hidden="true" />
+              <p>{companyInfo.location}: {address}</p>
+            </div>
             <a
               href={mapsLink}
               target="_blank"
@@ -52,7 +53,7 @@ export default function ContactCTA({
               <MapPin className="h-4 w-4" aria-hidden="true" />
               Open in Google Maps
             </a>
-            <div className="mt-5 flex flex-col gap-3 text-base font-semibold text-white/82 sm:flex-row sm:gap-6 md:text-[18px]">
+            <div className="mt-5 flex flex-col gap-3 text-base font-semibold text-white/82 sm:flex-row sm:flex-wrap sm:gap-6 md:text-[18px]">
               <a href={phoneLink} className="inline-flex items-center gap-2 transition hover:text-champagne">
                 <Phone className="h-5 w-5" aria-hidden="true" />
                 Phone: {phone}

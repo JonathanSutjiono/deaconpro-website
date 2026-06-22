@@ -55,8 +55,12 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
           "location" in item ? item.location : undefined,
           "year" in item ? item.year : undefined,
         ].filter(Boolean);
+        const primaryScope =
+          "scopeOfWork" in item && item.scopeOfWork.length
+            ? item.scopeOfWork[0]
+            : undefined;
         const categoryLabel = isSample
-          ? `Sample Project · ${getCategory(item)}`
+          ? `Representative Visual · ${getCategory(item)}`
           : isProject
             ? getCategory(item)
             : `Project Category · ${getCategory(item)}`;
@@ -70,7 +74,7 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
               className="object-cover transition duration-500 group-hover:scale-105"
               style={usesFallbackImage ? { objectPosition: fallbackPositions[index % fallbackPositions.length] } : undefined}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-7">
               <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-champagne">
                 {categoryLabel}
@@ -81,6 +85,11 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
               {meta.length ? (
                 <p className="mt-3 text-sm font-bold uppercase tracking-[0.14em] text-white/75">
                   {meta.join(" · ")}
+                </p>
+              ) : null}
+              {primaryScope ? (
+                <p className="mt-3 text-xs font-black uppercase tracking-[0.18em] text-champagne">
+                  Scope: {primaryScope}
                 </p>
               ) : null}
               {href ? (

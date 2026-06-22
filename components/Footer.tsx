@@ -25,7 +25,7 @@ export default function Footer({
   const footerLinks = footerContent?.links.length ? footerContent.links : quickLinks;
 
   return (
-    <footer className="bg-neutral-950 py-14 text-white">
+    <footer className="bg-neutral-950 pb-24 pt-14 text-white sm:py-14">
       <div className="container-x grid gap-10 md:grid-cols-2 lg:grid-cols-[1.25fr_0.7fr_0.85fr_1fr]">
         <div>
           <p className="text-lg font-black uppercase tracking-[0.28em]">

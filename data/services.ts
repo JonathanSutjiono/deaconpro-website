@@ -14,7 +14,7 @@ export const serviceNavigation = [
 
 export const homepageServices: ServiceItem[] = [
   {
-    title: "Construction",
+    title: "Deacon Construction",
     href: "/construction",
     label: "Construction",
     icon: "building",
@@ -23,7 +23,7 @@ export const homepageServices: ServiceItem[] = [
       "General contracting, site coordination, and project control for residential and commercial work.",
   },
   {
-    title: "Interior",
+    title: "Deacon Interior",
     href: "/interior",
     label: "Interior",
     icon: "interior",
