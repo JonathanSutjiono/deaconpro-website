@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from "@portabletext/react";
+
 export type Insight = {
   title: string;
   slug: string;
@@ -9,6 +11,8 @@ export type Insight = {
   seoTitle: string;
   seoDescription: string;
   imageAlt: string;
+  readTime?: string;
+  portableContent?: PortableTextBlock[];
 };
 
 // CMS-ready static insight source. Replace this array with a CMS fetch later.

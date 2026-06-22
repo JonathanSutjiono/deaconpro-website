@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { company } from "@/data/company";
+import { company, type CompanyInfo } from "@/data/company";
 import { portfolioNavigation } from "@/data/portfolio";
 import { serviceNavigation } from "@/data/services";
 
@@ -91,7 +92,7 @@ function MobileGroup({
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ companyInfo = company }: { companyInfo?: CompanyInfo }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -102,20 +103,32 @@ export default function Navbar() {
           className="flex min-w-0 shrink-0 items-center gap-3"
           aria-label="Deacon Pro home"
         >
-          <span className="grid h-10 w-10 shrink-0 place-items-center bg-neutral-950 text-[12px] font-black tracking-[0.12em] text-champagne xl:h-11 xl:w-11 xl:text-[13px]">
-            DP
-          </span>
-          <span className="leading-none">
-            <span className="block whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] sm:text-sm xl:tracking-[0.22em]">
-              {company.shortName}
+          {companyInfo.logoMarkUrl ? (
+            <span className="relative h-10 w-10 shrink-0 bg-neutral-950 xl:h-11 xl:w-11">
+              <Image src={companyInfo.logoMarkUrl} alt="" fill sizes="44px" className="object-contain p-1" />
             </span>
-            <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] text-gold 2xl:hidden">
-              {company.shortTagline}
+          ) : (
+            <span className="grid h-10 w-10 shrink-0 place-items-center bg-neutral-950 text-[12px] font-black tracking-[0.12em] text-champagne xl:h-11 xl:w-11 xl:text-[13px]">
+              DP
             </span>
-            <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-gold 2xl:block">
-              {company.tagline}
+          )}
+          {companyInfo.logoUrl ? (
+            <span className="relative h-10 w-32 sm:w-36">
+              <Image src={companyInfo.logoUrl} alt={companyInfo.shortName} fill sizes="144px" className="object-contain object-left" />
             </span>
-          </span>
+          ) : (
+            <span className="leading-none">
+              <span className="block whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] sm:text-sm xl:tracking-[0.22em]">
+                {companyInfo.shortName}
+              </span>
+              <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] text-gold 2xl:hidden">
+                {companyInfo.shortTagline}
+              </span>
+              <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-gold 2xl:block">
+                {companyInfo.tagline}
+              </span>
+            </span>
+          )}
         </Link>
 
         <div className="hidden h-full flex-nowrap items-center gap-4 xl:flex 2xl:gap-5">
@@ -139,14 +152,14 @@ export default function Navbar() {
         </div>
 
         <Link
-          href={company.phoneHref}
+          href={companyInfo.phoneHref}
           className="hidden whitespace-nowrap text-xs font-black uppercase tracking-[0.08em] text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold xl:inline-flex 2xl:tracking-[0.12em]"
         >
-          {company.phone}
+          {companyInfo.phone}
         </Link>
 
         <Link
-          href={company.whatsappHref}
+          href={companyInfo.whatsappHref}
           className="hidden whitespace-nowrap bg-gold px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:inline-flex xl:ml-1 2xl:px-5 2xl:tracking-[0.14em]"
           target="_blank"
           rel="noopener noreferrer"
@@ -187,13 +200,13 @@ export default function Navbar() {
             </Link>
             <a
               className="block border-t border-neutral-200 py-4 text-base font-bold text-neutral-900"
-              href={company.phoneHref}
+              href={companyInfo.phoneHref}
             >
-              Phone: {company.phone}
+              Phone: {companyInfo.phone}
             </a>
             <a
               className="mt-3 flex min-h-12 items-center justify-center bg-gold px-5 text-sm font-black uppercase tracking-[0.16em] text-white"
-              href={company.whatsappHref}
+              href={companyInfo.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
             >

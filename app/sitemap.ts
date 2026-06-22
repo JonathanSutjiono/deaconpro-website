@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { insights } from "@/data/insights";
-import { projects } from "@/data/projects";
 import { siteUrl } from "@/data/seo";
+import { getInsights, getProjects } from "@/sanity/lib/fetch";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [projects, insights] = await Promise.all([getProjects(), getInsights()]);
   const staticRoutes = [
     "",
     "/construction",

@@ -1,4 +1,10 @@
-export type ProjectCategory = "construction" | "interior";
+import type { PortableTextBlock } from "@portabletext/react";
+
+export type ProjectCategory =
+  | "construction"
+  | "interior"
+  | "office-commercial"
+  | "residential";
 
 export type Project = {
   title: string;
@@ -14,6 +20,9 @@ export type Project = {
   seoTitle: string;
   seoDescription: string;
   imageAlt: string;
+  clientName?: string;
+  status?: string;
+  portableDescription?: PortableTextBlock[];
 };
 
 export const imageUploadGuidelines = {

@@ -1,8 +1,11 @@
 import type { ComponentType } from "react";
+import Image from "next/image";
 import { BriefcaseBusiness, Building2, Globe, MapPin, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { company } from "@/data/company";
+import { company, type CompanyInfo } from "@/data/company";
+import type { AboutContent } from "@/sanity/lib/types";
+import PortableContent from "./PortableContent";
 
 function DetailRow({
   label,
@@ -49,11 +52,25 @@ function DetailRow({
   );
 }
 
-export default function CompanyDetail() {
-  const instagram = company.socialLinks.find((item) => item.label === "Instagram");
-  const facebook = company.socialLinks.find((item) => item.label === "Facebook");
-  const twitter = company.socialLinks.find((item) => item.label === "Twitter/X");
-  const linkedIn = company.socialLinks.find((item) => item.label === "LinkedIn");
+export default function CompanyDetail({
+  companyInfo = company,
+  aboutContent,
+}: {
+  companyInfo?: CompanyInfo;
+  aboutContent?: AboutContent;
+}) {
+  const instagram = companyInfo.socialLinks.find((item) => item.label === "Instagram");
+  const facebook = companyInfo.socialLinks.find((item) => item.label === "Facebook");
+  const twitter = companyInfo.socialLinks.find((item) => item.label === "Twitter/X");
+  const linkedIn = companyInfo.socialLinks.find((item) => item.label === "LinkedIn");
+  const projectFocus = aboutContent?.highlights.length
+    ? aboutContent.highlights.map((item) => item.title)
+    : companyInfo.projectFocus;
+  const missions = aboutContent?.values.length
+    ? aboutContent.values.map((item) =>
+        item.description ? `${item.title}: ${item.description}` : item.title,
+      )
+    : companyInfo.missions;
 
   return (
     <section id="company-detail" className="bg-white py-20 text-neutral-950 md:py-28">
@@ -63,10 +80,10 @@ export default function CompanyDetail() {
             Company Detail
           </p>
           <h2 className="mt-4 text-4xl font-black uppercase leading-tight md:text-6xl">
-            {company.name}
+            {aboutContent?.heading || companyInfo.name}
           </h2>
           <p className="mt-5 text-sm font-bold uppercase tracking-[0.18em] text-neutral-500">
-            {company.tagline}
+            {companyInfo.tagline}
           </p>
         </div>
 
@@ -80,7 +97,7 @@ export default function CompanyDetail() {
                     Location
                   </p>
                   <h3 className="mt-2 text-2xl font-black uppercase text-neutral-950">
-                    {company.location}
+                    {companyInfo.location}
                   </h3>
                 </div>
               </div>
@@ -92,13 +109,13 @@ export default function CompanyDetail() {
                     Address
                   </p>
                   <p className="mt-2 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
-                    {company.address}
+                    {companyInfo.address}
                   </p>
                 </div>
               </div>
 
               <a
-                href={company.googleMapsHref}
+                href={companyInfo.googleMapsHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-9 mt-5 inline-flex min-h-11 items-center justify-center gap-2 bg-neutral-950 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-gold md:text-sm"
@@ -108,20 +125,20 @@ export default function CompanyDetail() {
               </a>
             </div>
 
-            <DetailRow label="Company Name" value={company.name} Icon={Building2} />
-            <DetailRow label="Service Area" value={company.serviceArea} Icon={MapPin} />
-            <DetailRow label="Phone Number" value={company.phone} href={company.phoneHref} Icon={Phone} />
+            <DetailRow label="Company Name" value={companyInfo.name} Icon={Building2} />
+            <DetailRow label="Service Area" value={companyInfo.serviceArea} Icon={MapPin} />
+            <DetailRow label="Phone Number" value={companyInfo.phone} href={companyInfo.phoneHref} Icon={Phone} />
             <DetailRow
               label="WhatsApp"
-              value={company.whatsapp}
-              href={company.whatsappHref}
+              value={companyInfo.whatsapp}
+              href={companyInfo.whatsappHref}
               Icon={FaWhatsapp}
               external
             />
             <DetailRow
               label="Website"
-              value={company.website}
-              href={company.websiteHref}
+              value={companyInfo.website}
+              href={companyInfo.websiteHref}
               Icon={Globe}
               external
             />
@@ -156,7 +173,7 @@ export default function CompanyDetail() {
                 Project Focus
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
-                {company.projectFocus.map((item) => (
+                {projectFocus.map((item) => (
                   <span
                     key={item}
                     className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-neutral-950"
@@ -173,9 +190,26 @@ export default function CompanyDetail() {
             <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               About
             </p>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
-              {company.about}
-            </p>
+            {aboutContent?.image ? (
+              <div className="relative mb-7 aspect-[16/9] overflow-hidden bg-neutral-100">
+                <Image
+                  src={aboutContent.image}
+                  alt={`${companyInfo.shortName} about`}
+                  fill
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            ) : null}
+            {aboutContent?.body.length ? (
+              <div className="mt-5 space-y-5">
+                <PortableContent value={aboutContent.body} />
+              </div>
+            ) : (
+              <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
+                {aboutContent?.bodyText || companyInfo.about}
+              </p>
+            )}
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
 
@@ -183,7 +217,7 @@ export default function CompanyDetail() {
               Vision
             </p>
             <blockquote className="mt-4 border-l-4 border-gold pl-5 text-2xl font-black uppercase leading-tight text-neutral-950">
-              {company.vision}
+              {companyInfo.vision}
             </blockquote>
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
@@ -192,10 +226,10 @@ export default function CompanyDetail() {
               Missions
             </p>
             <p className="mt-4 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
-              {company.missionsIntro}
+              {companyInfo.missionsIntro}
             </p>
             <div className="mt-6 space-y-4">
-              {company.missions.map((mission, index) => (
+              {missions.map((mission, index) => (
                 <div key={mission} className="flex gap-4">
                   <span className="grid h-8 w-8 shrink-0 place-items-center bg-gold text-xs font-black text-white">
                     {String(index + 1).padStart(2, "0")}

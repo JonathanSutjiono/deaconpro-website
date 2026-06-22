@@ -24,7 +24,11 @@ function getCardHref(item: Item) {
 
 function getCategory(item: Item) {
   if ("category" in item && item.category) {
-    return item.category === "construction" ? "Construction" : item.category === "interior" ? "Interior" : item.category;
+    if (item.category === "construction") return "Construction";
+    if (item.category === "interior") return "Interior";
+    if (item.category === "office-commercial") return "Office & Commercial";
+    if (item.category === "residential") return "Residential";
+    return item.category;
   }
   return "Portfolio";
 }

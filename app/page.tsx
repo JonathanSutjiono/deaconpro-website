@@ -8,37 +8,79 @@ import PortfolioCards from "@/components/PortfolioCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import SectionTitle from "@/components/SectionTitle";
 import ServiceCards from "@/components/ServiceCards";
-import { company } from "@/data/company";
 import { homepagePortfolio } from "@/data/portfolio";
-import { featuredProjects } from "@/data/projects";
 import { createPageMetadata } from "@/data/seo";
+import {
+  getAbout,
+  getCompanyInfo,
+  getContact,
+  getFeaturedProjects,
+  getFooter,
+  getHomepage,
+  getInsights,
+  getProcessSteps,
+  getFeaturedServices,
+  getSiteSettings,
+} from "@/sanity/lib/fetch";
 
-export const metadata = createPageMetadata({
-  title: `${company.name} | Build New, Renovation, Home Maintenance`,
-  description:
-    "PT Deacon Pro Konstruksi Indonesia provides kontraktor rumah Jakarta, interior design Kelapa Gading, renovation, and home maintenance services.",
-});
+export async function generateMetadata() {
+  const settings = await getSiteSettings();
+  return createPageMetadata({
+    title: settings.defaultSeoTitle,
+    description: settings.defaultSeoDescription,
+    image: settings.defaultOgImage,
+  });
+}
 
-export default function Home() {
+export default async function Home() {
+  const [
+    companyInfo,
+    homepage,
+    about,
+    services,
+    featuredProjects,
+    processSteps,
+    insights,
+    contact,
+    footer,
+  ] = await Promise.all([
+    getCompanyInfo(),
+    getHomepage(),
+    getAbout(),
+    getFeaturedServices(),
+    getFeaturedProjects(),
+    getProcessSteps(),
+    getInsights(),
+    getContact(),
+    getFooter(),
+  ]);
+
   return (
     <main>
-      <Navbar />
+      <Navbar companyInfo={companyInfo} />
       <Hero
-        title={["DESIGN.", "CONSTRUCT.", "INSPIRE."]}
-        highlight="INSPIRE."
-        description={company.heroSubtitle}
+        title={homepage.heroTitle}
+        highlight={homepage.heroTitle.at(-1)}
+        eyebrow={homepage.heroEyebrow}
+        description={homepage.heroSubtitle}
+        imageSrc={homepage.heroImage}
+        imageAlt={`${companyInfo.shortName} construction and interior`}
+        primaryLabel={homepage.primaryButtonLabel}
+        primaryHref={homepage.primaryButtonLink}
+        secondaryLabel={homepage.secondaryButtonLabel}
+        secondaryHref={homepage.secondaryButtonLink}
         tertiaryLabel="Chat WhatsApp"
-        tertiaryHref={company.whatsappHref}
+        tertiaryHref={companyInfo.whatsappHref}
       />
 
       <section id="about" className="bg-white py-20 text-neutral-950 md:py-28">
         <div className="container-x grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <SectionTitle
             eyebrow="About Us"
-            title="Construction, renovation, and maintenance with a premium standard."
+            title={homepage.introTitle}
           />
           <p className="max-w-3xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
-            {company.aboutSummary}
+            {homepage.introText}
           </p>
           <a
             href="#company-detail"
@@ -53,10 +95,10 @@ export default function Home() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
-            title="Build New, Renovation, Home Maintenance, and specialist divisions."
-            description={`${company.tagline} for clients across ${company.serviceArea}.`}
+            title={homepage.servicesTitle}
+            description={homepage.servicesSubtitle}
           />
-          <ServiceCards />
+          <ServiceCards services={services} />
         </div>
       </section>
 
@@ -64,7 +106,8 @@ export default function Home() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Portfolio"
-            title="Project categories ready for official case studies."
+            title={homepage.portfolioTitle}
+            description={homepage.portfolioSubtitle || undefined}
           />
           <PortfolioCards items={homepagePortfolio} />
           <div className="mt-8">
@@ -77,13 +120,14 @@ export default function Home() {
         <div className="container-x">
           <SectionTitle
             eyebrow="Process"
-            title="A clear route from first meeting to handover."
+            title={homepage.processTitle}
+            description={homepage.processSubtitle || undefined}
           />
-          <ProcessSteps />
+          <ProcessSteps steps={processSteps} />
         </div>
       </section>
 
-      <CompanyDetail />
+      <CompanyDetail companyInfo={companyInfo} aboutContent={about} />
 
       <section id="insight" className="bg-neutral-950 py-20 text-white md:py-28">
         <div className="container-x">
@@ -92,7 +136,7 @@ export default function Home() {
             title="Project thinking for construction and interiors."
             light
           />
-          <InsightCards limit={3} />
+          <InsightCards limit={3} insights={insights} />
           <a
             href="/insight"
             className="mt-8 inline-flex bg-gold px-6 py-4 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-neutral-950"
@@ -102,8 +146,13 @@ export default function Home() {
         </div>
       </section>
 
-      <ContactCTA />
-      <Footer />
+      <ContactCTA
+        companyInfo={companyInfo}
+        contact={contact}
+        heading={homepage.contactTitle}
+        description={homepage.contactSubtitle}
+      />
+      <Footer companyInfo={companyInfo} footerContent={footer} />
     </main>
   );
 }

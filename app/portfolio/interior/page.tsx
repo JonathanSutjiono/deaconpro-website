@@ -4,27 +4,41 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
-import { company } from "@/data/company";
-import { interiorProjects } from "@/data/projects";
 import { createPageMetadata } from "@/data/seo";
+import {
+  getCompanyInfo,
+  getContact,
+  getFooter,
+  getProjectsByCategory,
+} from "@/sanity/lib/fetch";
 
-export const metadata = createPageMetadata({
-  title: `Interior Projects | ${company.name}`,
-  description:
-    "Interior design and fit-out project samples for residential, office, retail, and custom furniture scopes.",
-  path: "/portfolio/interior",
-});
+export async function generateMetadata() {
+  const companyInfo = await getCompanyInfo();
+  return createPageMetadata({
+    title: `Interior Projects | ${companyInfo.name}`,
+    description:
+      "Interior design and fit-out project samples for residential, office, retail, and custom furniture scopes.",
+    path: "/portfolio/interior",
+  });
+}
 
-export default function InteriorPortfolioPage() {
+export default async function InteriorPortfolioPage() {
+  const [companyInfo, interiorProjects, contact, footer] = await Promise.all([
+    getCompanyInfo(),
+    getProjectsByCategory("interior"),
+    getContact(),
+    getFooter(),
+  ]);
+
   return (
     <main>
-      <Navbar />
+      <Navbar companyInfo={companyInfo} />
       <Hero
         eyebrow="Portfolio"
         title="Interior Projects"
-        description={`Interior project references supported by ${company.name}.`}
+        description={`Interior project references supported by ${companyInfo.name}.`}
         primaryLabel="WhatsApp"
-        primaryHref={company.whatsappHref}
+        primaryHref={companyInfo.whatsappHref}
         secondaryLabel="Interior Services"
         secondaryHref="/interior"
       />
@@ -39,8 +53,8 @@ export default function InteriorPortfolioPage() {
           <PortfolioCards items={interiorProjects} />
         </div>
       </section>
-      <ContactCTA />
-      <Footer />
+      <ContactCTA companyInfo={companyInfo} contact={contact} />
+      <Footer companyInfo={companyInfo} footerContent={footer} />
     </main>
   );
 }

@@ -1,9 +1,9 @@
-import { insights } from "@/data/insights";
+import { insights, type Insight } from "@/data/insights";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function InsightCards({ limit }: { limit?: number }) {
-  const items = typeof limit === "number" ? insights.slice(0, limit) : insights;
+export default function InsightCards({ limit, insights: source = insights }: { limit?: number; insights?: Insight[] }) {
+  const items = typeof limit === "number" ? source.slice(0, limit) : source;
 
   return (
     <div className="grid gap-6 md:grid-cols-3">

@@ -21,6 +21,14 @@ export type CompanyInfo = {
   vision: string;
   missionsIntro: string;
   missions: string[];
+  logoUrl?: string;
+  logoMarkUrl?: string;
+  faviconUrl?: string;
+  email?: string;
+  googleMapsEmbedUrl?: string;
+  latitude?: number;
+  longitude?: number;
+  whatsappButtonLabel?: string;
 };
 
 export const company: CompanyInfo = {

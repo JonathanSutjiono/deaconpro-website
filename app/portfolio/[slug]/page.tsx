@@ -5,9 +5,16 @@ import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
-import { company } from "@/data/company";
-import { getProjectBySlug, getRelatedProjects, projects } from "@/data/projects";
+import PortableContent from "@/components/PortableContent";
+import { projects } from "@/data/projects";
 import { createPageMetadata } from "@/data/seo";
+import {
+  getCompanyInfo,
+  getContact,
+  getFooter,
+  getProjectBySlug,
+  getRelatedProjects,
+} from "@/sanity/lib/fetch";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -19,11 +26,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const [project, companyInfo] = await Promise.all([
+    getProjectBySlug(slug),
+    getCompanyInfo(),
+  ]);
 
   if (!project) {
     return createPageMetadata({
-      title: `Project Not Found | ${company.name}`,
+      title: `Project Not Found | ${companyInfo.name}`,
       description: "The requested Deacon Pro project could not be found.",
       path: `/portfolio/${slug}`,
     });
@@ -39,14 +49,19 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const [project, companyInfo, contact, footer] = await Promise.all([
+    getProjectBySlug(slug),
+    getCompanyInfo(),
+    getContact(),
+    getFooter(),
+  ]);
 
   if (!project) notFound();
-  const relatedProjects = getRelatedProjects(project);
+  const relatedProjects = await getRelatedProjects(project);
 
   return (
     <main>
-      <Navbar />
+      <Navbar companyInfo={companyInfo} />
       <section className="relative min-h-[72vh] overflow-hidden pt-20">
         <Image
           src={project.coverImage}
@@ -97,9 +112,25 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 </dt>
                 <dd className="mt-1 text-lg font-semibold">{project.year}</dd>
               </div>
+              {project.clientName ? (
+                <div>
+                  <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                    Client
+                  </dt>
+                  <dd className="mt-1 text-lg font-semibold">{project.clientName}</dd>
+                </div>
+              ) : null}
+              {project.status ? (
+                <div>
+                  <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                    Status
+                  </dt>
+                  <dd className="mt-1 text-lg font-semibold">{project.status}</dd>
+                </div>
+              ) : null}
             </dl>
             <Link
-              href={company.whatsappHref}
+              href={companyInfo.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex min-h-12 w-full items-center justify-center bg-gold px-6 text-sm font-black uppercase tracking-widest text-white transition hover:bg-neutral-950"
@@ -123,9 +154,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ))}
             </div>
 
-            <p className="mt-10 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
-              {project.description}
-            </p>
+            {project.portableDescription?.length ? (
+              <div className="mt-10 space-y-6">
+                <PortableContent value={project.portableDescription} />
+              </div>
+            ) : (
+              <p className="mt-10 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
+                {project.description}
+              </p>
+            )}
 
             <p className="mt-12 text-xs font-black uppercase tracking-widest text-gold">
               Gallery Placeholder
@@ -163,8 +200,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </section>
       ) : null}
-      <ContactCTA />
-      <Footer />
+      <ContactCTA companyInfo={companyInfo} contact={contact} />
+      <Footer companyInfo={companyInfo} footerContent={footer} />
     </main>
   );
 }

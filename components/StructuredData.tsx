@@ -1,30 +1,30 @@
-import { company } from "@/data/company";
+import { company, type CompanyInfo } from "@/data/company";
 
-export default function StructuredData() {
+export default function StructuredData({ companyInfo = company }: { companyInfo?: CompanyInfo }) {
   const data = [
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: company.name,
-      url: company.websiteHref,
-      telephone: company.phone,
-      sameAs: company.socialLinks.map((link) => link.href).filter((href) => href !== "#"),
+      name: companyInfo.name,
+      url: companyInfo.websiteHref,
+      telephone: companyInfo.phone,
+      sameAs: companyInfo.socialLinks.map((link) => link.href).filter((href) => href !== "#"),
     },
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      name: company.name,
-      url: company.websiteHref,
-      telephone: company.phone,
+      name: companyInfo.name,
+      url: companyInfo.websiteHref,
+      telephone: companyInfo.phone,
       address: {
         "@type": "PostalAddress",
-        streetAddress: company.address,
+        streetAddress: companyInfo.address,
         addressLocality: "Jakarta Utara",
         addressRegion: "DKI Jakarta",
         postalCode: "14240",
         addressCountry: "ID",
       },
-      areaServed: company.serviceArea,
+      areaServed: companyInfo.serviceArea,
     },
   ];
 

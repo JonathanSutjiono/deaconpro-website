@@ -4,22 +4,38 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
-import { company } from "@/data/company";
-import { interiorProjects } from "@/data/projects";
-import { interiorServices } from "@/data/services";
 import { createPageMetadata } from "@/data/seo";
+import {
+  getCompanyInfo,
+  getContact,
+  getFooter,
+  getInteriorServiceNames,
+  getProjectsByCategory,
+} from "@/sanity/lib/fetch";
 
-export const metadata = createPageMetadata({
-  title: `Deacon Pro Interior | ${company.name}`,
-  description:
-    "Interior design, interior fit-out, office interior, residential interior, and custom furniture services in Jakarta and service areas.",
-  path: "/interior",
-});
+export async function generateMetadata() {
+  const companyInfo = await getCompanyInfo();
+  return createPageMetadata({
+    title: `Deacon Pro Interior | ${companyInfo.name}`,
+    description:
+      "Interior design, interior fit-out, office interior, residential interior, and custom furniture services in Jakarta and service areas.",
+    path: "/interior",
+  });
+}
 
-export default function InteriorPage() {
+export default async function InteriorPage() {
+  const [companyInfo, interiorServices, interiorProjects, contact, footer] =
+    await Promise.all([
+      getCompanyInfo(),
+      getInteriorServiceNames(),
+      getProjectsByCategory("interior"),
+      getContact(),
+      getFooter(),
+    ]);
+
   return (
     <main>
-      <Navbar />
+      <Navbar companyInfo={companyInfo} />
       <Hero
         eyebrow="Interior"
         title="DEACON PRO INTERIOR"
@@ -64,8 +80,8 @@ export default function InteriorPage() {
         </div>
       </section>
 
-      <ContactCTA />
-      <Footer />
+      <ContactCTA companyInfo={companyInfo} contact={contact} />
+      <Footer companyInfo={companyInfo} footerContent={footer} />
     </main>
   );
 }

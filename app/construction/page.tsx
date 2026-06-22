@@ -4,22 +4,38 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
-import { company } from "@/data/company";
-import { constructionProjects } from "@/data/projects";
-import { constructionServices } from "@/data/services";
 import { createPageMetadata } from "@/data/seo";
+import {
+  getCompanyInfo,
+  getConstructionServiceNames,
+  getContact,
+  getFooter,
+  getProjectsByCategory,
+} from "@/sanity/lib/fetch";
 
-export const metadata = createPageMetadata({
-  title: `Deacon Pro Construction | ${company.name}`,
-  description:
-    "General contractor, Design & Build, renovation, and construction management services across Jabodetabek, Bali, and Makassar.",
-  path: "/construction",
-});
+export async function generateMetadata() {
+  const companyInfo = await getCompanyInfo();
+  return createPageMetadata({
+    title: `Deacon Pro Construction | ${companyInfo.name}`,
+    description:
+      "General contractor, Design & Build, renovation, and construction management services across Jabodetabek, Bali, and Makassar.",
+    path: "/construction",
+  });
+}
 
-export default function ConstructionPage() {
+export default async function ConstructionPage() {
+  const [companyInfo, constructionServices, constructionProjects, contact, footer] =
+    await Promise.all([
+      getCompanyInfo(),
+      getConstructionServiceNames(),
+      getProjectsByCategory("construction"),
+      getContact(),
+      getFooter(),
+    ]);
+
   return (
     <main>
-      <Navbar />
+      <Navbar companyInfo={companyInfo} />
       <Hero
         eyebrow="Construction"
         title="DEACON PRO CONSTRUCTION"
@@ -64,8 +80,8 @@ export default function ConstructionPage() {
         </div>
       </section>
 
-      <ContactCTA />
-      <Footer />
+      <ContactCTA companyInfo={companyInfo} contact={contact} />
+      <Footer companyInfo={companyInfo} footerContent={footer} />
     </main>
   );
 }

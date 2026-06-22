@@ -13,6 +13,8 @@ type HeroProps = {
   secondaryHref?: string;
   tertiaryLabel?: string;
   tertiaryHref?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 };
 
 export default function Hero({
@@ -26,6 +28,8 @@ export default function Hero({
   secondaryHref = "/#portfolio",
   tertiaryLabel,
   tertiaryHref,
+  imageSrc = "/images/hero-architecture.png",
+  imageAlt = "",
 }: HeroProps) {
   const lines = Array.isArray(title) ? title : [title];
   const primaryExternal = primaryHref.startsWith("http");
@@ -35,8 +39,8 @@ export default function Hero({
   return (
     <section className="relative min-h-[86vh] overflow-hidden pt-20 md:min-h-[88vh]">
       <Image
-        src="/images/hero-architecture.png"
-        alt=""
+        src={imageSrc}
+        alt={imageAlt}
         fill
         priority
         sizes="100vw"

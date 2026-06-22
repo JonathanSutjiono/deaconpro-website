@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Building2, Hammer, Paintbrush, ShieldCheck, Wrench } from "lucide-react";
-import { homepageServices } from "@/data/services";
+import { homepageServices, type ServiceItem } from "@/data/services";
 
 const icons = {
   building: Building2,
@@ -10,10 +10,10 @@ const icons = {
   maintenance: ShieldCheck,
 };
 
-export default function ServiceCards() {
+export default function ServiceCards({ services = homepageServices }: { services?: ServiceItem[] }) {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {homepageServices.map((service) => {
+      {services.map((service) => {
         const Icon = icons[service.icon];
 
         return (

@@ -1,10 +1,11 @@
 import { FaWhatsapp } from "react-icons/fa";
 import { company } from "@/data/company";
+import type { CompanyInfo } from "@/data/company";
 
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ companyInfo = company }: { companyInfo?: CompanyInfo }) {
   return (
     <a
-      href={company.whatsappHref}
+      href={companyInfo.whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

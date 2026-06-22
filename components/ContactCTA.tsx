@@ -1,10 +1,41 @@
 import Link from "next/link";
-import { MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { company } from "@/data/company";
+import { company, type CompanyInfo } from "@/data/company";
+import type { ContactContent } from "@/sanity/lib/types";
 
-export default function ContactCTA() {
-  const instagram = company.socialLinks.find((item) => item.label === "Instagram");
+function safeMapEmbedUrl(value?: string) {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value);
+    const isGoogle = url.hostname === "www.google.com" || url.hostname === "maps.google.com";
+    return url.protocol === "https:" && isGoogle && url.pathname.startsWith("/maps")
+      ? url.toString()
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export default function ContactCTA({
+  companyInfo = company,
+  contact,
+  heading,
+  description,
+}: {
+  companyInfo?: CompanyInfo;
+  contact?: ContactContent;
+  heading?: string;
+  description?: string;
+}) {
+  const instagram = companyInfo.socialLinks.find((item) => item.label === "Instagram");
+  const mapEmbedUrl = safeMapEmbedUrl(contact?.googleMapsEmbedUrl);
+  const phone = contact?.phone ?? companyInfo.phone;
+  const phoneLink = contact?.phoneHref ?? companyInfo.phoneHref;
+  const whatsapp = contact?.whatsappNumber ?? companyInfo.whatsapp;
+  const whatsappLink = contact?.whatsappHref ?? companyInfo.whatsappHref;
+  const address = contact?.address ?? companyInfo.address;
+  const mapsLink = contact?.googleMapsUrl ?? companyInfo.googleMapsHref;
 
   return (
     <section id="contact" className="bg-white py-20 text-neutral-950 md:py-28">
@@ -15,17 +46,16 @@ export default function ContactCTA() {
               Contact
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight md:text-6xl">
-              Ready to build, renovate, or maintain your property?
+              {heading ?? contact?.heading ?? "Ready to build, renovate, or maintain your property?"}
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/80 md:text-[18px] md:leading-9">
-              Talk with {company.name} about {company.tagline} services across{" "}
-              {company.serviceArea}.
+              {description ?? contact?.description ?? `Talk with ${companyInfo.name} about ${companyInfo.tagline} services across ${companyInfo.serviceArea}.`}
             </p>
             <p className="mt-4 max-w-3xl text-base leading-8 text-white/72 md:text-[18px] md:leading-9">
-              {company.location}: {company.address}
+              {companyInfo.location}: {address}
             </p>
             <a
-              href={company.googleMapsHref}
+              href={mapsLink}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 border border-white/20 px-5 text-xs font-black uppercase tracking-widest text-white transition hover:border-champagne hover:text-champagne"
@@ -34,18 +64,18 @@ export default function ContactCTA() {
               Open in Google Maps
             </a>
             <div className="mt-5 flex flex-col gap-3 text-base font-semibold text-white/82 sm:flex-row sm:gap-6 md:text-[18px]">
-              <a href={company.phoneHref} className="inline-flex items-center gap-2 transition hover:text-champagne">
+              <a href={phoneLink} className="inline-flex items-center gap-2 transition hover:text-champagne">
                 <Phone className="h-5 w-5" aria-hidden="true" />
-                Phone: {company.phone}
+                Phone: {phone}
               </a>
               <a
-                href={company.whatsappHref}
+                href={whatsappLink}
                 className="inline-flex items-center gap-2 transition hover:text-champagne"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
-                WhatsApp: {company.whatsapp}
+                WhatsApp: {whatsapp}
               </a>
               {instagram ? (
                 <a
@@ -58,18 +88,39 @@ export default function ContactCTA() {
                   {instagram.handle}
                 </a>
               ) : null}
+              {contact?.email ? (
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="inline-flex items-center gap-2 transition hover:text-champagne"
+                >
+                  <Mail className="h-5 w-5" aria-hidden="true" />
+                  {contact.email}
+                </a>
+              ) : null}
             </div>
           </div>
           <Link
-            href={company.whatsappHref}
+            href={whatsappLink}
             className="inline-flex min-h-12 items-center justify-center bg-gold px-7 text-sm font-black uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-neutral-950"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaWhatsapp className="mr-2 h-5 w-5" aria-hidden="true" />
-            WhatsApp
+            {contact?.whatsappButtonLabel ?? companyInfo.whatsappButtonLabel ?? "WhatsApp"}
           </Link>
         </div>
+        {mapEmbedUrl ? (
+          <div className="mt-10 overflow-hidden border border-white/10 bg-black">
+            <iframe
+              src={mapEmbedUrl}
+              title={`${companyInfo.name} location map`}
+              className="h-80 w-full border-0 md:h-96"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        ) : null}
       </div>
     </section>
   );

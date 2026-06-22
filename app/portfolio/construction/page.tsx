@@ -4,27 +4,41 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
-import { company } from "@/data/company";
-import { constructionProjects } from "@/data/projects";
 import { createPageMetadata } from "@/data/seo";
+import {
+  getCompanyInfo,
+  getContact,
+  getFooter,
+  getProjectsByCategory,
+} from "@/sanity/lib/fetch";
 
-export const metadata = createPageMetadata({
-  title: `Construction Projects | ${company.name}`,
-  description:
-    "Construction project samples for Build New, renovation, contractor, and construction management services.",
-  path: "/portfolio/construction",
-});
+export async function generateMetadata() {
+  const companyInfo = await getCompanyInfo();
+  return createPageMetadata({
+    title: `Construction Projects | ${companyInfo.name}`,
+    description:
+      "Construction project samples for Build New, renovation, contractor, and construction management services.",
+    path: "/portfolio/construction",
+  });
+}
 
-export default function ConstructionPortfolioPage() {
+export default async function ConstructionPortfolioPage() {
+  const [companyInfo, constructionProjects, contact, footer] = await Promise.all([
+    getCompanyInfo(),
+    getProjectsByCategory("construction"),
+    getContact(),
+    getFooter(),
+  ]);
+
   return (
     <main>
-      <Navbar />
+      <Navbar companyInfo={companyInfo} />
       <Hero
         eyebrow="Portfolio"
         title="Construction Projects"
-        description={`${company.tagline} portfolio references across ${company.serviceArea}.`}
+        description={`${companyInfo.tagline} portfolio references across ${companyInfo.serviceArea}.`}
         primaryLabel="WhatsApp"
-        primaryHref={company.whatsappHref}
+        primaryHref={companyInfo.whatsappHref}
         secondaryLabel="Construction Services"
         secondaryHref="/construction"
       />
@@ -39,8 +53,8 @@ export default function ConstructionPortfolioPage() {
           <PortfolioCards items={constructionProjects} />
         </div>
       </section>
-      <ContactCTA />
-      <Footer />
+      <ContactCTA companyInfo={companyInfo} contact={contact} />
+      <Footer companyInfo={companyInfo} footerContent={footer} />
     </main>
   );
 }
