@@ -43,6 +43,7 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
     <div className={gridClass}>
       {items.map((item) => {
         const href = getCardHref(item);
+        const isProject = "slug" in item && Boolean(item.slug);
         const content = (
           <article className="group relative min-h-[330px] overflow-hidden bg-neutral-950 shadow-xl">
             <Image
@@ -65,7 +66,7 @@ export default function PortfolioCards({ items }: { items: Item[] }) {
                   {item.location} · {item.year}
                 </p>
               ) : null}
-              {item.description ? (
+              {!isProject && item.description ? (
                 <p className="mt-3 text-base leading-8 text-white/78 md:text-[18px] md:leading-9">
                   {item.description}
                 </p>

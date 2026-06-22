@@ -14,7 +14,7 @@ export const serviceType = defineType({
       options: { list: ["Deacon Construction", "Deacon Interior", "Build New", "Renovation", "Home Maintenance"] },
       validation: (rule) => rule.required(),
     }),
-    defineField({ name: "shortDescription", title: "Short Description", type: "text", rows: 3 }),
+    defineField({ name: "shortDescription", title: "Short Description", type: "text", rows: 3, validation: (rule) => rule.max(180).warning("Keep card text concise so the original layout remains balanced.") }),
     defineField({ name: "description", title: "Description", type: "array", of: [{ type: "block" }] }),
     defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true }, description: "Recommended minimum width 1920px, JPG/PNG/WebP, ideally 2-5MB." }),
     defineField({ name: "order", title: "Order", type: "number", initialValue: 0 }),

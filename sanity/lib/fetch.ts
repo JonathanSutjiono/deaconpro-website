@@ -207,7 +207,7 @@ function mapProject(doc: SanityDocument): Project | undefined {
   const title = optionalText(doc.title);
   const slugValue = doc.slug as { current?: unknown } | undefined;
   const slug = optionalText(slugValue?.current);
-  if (!title || !slug) return undefined;
+  if (!title || !slug || !doc.coverImage) return undefined;
 
   const portableDescription = portableBlocks(doc.description);
   const description = portablePlainText(portableDescription, "");
@@ -355,7 +355,14 @@ export const getFeaturedServices = cache(async () => {
     ?.filter((doc) => Boolean(doc.featured))
     .map(mapService)
     .filter((item): item is ServiceItem => Boolean(item));
-  return mapped?.length ? mapped : fallbackServices;
+  const unique = new Map<string, ServiceItem>();
+  for (const item of mapped ?? []) {
+    if (!unique.has(item.title.toLowerCase())) {
+      unique.set(item.title.toLowerCase(), item);
+    }
+  }
+  const featured = [...unique.values()].slice(0, 5);
+  return featured.length ? featured : fallbackServices;
 });
 
 export const getConstructionServiceNames = cache(async () => {
@@ -389,7 +396,7 @@ export const getProjects = cache(async () => {
 export const getProcessSteps = cache(async () => {
   const docs = await safeFetch<SanityDocument[]>(processStepsQuery);
   const mapped = docs?.map(mapProcessStep).filter((item): item is ProcessStepContent => Boolean(item));
-  return mapped?.length ? mapped : fallbackProcessSteps;
+  return mapped?.length ? mapped.slice(0, 5) : fallbackProcessSteps;
 });
 
 export const getInsights = cache(async () => {
@@ -448,7 +455,19 @@ export async function getProjectsByCategory(category: "construction" | "interior
 }
 
 export async function getFeaturedProjects() {
-  return (await getProjects()).filter((project) => project.featured);
+  const genericTitles = new Set(["construction projects", "interior projects"]);
+  const unique = new Map<string, Project>();
+
+  for (const project of (await getProjects()).filter(
+    (item) => item.featured && !genericTitles.has(item.title.trim().toLowerCase()),
+  )) {
+    if (!unique.has(project.slug)) unique.set(project.slug, project);
+  }
+
+  const featured = [...unique.values()].slice(0, 4);
+  return featured.length
+    ? featured
+    : fallbackProjects.filter((project) => project.featured).slice(0, 4);
 }
 
 export async function getRelatedProjects(project: Project, limit = 3) {

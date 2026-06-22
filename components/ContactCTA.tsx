@@ -4,19 +4,6 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { company, type CompanyInfo } from "@/data/company";
 import type { ContactContent } from "@/sanity/lib/types";
 
-function safeMapEmbedUrl(value?: string) {
-  if (!value) return undefined;
-  try {
-    const url = new URL(value);
-    const isGoogle = url.hostname === "www.google.com" || url.hostname === "maps.google.com";
-    return url.protocol === "https:" && isGoogle && url.pathname.startsWith("/maps")
-      ? url.toString()
-      : undefined;
-  } catch {
-    return undefined;
-  }
-}
-
 export default function ContactCTA({
   companyInfo = company,
   contact,
@@ -29,7 +16,6 @@ export default function ContactCTA({
   description?: string;
 }) {
   const instagram = companyInfo.socialLinks.find((item) => item.label === "Instagram");
-  const mapEmbedUrl = safeMapEmbedUrl(contact?.googleMapsEmbedUrl);
   const phone = contact?.phone ?? companyInfo.phone;
   const phoneLink = contact?.phoneHref ?? companyInfo.phoneHref;
   const whatsapp = contact?.whatsappNumber ?? companyInfo.whatsapp;
@@ -109,18 +95,6 @@ export default function ContactCTA({
             {contact?.whatsappButtonLabel ?? companyInfo.whatsappButtonLabel ?? "WhatsApp"}
           </Link>
         </div>
-        {mapEmbedUrl ? (
-          <div className="mt-10 overflow-hidden border border-white/10 bg-black">
-            <iframe
-              src={mapEmbedUrl}
-              title={`${companyInfo.name} location map`}
-              className="h-80 w-full border-0 md:h-96"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
-          </div>
-        ) : null}
       </div>
     </section>
   );

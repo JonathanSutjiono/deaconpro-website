@@ -1,11 +1,9 @@
 import type { ComponentType } from "react";
-import Image from "next/image";
 import { BriefcaseBusiness, Building2, Globe, MapPin, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { company, type CompanyInfo } from "@/data/company";
 import type { AboutContent } from "@/sanity/lib/types";
-import PortableContent from "./PortableContent";
 
 function DetailRow({
   label,
@@ -190,26 +188,9 @@ export default function CompanyDetail({
             <p className="text-xs font-black uppercase tracking-widest text-gold md:text-sm">
               About
             </p>
-            {aboutContent?.image ? (
-              <div className="relative mb-7 aspect-[16/9] overflow-hidden bg-neutral-100">
-                <Image
-                  src={aboutContent.image}
-                  alt={`${companyInfo.shortName} about`}
-                  fill
-                  sizes="(min-width: 1024px) 55vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            ) : null}
-            {aboutContent?.body.length ? (
-              <div className="mt-5 space-y-5">
-                <PortableContent value={aboutContent.body} />
-              </div>
-            ) : (
-              <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
-                {aboutContent?.bodyText || companyInfo.about}
-              </p>
-            )}
+            <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
+              {aboutContent?.bodyText || companyInfo.about}
+            </p>
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
 

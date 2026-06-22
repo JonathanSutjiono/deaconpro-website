@@ -22,9 +22,6 @@ export default function ProcessSteps({ steps = defaultSteps }: { steps?: Process
           <h3 className="mt-10 text-xl font-black uppercase leading-tight text-neutral-950 lg:text-lg xl:text-xl">
             {step.title}
           </h3>
-          {step.description ? (
-            <p className="mt-4 text-sm leading-6 text-neutral-600">{step.description}</p>
-          ) : null}
         </article>
       ))}
     </div>
