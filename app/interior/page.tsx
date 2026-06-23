@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import SectionTitle from "@/components/SectionTitle";
+import ServiceList from "@/components/ServiceList";
 import { createPageMetadata } from "@/data/seo";
 import {
   getCompanyInfo,
@@ -46,29 +47,18 @@ export default async function InteriorPage() {
         secondaryHref="/portfolio/interior"
       />
 
-      <section id="services" className="bg-white py-20 text-neutral-950 md:py-28">
+      <section id="services" className="section-space bg-white text-neutral-950">
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
             title="Interior services for refined residential and commercial spaces."
             description="Design-led interior delivery with practical fit-out coordination, furniture detail, and project management."
           />
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {interiorServices.map((service, index) => (
-              <article key={service} className="border border-neutral-200 bg-neutral-50 p-7 shadow-sm">
-                <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-12 text-2xl font-black uppercase leading-tight">
-                  {service}
-                </h3>
-              </article>
-            ))}
-          </div>
+          <ServiceList services={interiorServices} />
         </div>
       </section>
 
-      <section className="bg-neutral-100 py-20 text-neutral-950 md:py-28">
+      <section className="section-space bg-neutral-100 text-neutral-950">
         <div className="container-x">
           <SectionTitle
             eyebrow="Portfolio"

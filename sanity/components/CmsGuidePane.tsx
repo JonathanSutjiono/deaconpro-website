@@ -37,6 +37,23 @@ export function CmsGuidePane() {
           ))}
         </Stack>
 
+        <Card border padding={4} radius={2} tone="transparent">
+          <Stack space={3}>
+            <Text size={2} weight="bold">
+              Peta Lokasi
+            </Text>
+            <Text size={1}>
+              Peta interaktif di website memakai OpenStreetMap, bukan Google Maps API. Field Latitude Peta dan Longitude Peta menentukan titik marker kantor.
+            </Text>
+            <Text size={1}>
+              Jika belum yakin koordinatnya, jangan ubah sembarangan. Tautan Google Maps tetap dipakai untuk tombol navigasi, sedangkan peta website hanya untuk membantu pengunjung melihat lokasi.
+            </Text>
+            <Text size={1}>
+              Matikan Tampilkan Peta Interaktif di menu Kontak dan Peta jika peta belum ingin ditampilkan di website.
+            </Text>
+          </Stack>
+        </Card>
+
         <Card border padding={4} radius={2} tone="caution">
           <Stack space={2}>
             <Text size={2} weight="bold">

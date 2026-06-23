@@ -41,7 +41,7 @@ export default async function InsightPage() {
         secondaryLabel="Home"
         secondaryHref="/"
       />
-      <section className="bg-neutral-950 py-20 text-white md:py-28">
+      <section className="section-space bg-neutral-950 text-white">
         <div className="container-x">
           <InsightCards insights={insights} />
         </div>

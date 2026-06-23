@@ -42,7 +42,7 @@ export default async function InteriorPortfolioPage() {
         secondaryLabel="Interior Services"
         secondaryHref="/interior"
       />
-      <section className="bg-neutral-950 py-20 text-white md:py-28">
+      <section className="section-space bg-neutral-950 text-white">
         <div className="container-x">
           <SectionTitle
             eyebrow="Interior Portfolio"
@@ -50,7 +50,7 @@ export default async function InteriorPortfolioPage() {
             description="Open a project to review its location, fit-out scope, and available project imagery."
             light
           />
-          <PortfolioCards items={interiorProjects} />
+          <PortfolioCards items={interiorProjects} dark />
         </div>
       </section>
       <ContactCTA companyInfo={companyInfo} contact={contact} />

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Globe, Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Globe, Mail, Phone } from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { company, type CompanyInfo } from "@/data/company";
 import { portfolioNavigation } from "@/data/portfolio";
@@ -25,14 +25,14 @@ export default function Footer({
   const footerLinks = footerContent?.links.length ? footerContent.links : quickLinks;
 
   return (
-    <footer className="bg-neutral-950 pb-24 pt-14 text-white sm:py-14">
-      <div className="container-x grid gap-10 md:grid-cols-2 lg:grid-cols-[1.25fr_0.7fr_0.85fr_1fr]">
+    <footer className="bg-neutral-950 pb-28 pt-16 text-white sm:py-16">
+      <div className="container-x grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.7fr_0.85fr_1fr]">
         <div>
-          <p className="text-lg font-black uppercase tracking-[0.28em]">
+          <p className="font-display text-3xl font-semibold uppercase leading-none">
             {companyInfo.shortName.split(" ")[0]}{" "}
             <span className="text-champagne">{companyInfo.shortName.split(" ").slice(1).join(" ")}</span>
           </p>
-          <p className="mt-4 max-w-md text-base leading-8 text-white/72">
+          <p className="mt-5 max-w-md text-base leading-8 text-white/72">
             {companyInfo.tagline}
           </p>
           <p className="mt-3 max-w-md text-base leading-8 text-white/58">
@@ -42,15 +42,16 @@ export default function Footer({
             href={companyInfo.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 bg-gold px-6 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-neutral-950"
+            className="button-primary mt-7 px-6 hover:bg-white hover:text-neutral-950"
           >
             <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
             Chat WhatsApp
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-champagne">
+          <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
             Quick Links
           </p>
           <div className="mt-5 flex flex-col gap-3 text-base text-white/72">
@@ -73,7 +74,7 @@ export default function Footer({
         </div>
 
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-champagne">
+          <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
             Services
           </p>
           <div className="mt-5 flex flex-col gap-3 text-base text-white/72">
@@ -91,7 +92,7 @@ export default function Footer({
         </div>
 
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-champagne">
+          <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
             Contact
           </p>
           <div className="mt-5 flex flex-col gap-3 text-base text-white/72">
@@ -140,7 +141,7 @@ export default function Footer({
           </div>
         </div>
       </div>
-      <div className="container-x mt-10 border-t border-white/10 pt-6 text-xs uppercase tracking-[0.18em] text-white/42">
+      <div className="container-x mt-12 border-t border-white/10 pt-6 text-[13px] uppercase leading-5 tracking-normal text-white/45">
         {footerContent?.copyrightText ?? `© ${new Date().getFullYear()} ${companyInfo.name}. All rights reserved.`}
       </div>
     </footer>

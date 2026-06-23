@@ -12,12 +12,12 @@ export default function PortableContent({ value }: { value: PortableTextBlock[] 
             </p>
           ),
           h2: ({ children }) => (
-            <h2 className="pt-3 text-3xl font-black uppercase leading-tight text-neutral-950 md:text-4xl">
+            <h2 className="pt-3 font-display text-4xl font-semibold uppercase leading-[0.96] text-neutral-950 md:text-5xl">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="pt-2 text-2xl font-black uppercase leading-tight text-neutral-950">
+            <h3 className="pt-2 font-display text-3xl font-semibold uppercase leading-[0.96] text-neutral-950">
               {children}
             </h3>
           ),

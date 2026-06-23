@@ -8,6 +8,7 @@ import PortfolioCards from "@/components/PortfolioCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import SectionTitle from "@/components/SectionTitle";
 import ServiceCards from "@/components/ServiceCards";
+import { ArrowUpRight, Building2, MapPinned, Paintbrush } from "lucide-react";
 import { createPageMetadata } from "@/data/seo";
 import {
   getAbout,
@@ -70,25 +71,43 @@ export default async function Home() {
         secondaryHref={homepage.secondaryButtonLink}
       />
 
-      <section id="about" className="bg-white py-20 text-neutral-950 md:py-28">
+      <section id="about" className="section-space bg-white text-neutral-950">
         <div className="container-x grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <SectionTitle
             eyebrow="About Us"
             title={homepage.introTitle}
           />
-          <p className="max-w-3xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
-            {homepage.introText}
-          </p>
-          <a
-            href="#company-detail"
-            className="inline-flex w-fit bg-neutral-950 px-5 py-3 text-xs font-black uppercase tracking-widest text-white transition hover:bg-gold"
-          >
-            Company Detail
-          </a>
+          <div>
+            <p className="max-w-3xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
+              {homepage.introText}
+            </p>
+            <a
+              href="#company-detail"
+              className="button-secondary mt-7 border-neutral-950 px-5 text-neutral-950 hover:border-gold hover:bg-gold hover:text-white"
+            >
+              Company detail
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+          <div className="col-span-full grid border-y border-neutral-200 sm:grid-cols-3">
+            {[
+              { label: "Construction", detail: "Build New & project coordination", Icon: Building2 },
+              { label: "Interior", detail: "Fit-out, furnishings & detail", Icon: Paintbrush },
+              { label: "Service area", detail: companyInfo.serviceArea, Icon: MapPinned },
+            ].map(({ label, detail, Icon }) => (
+              <div key={label} className="flex gap-4 border-b border-neutral-200 px-0 py-6 last:border-b-0 sm:border-b-0 sm:border-r sm:px-6 sm:first:pl-0 sm:last:border-r-0">
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                <div>
+                  <p className="eyebrow">{label}</p>
+                  <p className="mt-2 text-base font-semibold leading-7 text-neutral-700">{detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="services" className="bg-neutral-100 py-20 text-neutral-950 md:py-28">
+      <section id="services" className="section-space bg-neutral-100 text-neutral-950">
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
@@ -99,7 +118,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="portfolio" className="bg-white py-20 text-neutral-950 md:py-28">
+      <section id="portfolio" className="section-space bg-white text-neutral-950">
         <div className="container-x">
           <SectionTitle
             eyebrow="Portfolio"
@@ -110,7 +129,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="process" className="bg-neutral-100 py-16 text-neutral-950 md:py-20">
+      <section id="process" className="section-space bg-neutral-100 text-neutral-950">
         <div className="container-x">
           <SectionTitle
             eyebrow="Process"
@@ -118,24 +137,34 @@ export default async function Home() {
             description={homepage.processSubtitle || undefined}
           />
           <ProcessSteps steps={processSteps} />
+          <a
+            href={companyInfo.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button-secondary mt-8 border-neutral-950 px-5 text-neutral-950 hover:border-gold hover:bg-gold hover:text-white"
+          >
+            Discuss your project scope
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
         </div>
       </section>
 
       <CompanyDetail companyInfo={companyInfo} aboutContent={about} />
 
-      <section id="insight" className="bg-neutral-950 py-20 text-white md:py-28">
+      <section id="insight" className="section-space bg-neutral-950 text-white">
         <div className="container-x">
           <SectionTitle
             eyebrow="Insight"
-            title="Practical notes from planning to handover."
+            title="Practical notes for better project decisions."
             light
           />
           <InsightCards limit={3} insights={insights} />
           <a
             href="/insight"
-            className="mt-8 inline-flex bg-gold px-6 py-4 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white hover:text-neutral-950"
+            className="button-primary mt-8 px-6 hover:bg-white hover:text-neutral-950"
           >
-            View All Insights
+            View all insights
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
       </section>

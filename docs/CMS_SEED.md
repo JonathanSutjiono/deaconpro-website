@@ -21,7 +21,7 @@ Token harus memiliki izin write untuk dataset yang digunakan.
 npm run seed:sanity
 ```
 
-Seed bersifat idempoten: dokumen singleton yang sudah ada, serta layanan, proyek, dan artikel dengan slug yang sudah ada, akan dilewati. Script tidak menghapus, menimpa, atau menggandakan konten milik klien.
+Seed bersifat idempoten: dokumen singleton yang sudah ada, serta layanan, proyek, dan artikel dengan slug yang sudah ada, akan dilewati. Untuk singleton, field baru yang belum ada dapat dilengkapi tanpa menimpa nilai milik klien. Script tidak menghapus, menggandakan, atau menimpa konten yang sudah terisi.
 
 ## Setelah seed
 

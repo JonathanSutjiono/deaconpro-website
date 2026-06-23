@@ -14,10 +14,22 @@ html {
   scroll-behavior: smooth;
 }
 
+#about,
+#services,
+#portfolio,
+#process,
+#insight,
+#contact,
+#company-detail {
+  scroll-margin-top: 96px;
+}
+
 body {
   min-height: 100vh;
   background: #ffffff;
   color: #111111;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
@@ -26,10 +38,38 @@ body {
 }
 
 .container-x {
-  width: min(1180px, calc(100% - 32px));
+  width: min(1240px, calc(100% - 32px));
   margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .container-x {
+    width: min(1240px, calc(100% - 48px));
+  }
 }
 
 .gold-line {
   background: linear-gradient(90deg, transparent, #d6b25e, transparent);
+}
+
+@layer components {
+  .section-space {
+    @apply py-20 md:py-28;
+  }
+
+  .eyebrow {
+    @apply text-[13px] font-bold uppercase leading-5 tracking-normal text-gold;
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 bg-gold px-6 text-[14px] font-black uppercase leading-5 tracking-normal text-white transition duration-300 hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30;
+  }
+
+  .button-secondary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 border border-current px-6 text-[14px] font-black uppercase leading-5 tracking-normal transition duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30;
+  }
+
+  .surface-card {
+    @apply border border-neutral-200 bg-white shadow-surface transition duration-300;
+  }
 }

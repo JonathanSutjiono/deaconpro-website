@@ -18,9 +18,11 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", "Arial", "sans-serif"],
+        display: ["Iowan Old Style", "Baskerville", "Times New Roman", "serif"],
       },
       boxShadow: {
         gold: "0 24px 70px rgba(184, 138, 42, 0.18)",
+        surface: "0 16px 42px rgba(17, 17, 17, 0.08)",
       },
     },
   },

@@ -72,21 +72,21 @@ export default async function InsightDetailPage({ params }: PageProps) {
           <div className="absolute inset-0 bg-black/70" />
           <div className="container-x relative z-10 flex min-h-[calc(68vh-80px)] items-end py-16">
             <div className="max-w-4xl">
-              <p className="text-xs font-black uppercase tracking-[0.38em] text-champagne">
+              <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-champagne">
                 {insight.category} · {insight.publishedAt}
                 {insight.readTime ? ` · ${insight.readTime}` : ""}
               </p>
-              <h1 className="mt-5 text-5xl font-black uppercase leading-tight text-white md:text-7xl">
+              <h1 className="mt-5 font-display text-5xl font-semibold uppercase leading-[0.9] text-white md:text-7xl">
                 {insight.title}
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-white/78">
+              <p className="mt-6 max-w-3xl text-base leading-8 text-white/78 md:text-lg md:leading-9">
                 {insight.excerpt}
               </p>
             </div>
           </div>
         </section>
 
-        <section className="bg-white py-20 text-neutral-950 md:py-28">
+        <section className="section-space bg-white text-neutral-950">
           <div className="container-x max-w-4xl">
             {insight.portableContent?.length ? (
               <div className="space-y-7">
@@ -105,7 +105,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
               href={companyInfo.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-10 inline-flex min-h-12 items-center justify-center bg-gold px-7 text-sm font-black uppercase tracking-widest text-white transition hover:bg-neutral-950"
+              className="button-primary mt-10 px-7"
             >
               Discuss This Project
             </Link>

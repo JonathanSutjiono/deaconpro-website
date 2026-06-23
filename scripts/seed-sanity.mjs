@@ -13,16 +13,25 @@ if (!projectId || !token) {
 }
 
 const client = createClient({ projectId, dataset, apiVersion, token, useCdn: false });
-const summary = { created: [], skipped: [] };
+const summary = { created: [], updated: [], skipped: [] };
 
 function block(text, key) {
   return [{ _type: "block", _key: `block-${key}`, style: "normal", markDefs: [], children: [{ _type: "span", _key: `span-${key}`, text, marks: [] }] }];
 }
 
 async function ensureSingleton(id, type, document) {
-  const existing = await client.fetch(`*[_id == $id][0]._id`, { id });
+  const existing = await client.fetch(`*[_id == $id][0]`, { id });
   if (existing) {
-    summary.skipped.push(`${type} (${id})`);
+    const missingFields = Object.fromEntries(
+      Object.entries(document).filter(([field]) => !Object.hasOwn(existing, field)),
+    );
+
+    if (Object.keys(missingFields).length) {
+      await client.patch(id).set(missingFields).commit();
+      summary.updated.push(`${type} (${id})`);
+    } else {
+      summary.skipped.push(`${type} (${id})`);
+    }
     return;
   }
 
@@ -119,6 +128,11 @@ await ensureSingleton("contact", "contact", {
   whatsappButtonLabel: "Chat on WhatsApp",
   address,
   areaCoverage: "JABODETABEK · Bali · Makassar",
+  showInteractiveMap: true,
+  mapLatitude: -6.1499,
+  mapLongitude: 106.8916,
+  mapZoom: 15,
+  mapMarkerLabel: "PT Deacon Pro Konstruksi Indonesia",
   googleMapsUrl: mapsUrl,
   instagramUrl: "https://www.instagram.com/deaconprocontractor",
   facebookUrl: "#",
@@ -222,4 +236,5 @@ for (const [slug, title, category, excerpt] of insights) {
 
 console.log("Sanity seed selesai.");
 console.log(`Dibuat (${summary.created.length}): ${summary.created.join(", ") || "-"}`);
+console.log(`Dilengkapi (${summary.updated.length}): ${summary.updated.join(", ") || "-"}`);
 console.log(`Dilewati (${summary.skipped.length}): ${summary.skipped.join(", ") || "-"}`);

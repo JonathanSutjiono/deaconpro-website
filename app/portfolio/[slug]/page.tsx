@@ -74,53 +74,53 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="absolute inset-0 bg-black/68" />
         <div className="container-x relative z-10 flex min-h-[calc(72vh-80px)] items-end py-16">
           <div className="max-w-4xl">
-            <p className="text-xs font-black uppercase tracking-[0.38em] text-champagne">
+            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-champagne">
               {project.isSample ? "Representative Visual · " : ""}
               {project.category} · {project.location} · {project.year}
             </p>
-            <h1 className="mt-5 text-5xl font-black uppercase leading-tight text-white md:text-7xl">
+            <h1 className="mt-5 font-display text-5xl font-semibold uppercase leading-[0.9] text-white md:text-7xl">
               {project.title}
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/78">
+            <p className="mt-6 max-w-3xl text-base leading-8 text-white/78 md:text-lg md:leading-9">
               {project.description}
             </p>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 text-neutral-950 md:py-28">
+      <section className="section-space bg-white text-neutral-950">
         <div className="container-x grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <aside className="border border-neutral-200 bg-neutral-50 p-7">
-            <p className="text-xs font-black uppercase tracking-widest text-gold">
+            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
               Project Detail
             </p>
             {project.isSample ? (
-              <p className="mt-4 text-sm leading-6 text-neutral-600">
+              <p className="mt-4 text-base leading-7 text-neutral-600">
                 Representative visual used to present Deacon Pro&apos;s service scope and case-study format. It is not presented as a completed client project.
               </p>
             ) : null}
             <dl className="mt-6 space-y-5">
               <div>
-                <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                   Category
                 </dt>
                 <dd className="mt-1 text-lg font-semibold capitalize">{project.category}</dd>
               </div>
               <div>
-                <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                   Location
                 </dt>
                 <dd className="mt-1 text-lg font-semibold">{project.location}</dd>
               </div>
               <div>
-                <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                   Year
                 </dt>
                 <dd className="mt-1 text-lg font-semibold">{project.year}</dd>
               </div>
               {project.clientName ? (
                 <div>
-                  <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                  <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                     Client
                   </dt>
                   <dd className="mt-1 text-lg font-semibold">{project.clientName}</dd>
@@ -128,7 +128,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ) : null}
               {project.status ? (
                 <div>
-                  <dt className="text-sm font-black uppercase tracking-widest text-neutral-500">
+                  <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                     Status
                   </dt>
                   <dd className="mt-1 text-lg font-semibold">{project.status}</dd>
@@ -139,21 +139,21 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               href={companyInfo.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex min-h-12 w-full items-center justify-center bg-gold px-6 text-sm font-black uppercase tracking-widest text-white transition hover:bg-neutral-950"
+              className="button-primary mt-8 w-full px-6"
             >
               Consult Your Project
             </Link>
           </aside>
 
           <div>
-            <p className="text-xs font-black uppercase tracking-widest text-gold">
+            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
               Scope of Work
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               {project.scopeOfWork.map((scope) => (
                 <span
                   key={scope}
-                  className="border border-neutral-300 px-4 py-3 text-sm font-black uppercase tracking-[0.14em]"
+                  className="border border-neutral-300 px-4 py-3 text-[14px] font-black uppercase leading-5 tracking-normal"
                 >
                   {scope}
                 </span>
@@ -170,7 +170,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </p>
             )}
 
-            <p className="mt-12 text-xs font-black uppercase tracking-widest text-gold">
+            <p className="mt-12 text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
               Project Gallery
             </p>
             <div className="mt-5 grid gap-5 md:grid-cols-3">
@@ -194,10 +194,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {relatedProjects.length > 0 ? (
         <section className="bg-neutral-100 py-20 text-neutral-950 md:py-28">
           <div className="container-x">
-            <p className="text-xs font-black uppercase tracking-widest text-gold">
+            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
               Related Projects
             </p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight md:text-6xl">
+            <h2 className="mt-4 max-w-3xl font-display text-5xl font-semibold uppercase leading-[0.94] md:text-7xl">
               More {project.category} references.
             </h2>
             <div className="mt-10">

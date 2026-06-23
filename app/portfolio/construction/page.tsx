@@ -42,7 +42,7 @@ export default async function ConstructionPortfolioPage() {
         secondaryLabel="Construction Services"
         secondaryHref="/construction"
       />
-      <section className="bg-neutral-950 py-20 text-white md:py-28">
+      <section className="section-space bg-neutral-950 text-white">
         <div className="container-x">
           <SectionTitle
             eyebrow="Construction Portfolio"
@@ -50,7 +50,7 @@ export default async function ConstructionPortfolioPage() {
             description="Open a project to review its service scope, delivery context, and available project imagery."
             light
           />
-          <PortfolioCards items={constructionProjects} />
+          <PortfolioCards items={constructionProjects} dark />
         </div>
       </section>
       <ContactCTA companyInfo={companyInfo} contact={contact} />

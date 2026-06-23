@@ -3,20 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { company, type CompanyInfo } from "@/data/company";
 import { portfolioNavigation } from "@/data/portfolio";
 import { serviceNavigation } from "@/data/services";
 
 function Chevron({ open }: { open?: boolean }) {
   return (
-    <span
-      className={`ml-2 inline-block text-[10px] transition ${
+    <ChevronDown
+      className={`ml-1.5 h-3.5 w-3.5 transition ${
         open ? "rotate-180" : ""
       }`}
       aria-hidden="true"
-    >
-      ▼
-    </span>
+    />
   );
 }
 
@@ -30,19 +29,19 @@ function DesktopDropdown({
   return (
     <div className="group relative">
       <button
-        className="flex h-20 items-center whitespace-nowrap text-sm font-semibold text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold"
+        className="flex h-[76px] items-center whitespace-nowrap text-[15px] font-semibold leading-5 text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold"
         type="button"
         aria-haspopup="true"
       >
         {label}
         <Chevron />
       </button>
-      <div className="invisible absolute left-0 top-full z-20 w-64 translate-y-2 border border-neutral-200 bg-white opacity-0 shadow-2xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+      <div className="invisible absolute left-0 top-full z-20 w-64 translate-y-2 border border-neutral-200/90 bg-white p-1 opacity-0 shadow-surface transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
         {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="block border-b border-neutral-100 px-5 py-4 text-sm font-semibold text-neutral-700 transition last:border-b-0 hover:bg-neutral-950 hover:text-champagne focus:outline-none focus-visible:bg-neutral-950 focus-visible:text-champagne"
+            className="block border-b border-neutral-100 px-4 py-3.5 text-[15px] font-semibold leading-5 text-neutral-700 transition last:border-b-0 hover:bg-neutral-950 hover:text-champagne focus:outline-none focus-visible:bg-neutral-950 focus-visible:text-champagne"
           >
             {item.label}
           </Link>
@@ -96,8 +95,8 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200 bg-white text-neutral-950 shadow-sm">
-      <nav className="mx-auto flex h-20 w-full max-w-[1536px] flex-nowrap items-center justify-between gap-4 px-4 sm:px-6 xl:gap-4 xl:px-8 2xl:gap-5">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/85 bg-white/95 text-neutral-950 shadow-[0_8px_30px_rgba(17,17,17,0.05)] backdrop-blur-md">
+      <nav className="mx-auto flex h-[76px] w-full max-w-[1536px] flex-nowrap items-center justify-between gap-3 px-4 sm:px-6 xl:gap-3 xl:px-8 2xl:gap-4">
         <Link
           href="/"
           className="flex min-w-0 shrink-0 items-center gap-3"
@@ -118,49 +117,49 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
             </span>
           ) : (
             <span className="leading-none">
-              <span className="block whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] sm:text-sm xl:tracking-[0.22em]">
+              <span className="block whitespace-nowrap text-xs font-black uppercase tracking-normal sm:text-sm">
                 {companyInfo.shortName}
               </span>
-              <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] text-gold 2xl:hidden">
+              <span className="mt-1 hidden whitespace-nowrap text-[11px] font-bold uppercase leading-4 tracking-normal text-gold xl:block 2xl:hidden">
                 {companyInfo.shortTagline}
               </span>
-              <span className="mt-1 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-gold 2xl:block">
+              <span className="mt-1 hidden whitespace-nowrap text-[11px] font-bold uppercase leading-4 tracking-normal text-gold 2xl:block">
                 {companyInfo.tagline}
               </span>
             </span>
           )}
         </Link>
 
-        <div className="hidden h-full flex-nowrap items-center gap-4 xl:flex 2xl:gap-5">
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/">
+        <div className="hidden h-full flex-nowrap items-center gap-3 xl:flex 2xl:gap-4">
+          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/">
             Home
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#about">
+          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#about">
             About Us
           </Link>
           <DesktopDropdown label="Services" items={serviceNavigation} />
           <DesktopDropdown label="Portfolio" items={portfolioNavigation} />
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#process">
+          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#process">
             Process
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/insight">
+          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/insight">
             Insight
           </Link>
-          <Link className="whitespace-nowrap text-sm font-semibold transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#contact">
+          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#contact">
             Contact
           </Link>
         </div>
 
         <Link
           href={companyInfo.phoneHref}
-          className="hidden whitespace-nowrap text-xs font-black uppercase tracking-[0.08em] text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold xl:inline-flex 2xl:tracking-[0.12em]"
+          className="hidden whitespace-nowrap text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold xl:inline-flex"
         >
           {companyInfo.phone}
         </Link>
 
         <Link
           href={companyInfo.whatsappHref}
-          className="hidden whitespace-nowrap bg-gold px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:inline-flex xl:ml-1 2xl:px-5 2xl:tracking-[0.14em]"
+          className="hidden whitespace-nowrap border border-gold bg-gold px-4 py-3 text-[13px] font-black uppercase leading-5 tracking-normal text-white transition hover:border-neutral-950 hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:inline-flex xl:ml-1 2xl:px-5"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -168,18 +167,18 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
         </Link>
 
         <button
-          className="grid h-11 w-11 shrink-0 place-items-center border border-neutral-300 text-xl font-black xl:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center border border-neutral-300 text-neutral-950 transition hover:border-gold hover:text-gold xl:hidden"
           onClick={() => setOpen((value) => !value)}
           type="button"
           aria-label="Toggle navigation"
           aria-expanded={open}
         >
-          {open ? "×" : "☰"}
+          {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
         </button>
       </nav>
 
       {open ? (
-        <div className="max-h-[calc(100vh-80px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
+        <div className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
           <div className="container-x py-3">
             <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/" onClick={() => setOpen(false)}>
               Home
@@ -205,7 +204,7 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
               Phone: {companyInfo.phone}
             </a>
             <a
-              className="mt-3 flex min-h-12 items-center justify-center bg-gold px-5 text-sm font-black uppercase tracking-[0.16em] text-white"
+              className="button-primary mt-3 w-full px-5"
               href={companyInfo.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"

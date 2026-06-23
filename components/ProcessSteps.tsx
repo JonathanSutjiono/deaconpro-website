@@ -7,6 +7,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { ProcessStepContent } from "@/sanity/lib/types";
+import EmptyState from "@/components/EmptyState";
 
 const defaultSteps: ProcessStepContent[] = [
   {
@@ -62,6 +63,7 @@ const fallbackIcons: LucideIcon[] = [
 const stepDefaults = new Map(
   defaultSteps.map((step) => [step.title.toLowerCase(), step]),
 );
+const defaultOutputs = ["Project brief", "Survey notes", "Proposal & estimate", "Construction progress", "Completed work"];
 
 function resolveIcon(step: ProcessStepContent, index: number) {
   const hint = `${step.iconLabel ?? ""} ${step.title}`.toLowerCase();
@@ -76,21 +78,33 @@ function resolveIcon(step: ProcessStepContent, index: number) {
 }
 
 export default function ProcessSteps({ steps = defaultSteps }: { steps?: ProcessStepContent[] }) {
+  if (!steps.length) {
+    return (
+      <EmptyState
+        title="Our process is being updated."
+        description="Contact Deacon Pro to discuss the survey, quotation, and delivery steps for your property."
+      />
+    );
+  }
+
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {steps.map((step, index) => {
         const matchingDefault = stepDefaults.get(step.title.toLowerCase());
         const Icon = resolveIcon(step, index);
         const description = step.description || matchingDefault?.description;
-        const output = step.output || matchingDefault?.output;
+        const output = step.output || matchingDefault?.output || defaultOutputs[index];
 
         return (
           <article
             key={`${step.title}-${step.order}`}
-            className="group flex min-h-[330px] flex-col border border-neutral-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-gold hover:shadow-gold"
+            className="group relative flex min-h-[320px] flex-col overflow-hidden border border-neutral-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-gold hover:shadow-gold"
           >
+            <span className="absolute -right-1 -top-3 font-display text-8xl leading-none text-gold/[0.07]" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
             <div className="flex items-start justify-between gap-4">
-              <p className="text-xs font-black uppercase tracking-[0.28em] text-gold">
+              <p className="eyebrow relative z-10">
                 {String(index + 1).padStart(2, "0")}
               </p>
               <span className="grid h-11 w-11 shrink-0 place-items-center border border-gold/30 bg-gold/5 text-gold transition group-hover:border-gold group-hover:bg-gold group-hover:text-white">
@@ -99,22 +113,22 @@ export default function ProcessSteps({ steps = defaultSteps }: { steps?: Process
             </div>
 
             <div className="mt-8">
-              <h3 className="text-xl font-black uppercase leading-tight text-neutral-950 lg:text-lg xl:text-xl">
+              <h3 className="font-display text-2xl font-semibold uppercase leading-[0.95] text-neutral-950 lg:text-xl xl:text-2xl">
                 {step.title}
               </h3>
               {description ? (
-                <p className="mt-4 text-sm leading-7 text-neutral-600">
-                  {description}
+                <p className="mt-4 text-base leading-7 text-neutral-600">
+                {description}
                 </p>
               ) : null}
             </div>
 
             {output ? (
               <div className="mt-auto border-t border-neutral-200 pt-5">
-                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-gold">
+                <p className="eyebrow">
                   Output
                 </p>
-                <p className="mt-2 text-sm font-bold text-neutral-900">{output}</p>
+                <p className="mt-2 text-[15px] font-bold leading-6 text-neutral-900">{output}</p>
               </div>
             ) : null}
           </article>

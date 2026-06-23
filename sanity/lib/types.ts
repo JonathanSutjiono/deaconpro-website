@@ -61,6 +61,11 @@ export type ContactContent = {
   googleMapsEmbedUrl?: string;
   latitude?: number;
   longitude?: number;
+  showInteractiveMap: boolean;
+  mapLatitude?: number;
+  mapLongitude?: number;
+  mapZoom: number;
+  mapMarkerLabel: string;
   instagramUrl?: string;
   facebookUrl?: string;
   twitterUrl?: string;

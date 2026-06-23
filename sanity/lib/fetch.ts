@@ -283,6 +283,11 @@ function mapContact(doc?: SanityDocument | null): ContactContent {
   if (!doc) return fallbackContact;
   const phone = text(doc.phone, fallbackContact.phone);
   const whatsappNumber = text(doc.whatsappNumber, fallbackContact.whatsappNumber);
+  const legacyLatitude = typeof doc.latitude === "number" ? doc.latitude : undefined;
+  const legacyLongitude = typeof doc.longitude === "number" ? doc.longitude : undefined;
+  const mapLatitude = typeof doc.mapLatitude === "number" ? doc.mapLatitude : legacyLatitude ?? fallbackContact.mapLatitude;
+  const mapLongitude = typeof doc.mapLongitude === "number" ? doc.mapLongitude : legacyLongitude ?? fallbackContact.mapLongitude;
+  const mapZoom = typeof doc.mapZoom === "number" ? doc.mapZoom : fallbackContact.mapZoom;
 
   return {
     heading: text(doc.heading, fallbackContact.heading),
@@ -297,8 +302,13 @@ function mapContact(doc?: SanityDocument | null): ContactContent {
     areaCoverage: text(doc.areaCoverage, fallbackContact.areaCoverage),
     googleMapsUrl: text(doc.googleMapsUrl, fallbackContact.googleMapsUrl),
     googleMapsEmbedUrl: optionalText(doc.googleMapsEmbedUrl),
-    latitude: typeof doc.latitude === "number" ? doc.latitude : undefined,
-    longitude: typeof doc.longitude === "number" ? doc.longitude : undefined,
+    latitude: legacyLatitude,
+    longitude: legacyLongitude,
+    showInteractiveMap: typeof doc.showInteractiveMap === "boolean" ? doc.showInteractiveMap : fallbackContact.showInteractiveMap,
+    mapLatitude,
+    mapLongitude,
+    mapZoom,
+    mapMarkerLabel: text(doc.mapMarkerLabel, fallbackContact.mapMarkerLabel),
     instagramUrl: optionalText(doc.instagramUrl) ?? fallbackContact.instagramUrl,
     facebookUrl: optionalText(doc.facebookUrl) ?? fallbackContact.facebookUrl,
     twitterUrl: optionalText(doc.twitterUrl) ?? fallbackContact.twitterUrl,

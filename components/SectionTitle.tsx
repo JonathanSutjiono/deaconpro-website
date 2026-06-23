@@ -12,12 +12,15 @@ export default function SectionTitle({
   light = false,
 }: SectionTitleProps) {
   return (
-    <div className="mb-10 max-w-3xl md:mb-12">
-      <p className="text-xs font-black uppercase tracking-[0.36em] text-gold">
+    <div className="mb-10 max-w-4xl md:mb-14">
+      <div className="flex items-center gap-3">
+        <span className="h-px w-8 bg-gold" aria-hidden="true" />
+        <p className={light ? "eyebrow text-champagne" : "eyebrow"}>
         {eyebrow}
-      </p>
+        </p>
+      </div>
       <h2
-        className={`mt-4 text-3xl font-black uppercase leading-tight sm:text-4xl md:text-5xl ${
+        className={`mt-5 font-display text-4xl font-semibold uppercase leading-[0.96] sm:text-5xl md:text-6xl ${
           light ? "text-white" : "text-neutral-950"
         }`}
       >
@@ -25,7 +28,7 @@ export default function SectionTitle({
       </h2>
       {description ? (
         <p
-          className={`mt-5 max-w-2xl text-base leading-8 md:text-lg ${
+          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg md:leading-9 ${
             light ? "text-white/70" : "text-neutral-600"
           }`}
         >
