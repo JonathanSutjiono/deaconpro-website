@@ -15,12 +15,13 @@ export default function StudioPage() {
             DEACON PRO CMS
           </p>
           <h1 className="mt-5 text-3xl font-black uppercase leading-tight md:text-5xl">
-            Sanity Studio is not configured yet.
+            CMS belum dikonfigurasi.
           </h1>
           <p className="mt-5 text-base leading-8 text-white/75 md:text-lg">
-            Please set NEXT_PUBLIC_SANITY_PROJECT_ID,
-            NEXT_PUBLIC_SANITY_DATASET, and NEXT_PUBLIC_SANITY_API_VERSION,
-            then restart the development server or redeploy.
+            Tambahkan NEXT_PUBLIC_SANITY_PROJECT_ID,
+            NEXT_PUBLIC_SANITY_DATASET, dan NEXT_PUBLIC_SANITY_API_VERSION pada
+            environment Vercel atau file .env.local, lalu jalankan ulang server
+            atau deploy kembali.
           </p>
         </section>
       </main>

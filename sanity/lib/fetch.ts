@@ -104,8 +104,10 @@ function mapSiteSettings(doc?: SanityDocument | null): SiteSettingsContent {
     whatsappNumber,
     whatsappHref: whatsappHref(whatsappNumber),
     email: optionalText(doc.email),
+    websiteUrl: optionalText(doc.websiteUrl) ?? fallbackSiteSettings.websiteUrl,
     instagramUrl: optionalText(doc.instagramUrl) ?? fallbackSiteSettings.instagramUrl,
     facebookUrl: optionalText(doc.facebookUrl) ?? fallbackSiteSettings.facebookUrl,
+    twitterUrl: optionalText(doc.twitterUrl) ?? fallbackSiteSettings.twitterUrl,
     linkedinUrl: optionalText(doc.linkedinUrl) ?? fallbackSiteSettings.linkedinUrl,
     logoUrl: doc.logo ? resolveImageUrl(doc.logo, "", 1000) || undefined : undefined,
     logoMarkUrl: doc.logoMark ? resolveImageUrl(doc.logoMark, "", 500) || undefined : undefined,
@@ -207,10 +209,11 @@ function mapProject(doc: SanityDocument): Project | undefined {
   const title = optionalText(doc.title);
   const slugValue = doc.slug as { current?: unknown } | undefined;
   const slug = optionalText(slugValue?.current);
-  if (!title || !slug || !doc.coverImage) return undefined;
+  if (!title || !slug) return undefined;
 
   const portableDescription = portableBlocks(doc.description);
   const description = portablePlainText(portableDescription, "");
+  const hasCoverImage = Boolean(doc.coverImage);
   const coverImage = resolveImageUrl(doc.coverImage, "/images/hero-architecture.png");
   const gallery = Array.isArray(doc.gallery)
     ? doc.gallery.map((image) => resolveImageUrl(image, coverImage, 1920))
@@ -233,7 +236,9 @@ function mapProject(doc: SanityDocument): Project | undefined {
     imageAlt: `${title} - ${text(doc.location, "Deacon Pro project")}`,
     clientName: optionalText(doc.clientName),
     status: optionalText(doc.status),
-    isSample: false,
+    // An incomplete CMS entry is still safe to preview, but it is clearly
+    // identified as a representative visual until the client uploads media.
+    isSample: !hasCoverImage,
   };
 }
 
@@ -296,6 +301,7 @@ function mapContact(doc?: SanityDocument | null): ContactContent {
     longitude: typeof doc.longitude === "number" ? doc.longitude : undefined,
     instagramUrl: optionalText(doc.instagramUrl) ?? fallbackContact.instagramUrl,
     facebookUrl: optionalText(doc.facebookUrl) ?? fallbackContact.facebookUrl,
+    twitterUrl: optionalText(doc.twitterUrl) ?? fallbackContact.twitterUrl,
     linkedinUrl: optionalText(doc.linkedinUrl) ?? fallbackContact.linkedinUrl,
   };
 }
@@ -346,81 +352,89 @@ const getServiceDocuments = cache(async () =>
 
 export const getServices = cache(async () => {
   const docs = await getServiceDocuments();
-  const mapped = docs?.map(mapService).filter((item): item is ServiceItem => Boolean(item));
-  return mapped?.length ? mapped : fallbackServices;
+  if (docs === undefined) return fallbackServices;
+  return docs.map(mapService).filter((item): item is ServiceItem => Boolean(item));
 });
 
 export const getFeaturedServices = cache(async () => {
   const docs = await getServiceDocuments();
+  if (docs === undefined) return fallbackServices;
   const mapped = docs
-    ?.filter((doc) => Boolean(doc.featured))
+    .filter((doc) => Boolean(doc.featured))
     .map(mapService)
     .filter((item): item is ServiceItem => Boolean(item));
   const unique = new Map<string, ServiceItem>();
-  for (const item of mapped ?? []) {
+  for (const item of mapped) {
     if (!unique.has(item.title.toLowerCase())) {
       unique.set(item.title.toLowerCase(), item);
     }
   }
-  const featured = [...unique.values()].slice(0, 5);
-  return featured.length ? featured : fallbackServices;
+  return [...unique.values()].slice(0, 5);
 });
 
 export const getConstructionServiceNames = cache(async () => {
   const docs = await getServiceDocuments();
+  if (docs === undefined) return constructionServices;
   const names = docs
-    ?.filter((doc) =>
+    .filter((doc) =>
       ["Deacon Construction", "Build New", "Renovation", "Home Maintenance"].includes(
         text(doc.category, ""),
       ),
     )
     .map((doc) => text(doc.title, ""))
     .filter(Boolean);
-  return names?.length ? names : constructionServices;
+  return names;
 });
 
 export const getInteriorServiceNames = cache(async () => {
   const docs = await getServiceDocuments();
+  if (docs === undefined) return interiorServices;
   const names = docs
-    ?.filter((doc) => text(doc.category, "") === "Deacon Interior")
+    .filter((doc) => text(doc.category, "") === "Deacon Interior")
     .map((doc) => text(doc.title, ""))
     .filter(Boolean);
-  return names?.length ? names : interiorServices;
+  return names;
 });
 
+const getProjectDocuments = cache(async () => safeFetch<SanityDocument[]>(portfolioQuery));
+
 export const getProjects = cache(async () => {
-  const docs = await safeFetch<SanityDocument[]>(portfolioQuery);
-  const mapped = docs?.map(mapProject).filter((item): item is Project => Boolean(item));
-  return mapped?.length ? mapped : fallbackProjects;
+  const docs = await getProjectDocuments();
+  if (docs === undefined) return fallbackProjects;
+  return docs.map(mapProject).filter((item): item is Project => Boolean(item));
 });
 
 export const getProcessSteps = cache(async () => {
   const docs = await safeFetch<SanityDocument[]>(processStepsQuery);
-  const mapped = docs?.map(mapProcessStep).filter((item): item is ProcessStepContent => Boolean(item));
-  return mapped?.length ? mapped.slice(0, 5) : fallbackProcessSteps;
+  if (docs === undefined) return fallbackProcessSteps;
+  return docs.map(mapProcessStep).filter((item): item is ProcessStepContent => Boolean(item)).slice(0, 5);
 });
 
 export const getInsights = cache(async () => {
   const docs = await safeFetch<SanityDocument[]>(insightsQuery);
-  const mapped = docs?.map(mapInsight).filter((item): item is Insight => Boolean(item));
-  return mapped?.length ? mapped : fallbackInsights;
+  if (docs === undefined) return fallbackInsights;
+  return docs.map(mapInsight).filter((item): item is Insight => Boolean(item));
 });
 
 export const getProjectBySlug = cache(async (slug: string) => {
   const doc = await safeFetch<SanityDocument | null>(portfolioBySlugQuery, { slug });
-  return (doc ? mapProject(doc) : undefined) ?? fallbackProjects.find((item) => item.slug === slug);
+  if (doc === undefined) return fallbackProjects.find((item) => item.slug === slug);
+  return doc ? mapProject(doc) : undefined;
 });
 
 export const getInsightBySlug = cache(async (slug: string) => {
   const doc = await safeFetch<SanityDocument | null>(insightBySlugQuery, { slug });
-  return (doc ? mapInsight(doc) : undefined) ?? fallbackInsights.find((item) => item.slug === slug);
+  if (doc === undefined) return fallbackInsights.find((item) => item.slug === slug);
+  return doc ? mapInsight(doc) : undefined;
 });
 
 export async function getCompanyInfo(): Promise<CompanyInfo> {
   const [settings, contact] = await Promise.all([getSiteSettings(), getContact()]);
   const instagramUrl = settings.instagramUrl ?? contact.instagramUrl;
   const facebookUrl = settings.facebookUrl ?? contact.facebookUrl;
+  const twitterUrl = settings.twitterUrl ?? contact.twitterUrl;
   const linkedinUrl = settings.linkedinUrl ?? contact.linkedinUrl;
+  const websiteHref = settings.websiteUrl ?? company.websiteHref;
 
   return {
     ...company,
@@ -431,13 +445,15 @@ export async function getCompanyInfo(): Promise<CompanyInfo> {
     phoneHref: settings.phoneHref,
     whatsapp: settings.whatsappNumber,
     whatsappHref: settings.whatsappHref,
+    website: websiteHref.replace(/^https?:\/\//, "").replace(/\/$/, ""),
+    websiteHref,
     address: contact.address,
     serviceArea: contact.areaCoverage,
     googleMapsHref: contact.googleMapsUrl,
     socialLinks: [
       { label: "Instagram", handle: company.socialLinks[0].handle, href: instagramUrl ?? "#" },
       { label: "Facebook", href: facebookUrl ?? "#" },
-      { label: "Twitter/X", href: company.socialLinks.find((item) => item.label === "Twitter/X")?.href ?? "#" },
+      { label: "Twitter/X", href: twitterUrl ?? "#" },
       { label: "LinkedIn", href: linkedinUrl ?? "#" },
     ],
     logoUrl: settings.logoUrl,
@@ -459,16 +475,18 @@ export async function getFeaturedProjects() {
   const genericTitles = new Set(["construction projects", "interior projects"]);
   const unique = new Map<string, Project>();
 
-  for (const project of (await getProjects()).filter(
+  const docs = await getProjectDocuments();
+  const source = docs === undefined
+    ? fallbackProjects
+    : docs.map(mapProject).filter((item): item is Project => Boolean(item));
+
+  for (const project of source.filter(
     (item) => item.featured && !genericTitles.has(item.title.trim().toLowerCase()),
   )) {
     if (!unique.has(project.slug)) unique.set(project.slug, project);
   }
 
-  const featured = [...unique.values()].slice(0, 4);
-  return featured.length
-    ? featured
-    : fallbackProjects.filter((project) => project.featured).slice(0, 4);
+  return [...unique.values()].slice(0, 4);
 }
 
 export async function getRelatedProjects(project: Project, limit = 3) {

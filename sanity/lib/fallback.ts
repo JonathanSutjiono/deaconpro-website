@@ -19,8 +19,10 @@ export const fallbackSiteSettings: SiteSettingsContent = {
   phoneHref: company.phoneHref,
   whatsappNumber: company.whatsapp,
   whatsappHref: company.whatsappHref,
+  websiteUrl: company.websiteHref,
   instagramUrl: company.socialLinks.find((item) => item.label === "Instagram")?.href,
   facebookUrl: company.socialLinks.find((item) => item.label === "Facebook")?.href,
+  twitterUrl: company.socialLinks.find((item) => item.label === "Twitter/X")?.href,
   linkedinUrl: company.socialLinks.find((item) => item.label === "LinkedIn")?.href,
   defaultSeoTitle: `${company.name} | Build New, Renovation, Home Maintenance`,
   defaultSeoDescription:
@@ -117,6 +119,7 @@ export const fallbackContact: ContactContent = {
   googleMapsUrl: company.googleMapsHref,
   instagramUrl: company.socialLinks.find((item) => item.label === "Instagram")?.href,
   facebookUrl: company.socialLinks.find((item) => item.label === "Facebook")?.href,
+  twitterUrl: company.socialLinks.find((item) => item.label === "Twitter/X")?.href,
   linkedinUrl: company.socialLinks.find((item) => item.label === "LinkedIn")?.href,
 };
 

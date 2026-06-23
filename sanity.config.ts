@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool, type StructureResolver } from "sanity/structure";
+import { CmsGuidePane } from "./sanity/components/CmsGuidePane";
 import { schemaTypes } from "./sanity/schemaTypes";
 
 export const sanityProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -17,17 +18,21 @@ const structure: StructureResolver = (S) =>
   S.list()
     .title("DEACON PRO CMS")
     .items([
-      singleton(S, "Site Settings", "siteSettings", "siteSettings"),
-      singleton(S, "Homepage", "homepage", "homepage"),
-      singleton(S, "About Us", "about", "about"),
+      singleton(S, "Pengaturan Website", "siteSettings", "siteSettings"),
+      singleton(S, "Halaman Utama", "homepage", "homepage"),
+      singleton(S, "Tentang Deacon / About Us", "about", "about"),
       S.divider(),
-      S.documentTypeListItem("service").title("Services"),
-      S.documentTypeListItem("portfolio").title("Portfolio"),
-      S.documentTypeListItem("processStep").title("Process"),
-      S.documentTypeListItem("insight").title("Insight"),
+      S.documentTypeListItem("service").title("Layanan / Services"),
+      S.documentTypeListItem("portfolio").title("Portfolio / Proyek"),
+      S.documentTypeListItem("processStep").title("Proses Kerja"),
+      S.documentTypeListItem("insight").title("Insight / Artikel"),
       S.divider(),
-      singleton(S, "Contact", "contact", "contact"),
-      singleton(S, "Footer", "footer", "footer"),
+      singleton(S, "Kontak dan Peta", "contact", "contact"),
+      singleton(S, "Footer Website", "footer", "footer"),
+      S.divider(),
+      S.listItem()
+        .title("Panduan CMS")
+        .child(S.component(CmsGuidePane).title("Panduan CMS")),
     ]);
 
 export default defineConfig({

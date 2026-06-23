@@ -63,6 +63,7 @@ export type ContactContent = {
   longitude?: number;
   instagramUrl?: string;
   facebookUrl?: string;
+  twitterUrl?: string;
   linkedinUrl?: string;
 };
 
@@ -81,8 +82,10 @@ export type SiteSettingsContent = {
   whatsappNumber: string;
   whatsappHref: string;
   email?: string;
+  websiteUrl?: string;
   instagramUrl?: string;
   facebookUrl?: string;
+  twitterUrl?: string;
   linkedinUrl?: string;
   logoUrl?: string;
   logoMarkUrl?: string;

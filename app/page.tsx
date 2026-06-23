@@ -8,7 +8,6 @@ import PortfolioCards from "@/components/PortfolioCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import SectionTitle from "@/components/SectionTitle";
 import ServiceCards from "@/components/ServiceCards";
-import { homepagePortfolio } from "@/data/portfolio";
 import { createPageMetadata } from "@/data/seo";
 import {
   getAbout,
@@ -19,7 +18,7 @@ import {
   getHomepage,
   getInsights,
   getProcessSteps,
-  getFeaturedServices,
+  getServices,
   getSiteSettings,
 } from "@/sanity/lib/fetch";
 
@@ -47,7 +46,7 @@ export default async function Home() {
     getCompanyInfo(),
     getHomepage(),
     getAbout(),
-    getFeaturedServices(),
+    getServices(),
     getFeaturedProjects(),
     getProcessSteps(),
     getInsights(),
@@ -107,10 +106,7 @@ export default async function Home() {
             title={homepage.portfolioTitle}
             description={homepage.portfolioSubtitle || undefined}
           />
-          <PortfolioCards items={homepagePortfolio} />
-          <div className="mt-8">
-            <PortfolioCards items={featuredProjects} />
-          </div>
+          <PortfolioCards items={featuredProjects} />
         </div>
       </section>
 
