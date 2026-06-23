@@ -47,11 +47,13 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
   }
 
   const gridClass =
-    items.length === 2 || items.length === 4
-      ? "grid gap-6 md:grid-cols-2"
-      : items.length === 1
-        ? "max-w-2xl"
-        : "grid gap-6 md:grid-cols-2 lg:grid-cols-3";
+    items.length === 1
+      ? "mx-auto max-w-2xl"
+      : items.length === 2
+        ? "mx-auto grid max-w-[980px] auto-rows-fr gap-6 md:grid-cols-2"
+        : items.length === 4
+          ? "grid auto-rows-fr gap-6 md:grid-cols-2"
+          : "grid auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-3";
 
   return (
     <div className={gridClass}>
@@ -75,7 +77,7 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
             : undefined;
         const referenceLabel = isSample ? "Representative visual" : isProject ? "Project reference" : "Project category";
         const content = (
-          <article className="group relative min-h-[350px] overflow-hidden border border-white/10 bg-neutral-900 shadow-[0_20px_50px_rgba(17,17,17,0.18)] transition duration-500 hover:-translate-y-1 hover:border-gold/70 hover:shadow-gold">
+          <article className="group relative h-full min-h-[350px] overflow-hidden border border-white/10 bg-neutral-900 shadow-[0_20px_50px_rgba(17,17,17,0.18)] transition duration-500 hover:-translate-y-1 hover:border-gold/70 hover:shadow-gold">
             <Image
               src={imageSrc}
               alt={"imageAlt" in item && item.imageAlt ? item.imageAlt : item.title}
@@ -86,7 +88,7 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,7,7,0.08)_8%,rgba(7,7,7,0.26)_38%,rgba(7,7,7,0.92)_100%)]" />
             <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-7">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] font-bold uppercase leading-5 tracking-normal text-champagne">
                 <span>{referenceLabel}</span>
                 <span className="h-1 w-1 rounded-full bg-champagne" aria-hidden="true" />
                 <span>{getCategory(item)}</span>
@@ -100,7 +102,7 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
                 </p>
               ) : null}
               {primaryScope ? (
-                <p className="mt-2 text-[15px] font-medium leading-6 text-white/72">
+                <p className="mt-2 text-[15px] font-medium leading-6 text-white/80">
                   Scope: {primaryScope}
                 </p>
               ) : null}
@@ -115,11 +117,11 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
         );
 
         return href ? (
-          <Link key={item.title} href={href} className="block focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
+          <Link key={item.title} href={href} className="group block h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
             {content}
           </Link>
         ) : (
-          <div key={item.title}>{content}</div>
+          <div key={item.title} className="h-full">{content}</div>
         );
       })}
     </div>

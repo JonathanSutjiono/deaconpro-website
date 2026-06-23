@@ -72,7 +72,7 @@ export default async function InsightDetailPage({ params }: PageProps) {
           <div className="absolute inset-0 bg-black/70" />
           <div className="container-x relative z-10 flex min-h-[calc(68vh-80px)] items-end py-16">
             <div className="max-w-4xl">
-              <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-champagne">
+              <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-champagne">
                 {insight.category} · {insight.publishedAt}
                 {insight.readTime ? ` · ${insight.readTime}` : ""}
               </p>

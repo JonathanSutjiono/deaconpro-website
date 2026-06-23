@@ -58,15 +58,15 @@ body {
   }
 
   .eyebrow {
-    @apply text-[13px] font-bold uppercase leading-5 tracking-normal text-gold;
+    @apply text-[14px] font-extrabold uppercase leading-5 tracking-normal text-gold;
   }
 
   .button-primary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 bg-gold px-6 text-[14px] font-black uppercase leading-5 tracking-normal text-white transition duration-300 hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30;
+    @apply inline-flex min-h-[52px] items-center justify-center gap-2 bg-gold px-6 text-[14px] font-black uppercase leading-5 tracking-normal text-white transition duration-300 hover:-translate-y-px hover:bg-neutral-950 active:translate-y-0 active:scale-[0.99] focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30;
   }
 
   .button-secondary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 border border-current px-6 text-[14px] font-black uppercase leading-5 tracking-normal transition duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30;
+    @apply inline-flex min-h-[52px] items-center justify-center gap-2 border border-current px-6 text-[14px] font-black uppercase leading-5 tracking-normal transition duration-300 hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30;
   }
 
   .surface-card {

@@ -28,7 +28,7 @@ function DetailRow({
     <div className="flex gap-4 border-b border-neutral-200 py-4">
       <Icon className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden={true} />
       <div>
-        <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+        <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
           {label}
         </p>
         {href ? (
@@ -90,7 +90,7 @@ export default function CompanyDetail({
 
       <div className="container-x relative z-10">
         <div className="mb-12 max-w-3xl">
-          <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
+          <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
             Company Detail
           </p>
           <h2 className="mt-4 font-display text-5xl font-semibold uppercase leading-[0.94] md:text-7xl">
@@ -107,7 +107,7 @@ export default function CompanyDetail({
               <div className="flex gap-4">
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
                 <div>
-                  <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+                  <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
                     Location
                   </p>
                   <h3 className="mt-2 text-2xl font-black uppercase text-neutral-950">
@@ -119,7 +119,7 @@ export default function CompanyDetail({
               <div className="mt-6 flex gap-4">
                 <MapPin className="mt-1 h-5 w-5 shrink-0 text-neutral-950" aria-hidden="true" />
                 <div>
-                  <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+                  <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
                     Address
                   </p>
                   <p className="mt-2 text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
@@ -183,14 +183,14 @@ export default function CompanyDetail({
             />
 
             <div className="pt-6">
-              <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+              <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
                 Project Focus
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 {projectFocus.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-neutral-950"
+                    className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-3 text-sm font-black uppercase tracking-normal text-neutral-950"
                   >
                     <BriefcaseBusiness className="h-4 w-4 text-gold" aria-hidden="true" />
                     {item}
@@ -201,7 +201,7 @@ export default function CompanyDetail({
           </div>
 
           <div className="border border-gold/15 bg-white/95 p-6 shadow-[0_22px_70px_rgba(184,138,42,0.08)] md:p-8">
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               About
             </p>
             <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">
@@ -210,7 +210,7 @@ export default function CompanyDetail({
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
 
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               Vision
             </p>
             <blockquote className="mt-4 border-l-4 border-gold pl-5 font-display text-3xl font-semibold uppercase leading-[0.98] text-neutral-950">
@@ -219,7 +219,7 @@ export default function CompanyDetail({
 
             <div className="my-8 h-px bg-gradient-to-r from-gold via-neutral-200 to-transparent" />
 
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold md:text-sm">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               Missions
             </p>
             <p className="mt-4 max-w-3xl text-base leading-8 text-neutral-700 md:text-[18px] md:leading-9">

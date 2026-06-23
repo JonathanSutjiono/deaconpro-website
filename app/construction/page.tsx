@@ -54,7 +54,7 @@ export default async function ConstructionPage() {
             title="Construction services for Build New and Renovation delivery."
             description="From planning and budgeting to site execution, construction management, and quality control."
           />
-          <ServiceList services={constructionServices} />
+          <ServiceList services={constructionServices} whatsappHref={companyInfo.whatsappHref} />
         </div>
       </section>
 

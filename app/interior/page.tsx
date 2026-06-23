@@ -54,7 +54,7 @@ export default async function InteriorPage() {
             title="Interior services for refined residential and commercial spaces."
             description="Design-led interior delivery with practical fit-out coordination, furniture detail, and project management."
           />
-          <ServiceList services={interiorServices} />
+          <ServiceList services={interiorServices} whatsappHref={companyInfo.whatsappHref} />
         </div>
       </section>
 

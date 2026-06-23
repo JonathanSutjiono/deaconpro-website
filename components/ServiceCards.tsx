@@ -11,6 +11,30 @@ const icons = {
   maintenance: ShieldCheck,
 };
 
+function getGridClass(count: number) {
+  switch (count) {
+    case 1:
+      return "mx-auto max-w-[440px]";
+    case 2:
+      return "mx-auto grid max-w-[980px] auto-rows-fr gap-6 md:grid-cols-2";
+    case 3:
+      return "grid auto-rows-fr gap-6 md:grid-cols-3";
+    case 4:
+      return "grid auto-rows-fr gap-6 sm:grid-cols-2";
+    case 5:
+      return "grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-6";
+    default:
+      return "grid auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-3";
+  }
+}
+
+function getCardGridClass(count: number, index: number) {
+  if (count !== 5) return "";
+  if (index < 3) return "lg:col-span-2";
+  if (index === 3) return "lg:col-span-2 lg:col-start-2";
+  return "sm:col-span-2 lg:col-span-2";
+}
+
 export default function ServiceCards({ services = homepageServices }: { services?: ServiceItem[] }) {
   if (!services.length) {
     return (
@@ -21,20 +45,22 @@ export default function ServiceCards({ services = homepageServices }: { services
     );
   }
 
+  const serviceCount = services.length;
+
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {services.map((service) => {
+    <div className={getGridClass(serviceCount)}>
+      {services.map((service, index) => {
         const Icon = icons[service.icon];
 
         return (
-          <Link key={service.title} href={service.href} className="group block focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30">
-            <article className="surface-card flex min-h-[320px] flex-col p-7 hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
+          <Link key={service.title} href={service.href} className={`group block h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/30 ${getCardGridClass(serviceCount, index)}`}>
+            <article className="surface-card flex h-full min-h-[320px] flex-col p-7 hover:-translate-y-1 hover:border-gold hover:shadow-gold md:p-8">
               <div className="flex items-start justify-between gap-4">
                 <div className="grid h-14 w-14 place-items-center bg-neutral-950 text-champagne transition group-hover:bg-gold group-hover:text-white">
                   <Icon className="h-7 w-7" aria-hidden="true" />
                 </div>
                 <span className="font-display text-5xl leading-none text-neutral-950/[0.06]" aria-hidden="true">
-                  {String(services.indexOf(service) + 1).padStart(2, "0")}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
               <p className="mt-8 eyebrow">

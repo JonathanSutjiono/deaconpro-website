@@ -107,7 +107,7 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
               <Image src={companyInfo.logoMarkUrl} alt="" fill sizes="44px" className="object-contain p-1" />
             </span>
           ) : (
-            <span className="grid h-10 w-10 shrink-0 place-items-center bg-neutral-950 text-[12px] font-black tracking-[0.12em] text-champagne xl:h-11 xl:w-11 xl:text-[13px]">
+            <span className="grid h-10 w-10 shrink-0 place-items-center bg-neutral-950 text-[13px] font-black tracking-normal text-champagne xl:h-11 xl:w-11">
               DP
             </span>
           )}
@@ -117,13 +117,13 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
             </span>
           ) : (
             <span className="leading-none">
-              <span className="block whitespace-nowrap text-xs font-black uppercase tracking-normal sm:text-sm">
+              <span className="block whitespace-nowrap text-[13px] font-black uppercase leading-5 tracking-normal sm:text-sm">
                 {companyInfo.shortName}
               </span>
-              <span className="mt-1 hidden whitespace-nowrap text-[11px] font-bold uppercase leading-4 tracking-normal text-gold xl:block 2xl:hidden">
+              <span className="mt-1 hidden whitespace-nowrap text-[12px] font-bold uppercase leading-4 tracking-normal text-gold xl:block 2xl:hidden">
                 {companyInfo.shortTagline}
               </span>
-              <span className="mt-1 hidden whitespace-nowrap text-[11px] font-bold uppercase leading-4 tracking-normal text-gold 2xl:block">
+              <span className="mt-1 hidden whitespace-nowrap text-[12px] font-bold uppercase leading-4 tracking-normal text-gold 2xl:block">
                 {companyInfo.tagline}
               </span>
             </span>
@@ -152,14 +152,14 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
 
         <Link
           href={companyInfo.phoneHref}
-          className="hidden whitespace-nowrap text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold xl:inline-flex"
+          className="hidden whitespace-nowrap text-[14px] font-black uppercase leading-5 tracking-normal text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold xl:inline-flex"
         >
           {companyInfo.phone}
         </Link>
 
         <Link
           href={companyInfo.whatsappHref}
-          className="hidden whitespace-nowrap border border-gold bg-gold px-4 py-3 text-[13px] font-black uppercase leading-5 tracking-normal text-white transition hover:border-neutral-950 hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:inline-flex xl:ml-1 2xl:px-5"
+          className="hidden whitespace-nowrap border border-gold bg-gold px-4 py-3 text-[14px] font-black uppercase leading-5 tracking-normal text-white transition hover:border-neutral-950 hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:inline-flex xl:ml-1 2xl:px-5"
           target="_blank"
           rel="noopener noreferrer"
         >

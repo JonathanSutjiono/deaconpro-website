@@ -71,35 +71,48 @@ export default async function Home() {
         secondaryHref={homepage.secondaryButtonLink}
       />
 
-      <section id="about" className="section-space bg-white text-neutral-950">
-        <div className="container-x grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-          <SectionTitle
-            eyebrow="About Us"
-            title={homepage.introTitle}
-          />
-          <div>
-            <p className="max-w-3xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
-              {homepage.introText}
-            </p>
-            <a
-              href="#company-detail"
-              className="button-secondary mt-7 border-neutral-950 px-5 text-neutral-950 hover:border-gold hover:bg-gold hover:text-white"
-            >
-              Company detail
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+      <section id="about" className="section-space bg-white pb-16 pt-16 text-neutral-950 md:pb-20 md:pt-24">
+        <div className="container-x">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-x-16">
+            <SectionTitle
+              eyebrow="About Us"
+              title={homepage.introTitle}
+              className="max-w-3xl lg:col-span-7"
+            />
+            <div className="lg:col-span-5">
+              <div className="border-l-2 border-gold pl-6 sm:pl-8">
+                <p className="eyebrow">{companyInfo.tagline}</p>
+                <p className="mt-5 max-w-2xl text-base leading-8 text-neutral-700 md:text-lg md:leading-9">
+                  {homepage.introText}
+                </p>
+                <div className="mt-8 flex flex-col gap-4 border-t border-neutral-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                  <a
+                    href="#company-detail"
+                    className="button-secondary w-fit border-neutral-950 px-5 text-neutral-950 hover:border-gold hover:bg-gold hover:text-white"
+                  >
+                    Company detail
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <p className="max-w-[15rem] text-[14px] font-bold uppercase leading-5 tracking-normal text-neutral-600 sm:text-right">
+                    Serving {companyInfo.serviceArea}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-span-full grid border-y border-neutral-200 sm:grid-cols-3">
+          <div className="mt-12 grid overflow-hidden border border-neutral-200 bg-[#fbfaf7] shadow-[0_18px_45px_rgba(17,17,17,0.05)] sm:grid-cols-3 md:mt-14">
             {[
               { label: "Construction", detail: "Build New & project coordination", Icon: Building2 },
               { label: "Interior", detail: "Fit-out, furnishings & detail", Icon: Paintbrush },
               { label: "Service area", detail: companyInfo.serviceArea, Icon: MapPinned },
             ].map(({ label, detail, Icon }) => (
-              <div key={label} className="flex gap-4 border-b border-neutral-200 px-0 py-6 last:border-b-0 sm:border-b-0 sm:border-r sm:px-6 sm:first:pl-0 sm:last:border-r-0">
-                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+              <div key={label} className="group flex min-h-[154px] gap-4 border-b border-neutral-200 p-6 transition duration-300 hover:bg-white sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-7">
+                <span className="grid h-11 w-11 shrink-0 place-items-center border border-gold/30 bg-white text-gold transition group-hover:border-gold group-hover:bg-gold group-hover:text-white">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
                 <div>
                   <p className="eyebrow">{label}</p>
-                  <p className="mt-2 text-base font-semibold leading-7 text-neutral-700">{detail}</p>
+                  <p className="mt-3 text-base font-semibold leading-7 text-neutral-700 md:text-[17px] md:leading-8">{detail}</p>
                 </div>
               </div>
             ))}
@@ -107,7 +120,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="services" className="section-space bg-neutral-100 text-neutral-950">
+      <section id="services" className="section-space bg-neutral-100 pt-16 text-neutral-950 md:pt-20">
         <div className="container-x">
           <SectionTitle
             eyebrow="Services"
@@ -137,15 +150,17 @@ export default async function Home() {
             description={homepage.processSubtitle || undefined}
           />
           <ProcessSteps steps={processSteps} />
-          <a
-            href={companyInfo.whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button-secondary mt-8 border-neutral-950 px-5 text-neutral-950 hover:border-gold hover:bg-gold hover:text-white"
-          >
-            Discuss your project scope
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
+          <div className={processSteps.length <= 2 ? "mt-10 flex justify-center" : "mt-10"}>
+            <a
+              href={companyInfo.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-secondary border-neutral-950 px-6 text-neutral-950 hover:border-gold hover:bg-gold hover:text-white"
+            >
+              Discuss your project scope
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </section>
 

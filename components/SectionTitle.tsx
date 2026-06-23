@@ -3,6 +3,7 @@ type SectionTitleProps = {
   title: string;
   description?: string;
   light?: boolean;
+  className?: string;
 };
 
 export default function SectionTitle({
@@ -10,13 +11,14 @@ export default function SectionTitle({
   title,
   description,
   light = false,
+  className,
 }: SectionTitleProps) {
   return (
-    <div className="mb-10 max-w-4xl md:mb-14">
+    <div className={className ?? "mb-10 max-w-4xl md:mb-14"}>
       <div className="flex items-center gap-3">
         <span className="h-px w-8 bg-gold" aria-hidden="true" />
         <p className={light ? "eyebrow text-champagne" : "eyebrow"}>
-        {eyebrow}
+          {eyebrow}
         </p>
       </div>
       <h2

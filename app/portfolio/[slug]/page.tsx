@@ -74,7 +74,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <div className="absolute inset-0 bg-black/68" />
         <div className="container-x relative z-10 flex min-h-[calc(72vh-80px)] items-end py-16">
           <div className="max-w-4xl">
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-champagne">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-champagne">
               {project.isSample ? "Representative Visual · " : ""}
               {project.category} · {project.location} · {project.year}
             </p>
@@ -91,7 +91,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       <section className="section-space bg-white text-neutral-950">
         <div className="container-x grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <aside className="border border-neutral-200 bg-neutral-50 p-7">
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               Project Detail
             </p>
             {project.isSample ? (
@@ -101,26 +101,26 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             ) : null}
             <dl className="mt-6 space-y-5">
               <div>
-                <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
+                <dt className="text-[14px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                   Category
                 </dt>
                 <dd className="mt-1 text-lg font-semibold capitalize">{project.category}</dd>
               </div>
               <div>
-                <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
+                <dt className="text-[14px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                   Location
                 </dt>
                 <dd className="mt-1 text-lg font-semibold">{project.location}</dd>
               </div>
               <div>
-                <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
+                <dt className="text-[14px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                   Year
                 </dt>
                 <dd className="mt-1 text-lg font-semibold">{project.year}</dd>
               </div>
               {project.clientName ? (
                 <div>
-                  <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
+                  <dt className="text-[14px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                     Client
                   </dt>
                   <dd className="mt-1 text-lg font-semibold">{project.clientName}</dd>
@@ -128,7 +128,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               ) : null}
               {project.status ? (
                 <div>
-                  <dt className="text-[13px] font-black uppercase leading-5 tracking-normal text-neutral-500">
+                  <dt className="text-[14px] font-black uppercase leading-5 tracking-normal text-neutral-500">
                     Status
                   </dt>
                   <dd className="mt-1 text-lg font-semibold">{project.status}</dd>
@@ -146,7 +146,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </aside>
 
           <div>
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               Scope of Work
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
@@ -170,7 +170,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               </p>
             )}
 
-            <p className="mt-12 text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
+            <p className="mt-12 text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               Project Gallery
             </p>
             <div className="mt-5 grid gap-5 md:grid-cols-3">
@@ -192,9 +192,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       </section>
 
       {relatedProjects.length > 0 ? (
-        <section className="bg-neutral-100 py-20 text-neutral-950 md:py-28">
+        <section className="section-space bg-neutral-100 text-neutral-950">
           <div className="container-x">
-            <p className="text-[13px] font-black uppercase leading-5 tracking-normal text-gold">
+            <p className="text-[14px] font-black uppercase leading-5 tracking-normal text-gold">
               Related Projects
             </p>
             <h2 className="mt-4 max-w-3xl font-display text-5xl font-semibold uppercase leading-[0.94] md:text-7xl">

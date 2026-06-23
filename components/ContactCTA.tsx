@@ -38,7 +38,7 @@ export default function ContactCTA({
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-champagne" aria-hidden="true" />
-              <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
+              <p className="text-[14px] font-bold uppercase leading-5 tracking-normal text-champagne">
               Contact
               </p>
             </div>
@@ -101,11 +101,11 @@ export default function ContactCTA({
             </div>
           </div>
           <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-            <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">Start a conversation</p>
+            <p className="text-[14px] font-bold uppercase leading-5 tracking-normal text-champagne">Start a conversation</p>
             <p className="mt-4 font-display text-3xl font-semibold uppercase leading-tight text-white">
               Send your location and scope.
             </p>
-            <p className="mt-4 text-base leading-7 text-white/65">
+            <p className="mt-4 text-base leading-7 text-white/72">
               Our team will guide the next practical step, from survey through delivery.
             </p>
             <Link
@@ -133,13 +133,10 @@ export default function ContactCTA({
             <div className="pb-1 lg:pl-2">
               <div className="flex items-center gap-3">
                 <span className="h-px w-7 bg-champagne" aria-hidden="true" />
-                <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">Office location</p>
+                <p className="text-[14px] font-bold uppercase leading-5 tracking-normal text-champagne">Office location</p>
               </div>
               <p className="mt-4 font-display text-3xl font-semibold uppercase leading-[0.96] text-white">
                 {companyInfo.location}
-              </p>
-              <p className="mt-4 text-base leading-7 text-white/65">
-                Interactive map powered by OpenStreetMap. Use the navigation button above for directions in Google Maps.
               </p>
             </div>
           </div>

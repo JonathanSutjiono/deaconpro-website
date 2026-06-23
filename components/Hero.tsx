@@ -52,14 +52,14 @@ export default function Hero({
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-neutral-950/95 to-transparent" />
 
       <div className="container-x relative z-10 flex min-h-[calc(85svh-76px)] items-center py-16 md:min-h-[calc(88vh-76px)] md:py-20">
-        <div className="max-w-5xl">
+        <div className="max-w-[980px]">
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-champagne" aria-hidden="true" />
-            <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
+            <p className="text-[14px] font-extrabold uppercase leading-5 tracking-normal text-champagne">
             {eyebrow}
             </p>
           </div>
-          <h1 className="mt-6 font-display text-[clamp(2.85rem,9vw,8rem)] font-semibold uppercase leading-[0.84] text-white sm:leading-[0.82]">
+          <h1 className="mt-6 font-display text-[clamp(2.85rem,8.5vw,7.75rem)] font-semibold uppercase leading-[0.84] text-white sm:leading-[0.82]">
             {lines.map((line) => (
               <span
                 key={line}

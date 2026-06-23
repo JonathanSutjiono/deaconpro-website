@@ -35,7 +35,7 @@ export default function Footer({
           <p className="mt-5 max-w-md text-base leading-8 text-white/72">
             {companyInfo.tagline}
           </p>
-          <p className="mt-3 max-w-md text-base leading-8 text-white/58">
+          <p className="mt-3 max-w-md text-base leading-8 text-white/68">
             {footerContent?.shortDescription ?? `${companyInfo.name} serves ${companyInfo.serviceArea} from ${companyInfo.location}.`}
           </p>
           <Link
@@ -51,7 +51,7 @@ export default function Footer({
         </div>
 
         <div>
-          <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
+          <p className="text-[14px] font-extrabold uppercase leading-5 tracking-normal text-champagne">
             Quick Links
           </p>
           <div className="mt-5 flex flex-col gap-3 text-base text-white/72">
@@ -74,7 +74,7 @@ export default function Footer({
         </div>
 
         <div>
-          <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
+          <p className="text-[14px] font-extrabold uppercase leading-5 tracking-normal text-champagne">
             Services
           </p>
           <div className="mt-5 flex flex-col gap-3 text-base text-white/72">
@@ -92,7 +92,7 @@ export default function Footer({
         </div>
 
         <div>
-          <p className="text-[13px] font-bold uppercase leading-5 tracking-normal text-champagne">
+          <p className="text-[14px] font-extrabold uppercase leading-5 tracking-normal text-champagne">
             Contact
           </p>
           <div className="mt-5 flex flex-col gap-3 text-base text-white/72">
@@ -141,7 +141,7 @@ export default function Footer({
           </div>
         </div>
       </div>
-      <div className="container-x mt-12 border-t border-white/10 pt-6 text-[13px] uppercase leading-5 tracking-normal text-white/45">
+      <div className="container-x mt-12 border-t border-white/10 pt-6 text-[14px] uppercase leading-5 tracking-normal text-white/60">
         {footerContent?.copyrightText ?? `© ${new Date().getFullYear()} ${companyInfo.name}. All rights reserved.`}
       </div>
     </footer>
