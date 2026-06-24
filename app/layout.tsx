@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import StructuredData from "@/components/StructuredData";
 import { createPageMetadata, siteUrl } from "@/data/seo";
 import { getCompanyInfo, getSiteSettings } from "@/sanity/lib/fetch";
 import "./globals.css";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
@@ -34,7 +27,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} bg-ink text-white antialiased`}>
+      <body className="bg-ink text-white antialiased">
+        <a
+          href="#main-content"
+          className="sr-only fixed left-4 top-4 z-[110] bg-white px-5 py-3 text-sm font-black uppercase tracking-normal text-neutral-950 shadow-surface focus:not-sr-only"
+        >
+          Skip to main content
+        </a>
         <StructuredData companyInfo={companyInfo} />
         {children}
         <FloatingWhatsApp companyInfo={companyInfo} />

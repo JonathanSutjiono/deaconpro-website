@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/data/seo";
-import { getInsights, getProjects } from "@/sanity/lib/fetch";
+import { getInsights, getProjects, getServices } from "@/sanity/lib/fetch";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [projects, insights] = await Promise.all([getProjects(), getInsights()]);
+  const [projects, insights, services] = await Promise.all([getProjects(), getInsights(), getServices()]);
   const staticRoutes = [
     "",
     "/construction",
@@ -25,6 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...insights.map((insight) => ({
       url: `${siteUrl}/insight/${insight.slug}`,
       lastModified: new Date(insight.publishedAt),
+    })),
+    ...services.map((service) => ({
+      url: `${siteUrl}/services/${service.slug}`,
+      lastModified: new Date(),
     })),
   ];
 }

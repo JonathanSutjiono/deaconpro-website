@@ -29,7 +29,18 @@ export type CompanyInfo = {
   latitude?: number;
   longitude?: number;
   whatsappButtonLabel?: string;
+  whatsappPrefill?: string;
 };
+
+export const whatsappPrefill =
+  "Halo DEACON PRO, saya ingin konsultasi kebutuhan konstruksi/renovasi/interior.";
+
+export function createWhatsAppHref(number: string, message = whatsappPrefill) {
+  const normalized = number.replace(/\D/g, "").replace(/^0/, "62");
+  const recipient = normalized.startsWith("62") ? normalized : `62${normalized}`;
+
+  return `https://wa.me/${recipient.length > 4 ? recipient : "6281299375577"}?text=${encodeURIComponent(message)}`;
+}
 
 export const company: CompanyInfo = {
   name: "PT Deacon Pro Konstruksi Indonesia",
@@ -43,7 +54,8 @@ export const company: CompanyInfo = {
   phone: "021-22459116",
   phoneHref: "tel:02122459116",
   whatsapp: "081299375577",
-  whatsappHref: "https://wa.me/6281299375577",
+  whatsappHref: createWhatsAppHref("081299375577"),
+  whatsappPrefill,
   website: "deaconpro.co.id",
   websiteHref: "https://deaconpro.co.id",
   googleMapsHref:
@@ -60,7 +72,7 @@ export const company: CompanyInfo = {
   ],
   projectFocus: ["Office & Commercial", "Residential"],
   heroSubtitle:
-    "Construction, renovation, home maintenance, and interior work for homes and businesses across JABODETABEK, Bali, and Makassar.",
+    "A contractor for construction, interior fit-out, renovation, and home maintenance across JABODETABEK, Bali, and Makassar.",
   aboutSummary:
     "PT Deacon Pro Konstruksi Indonesia is a contractor and interior specialist based in Kelapa Gading, Jakarta. We support residential and commercial work across JABODETABEK, Bali, and Makassar through construction, interior fit-out, renovation, maintenance, and hands-on project management.",
   about:

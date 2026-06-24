@@ -7,8 +7,12 @@ import { portfolioType } from "./portfolio";
 import { processStepType } from "./processStep";
 import { serviceType } from "./service";
 import { siteSettingsType } from "./siteSettings";
+import { ctaType, imageWithAltType, seoType } from "./objects";
 
 export const schemaTypes = [
+  imageWithAltType,
+  seoType,
+  ctaType,
   siteSettingsType,
   homepageType,
   aboutType,

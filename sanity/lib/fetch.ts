@@ -1,12 +1,13 @@
 import { cache } from "react";
 import { toPlainText, type PortableTextBlock } from "@portabletext/react";
-import { company, type CompanyInfo } from "@/data/company";
+import { company, createWhatsAppHref, type CompanyInfo } from "@/data/company";
 import type { Insight } from "@/data/insights";
 import type { Project, ProjectCategory } from "@/data/projects";
 import {
   constructionServices,
   interiorServices,
   type ServiceItem,
+  type ServicePillar,
 } from "@/data/services";
 import { hasSanityConfig, sanityClient } from "./client";
 import {
@@ -68,13 +69,6 @@ function phoneHref(phone: string) {
   return normalized ? `tel:${normalized}` : company.phoneHref;
 }
 
-function whatsappHref(number: string) {
-  let normalized = number.replace(/\D/g, "");
-  if (normalized.startsWith("0")) normalized = `62${normalized.slice(1)}`;
-  if (!normalized.startsWith("62")) normalized = `62${normalized}`;
-  return normalized.length > 4 ? `https://wa.me/${normalized}` : company.whatsappHref;
-}
-
 async function safeFetch<T>(query: string, params: Record<string, unknown> = {}) {
   if (!hasSanityConfig) return undefined;
 
@@ -82,10 +76,14 @@ async function safeFetch<T>(query: string, params: Record<string, unknown> = {})
     return await sanityClient.fetch<T>(query, params, {
       next: { revalidate: 60 },
     });
-  } catch (error) {
-    console.warn("[sanity] Query failed; using static fallback content.", error);
+  } catch {
     return undefined;
   }
+}
+
+function imageAlt(value: unknown, fallback: string) {
+  if (!value || typeof value !== "object") return fallback;
+  return optionalText((value as SanityDocument).alt) ?? fallback;
 }
 
 function mapSiteSettings(doc?: SanityDocument | null): SiteSettingsContent {
@@ -102,7 +100,8 @@ function mapSiteSettings(doc?: SanityDocument | null): SiteSettingsContent {
     phone,
     phoneHref: phoneHref(phone),
     whatsappNumber,
-    whatsappHref: whatsappHref(whatsappNumber),
+    whatsappHref: createWhatsAppHref(whatsappNumber),
+    whatsappPrefill: optionalText(doc.whatsappPrefill),
     email: optionalText(doc.email),
     websiteUrl: optionalText(doc.websiteUrl) ?? fallbackSiteSettings.websiteUrl,
     instagramUrl: optionalText(doc.instagramUrl) ?? fallbackSiteSettings.instagramUrl,
@@ -112,8 +111,8 @@ function mapSiteSettings(doc?: SanityDocument | null): SiteSettingsContent {
     logoUrl: doc.logo ? resolveImageUrl(doc.logo, "", 1000) || undefined : undefined,
     logoMarkUrl: doc.logoMark ? resolveImageUrl(doc.logoMark, "", 500) || undefined : undefined,
     faviconUrl: doc.favicon ? resolveImageUrl(doc.favicon, "", 256) || undefined : undefined,
-    defaultSeoTitle: text(doc.defaultSeoTitle, fallbackSiteSettings.defaultSeoTitle),
-    defaultSeoDescription: text(doc.defaultSeoDescription, fallbackSiteSettings.defaultSeoDescription),
+    defaultSeoTitle: text((doc.defaultSeo as SanityDocument | undefined)?.title, text(doc.defaultSeoTitle, fallbackSiteSettings.defaultSeoTitle)),
+    defaultSeoDescription: text((doc.defaultSeo as SanityDocument | undefined)?.description, text(doc.defaultSeoDescription, fallbackSiteSettings.defaultSeoDescription)),
     defaultOgImage: resolveImageUrl(doc.defaultOgImage, fallbackSiteSettings.defaultOgImage, 1600),
   };
 }
@@ -126,15 +125,19 @@ function mapHomepage(doc?: SanityDocument | null): HomepageContent {
     .map((line) => line.trim())
     .filter(Boolean);
 
+  const primaryCta = doc.primaryCta as SanityDocument | undefined;
+  const secondaryCta = doc.secondaryCta as SanityDocument | undefined;
+
   return {
     heroEyebrow: text(doc.heroEyebrow, fallbackHomepage.heroEyebrow),
     heroTitle: heroTitle.length ? heroTitle : fallbackHomepage.heroTitle,
     heroSubtitle: text(doc.heroSubtitle, fallbackHomepage.heroSubtitle),
     heroImage: resolveImageUrl(doc.heroImage, fallbackHomepage.heroImage),
-    primaryButtonLabel: text(doc.primaryButtonLabel, fallbackHomepage.primaryButtonLabel),
-    primaryButtonLink: text(doc.primaryButtonLink, fallbackHomepage.primaryButtonLink),
-    secondaryButtonLabel: text(doc.secondaryButtonLabel, fallbackHomepage.secondaryButtonLabel),
-    secondaryButtonLink: text(doc.secondaryButtonLink, fallbackHomepage.secondaryButtonLink),
+    heroImageAlt: imageAlt(doc.heroImage, fallbackHomepage.heroImageAlt),
+    primaryButtonLabel: text(primaryCta?.label, text(doc.primaryButtonLabel, fallbackHomepage.primaryButtonLabel)),
+    primaryButtonLink: text(primaryCta?.href, text(doc.primaryButtonLink, fallbackHomepage.primaryButtonLink)),
+    secondaryButtonLabel: text(secondaryCta?.label, text(doc.secondaryButtonLabel, fallbackHomepage.secondaryButtonLabel)),
+    secondaryButtonLink: text(secondaryCta?.href, text(doc.secondaryButtonLink, fallbackHomepage.secondaryButtonLink)),
     introTitle: text(doc.introTitle, fallbackHomepage.introTitle),
     introText: text(doc.introText, fallbackHomepage.introText),
     servicesTitle: text(doc.servicesTitle, fallbackHomepage.servicesTitle),
@@ -177,26 +180,43 @@ function mapAbout(doc?: SanityDocument | null): AboutContent {
 
 const servicePresentation: Record<
   string,
-  Pick<ServiceItem, "href" | "label" | "icon" | "cta">
+  Pick<ServiceItem, "slug" | "pillar" | "title" | "href" | "label" | "icon" | "cta">
 > = {
-  "Deacon Construction": { href: "/construction", label: "Construction", icon: "building", cta: "Explore Construction" },
-  "Deacon Interior": { href: "/interior", label: "Interior", icon: "interior", cta: "Explore Interior" },
-  "Build New": { href: "/construction", label: "Build", icon: "build", cta: "Plan a Build" },
-  Renovation: { href: "/construction", label: "Renovation", icon: "renovation", cta: "Discuss Renovation" },
-  "Home Maintenance": { href: "/#contact", label: "Maintenance", icon: "maintenance", cta: "Request Support" },
+  construction: { slug: "construction", pillar: "construction", title: "Construction", href: "/services/construction", label: "Build New", icon: "building", cta: "Explore Construction" },
+  "interior-fit-out": { slug: "interior-fit-out", pillar: "interior-fit-out", title: "Interior Fit-Out", href: "/services/interior-fit-out", label: "Interior", icon: "interior", cta: "Explore Interior" },
+  renovation: { slug: "renovation", pillar: "renovation", title: "Renovation", href: "/services/renovation", label: "Renovation", icon: "renovation", cta: "Plan a Renovation" },
+  "home-maintenance": { slug: "home-maintenance", pillar: "home-maintenance", title: "Home Maintenance", href: "/services/home-maintenance", label: "Maintenance", icon: "maintenance", cta: "Request Support" },
+  "Deacon Construction": { slug: "construction", pillar: "construction", title: "Construction", href: "/services/construction", label: "Build New", icon: "building", cta: "Explore Construction" },
+  "Build New": { slug: "construction", pillar: "construction", title: "Construction", href: "/services/construction", label: "Build New", icon: "building", cta: "Explore Construction" },
+  "Deacon Interior": { slug: "interior-fit-out", pillar: "interior-fit-out", title: "Interior Fit-Out", href: "/services/interior-fit-out", label: "Interior", icon: "interior", cta: "Explore Interior" },
+  Renovation: { slug: "renovation", pillar: "renovation", title: "Renovation", href: "/services/renovation", label: "Renovation", icon: "renovation", cta: "Plan a Renovation" },
+  "Home Maintenance": { slug: "home-maintenance", pillar: "home-maintenance", title: "Home Maintenance", href: "/services/home-maintenance", label: "Maintenance", icon: "maintenance", cta: "Request Support" },
 };
 
 function mapService(doc: SanityDocument): ServiceItem | undefined {
   const title = optionalText(doc.title);
   if (!title) return undefined;
-  const category = text(doc.category, title);
-  const presentation = servicePresentation[category] ?? servicePresentation[title] ?? servicePresentation["Deacon Construction"];
+  const legacyCategory = text(doc.category, title);
+  const pillar = optionalText(doc.pillar) as ServicePillar | undefined;
+  const presentation =
+    (pillar ? servicePresentation[pillar] : undefined) ??
+    servicePresentation[legacyCategory] ??
+    servicePresentation[title] ??
+    servicePresentation.construction;
 
   return {
-    title,
-    description: text(doc.shortDescription, portablePlainText(doc.description, "")),
     ...presentation,
+    title: presentation.title,
+    description: text(doc.shortDescription, portablePlainText(doc.description, "")),
   };
+}
+
+function uniqueServicePillars(items: ServiceItem[]) {
+  const unique = new Map<ServicePillar, ServiceItem>();
+  for (const item of items) {
+    if (!unique.has(item.pillar)) unique.set(item.pillar, item);
+  }
+  return [...unique.values()];
 }
 
 function projectCategory(value: unknown): ProjectCategory {
@@ -231,9 +251,9 @@ function mapProject(doc: SanityDocument): Project | undefined {
     coverImage,
     gallery: gallery.length ? gallery : [coverImage],
     featured: Boolean(doc.featured),
-    seoTitle: text(doc.seoTitle, title),
-    seoDescription: text(doc.seoDescription, description),
-    imageAlt: `${title} - ${text(doc.location, "Deacon Pro project")}`,
+    seoTitle: text((doc.seo as SanityDocument | undefined)?.title, text(doc.seoTitle, title)),
+    seoDescription: text((doc.seo as SanityDocument | undefined)?.description, text(doc.seoDescription, description)),
+    imageAlt: imageAlt(doc.coverImage, `${title} - ${text(doc.location, "Deacon Pro project")}`),
     clientName: optionalText(doc.clientName),
     status: optionalText(doc.status),
     // An incomplete CMS entry is still safe to preview, but it is clearly
@@ -250,6 +270,7 @@ function mapProcessStep(doc: SanityDocument, index: number): ProcessStepContent 
     description: optionalText(doc.description),
     order: typeof doc.order === "number" ? doc.order : index + 1,
     iconLabel: optionalText(doc.iconLabel),
+    output: optionalText(doc.output),
   };
 }
 
@@ -272,9 +293,9 @@ function mapInsight(doc: SanityDocument): Insight | undefined {
     portableContent,
     coverImage: resolveImageUrl(doc.coverImage, "/images/hero-architecture.png"),
     publishedAt: text(doc.publishedAt, new Date().toISOString()),
-    seoTitle: text(doc.seoTitle, title),
-    seoDescription: text(doc.seoDescription, excerpt),
-    imageAlt: `${title} - Deacon Pro insight`,
+    seoTitle: text((doc.seo as SanityDocument | undefined)?.title, text(doc.seoTitle, title)),
+    seoDescription: text((doc.seo as SanityDocument | undefined)?.description, text(doc.seoDescription, excerpt)),
+    imageAlt: imageAlt(doc.coverImage, `${title} - Deacon Pro insight`),
     readTime: optionalText(doc.readTime),
   };
 }
@@ -295,7 +316,7 @@ function mapContact(doc?: SanityDocument | null): ContactContent {
     phone,
     phoneHref: phoneHref(phone),
     whatsappNumber,
-    whatsappHref: whatsappHref(whatsappNumber),
+    whatsappHref: createWhatsAppHref(whatsappNumber),
     whatsappButtonLabel: text(doc.whatsappButtonLabel, fallbackContact.whatsappButtonLabel),
     email: optionalText(doc.email) ?? fallbackContact.email,
     address: text(doc.address, fallbackContact.address),
@@ -363,7 +384,7 @@ const getServiceDocuments = cache(async () =>
 export const getServices = cache(async () => {
   const docs = await getServiceDocuments();
   if (docs === undefined) return fallbackServices;
-  return docs.map(mapService).filter((item): item is ServiceItem => Boolean(item));
+  return uniqueServicePillars(docs.map(mapService).filter((item): item is ServiceItem => Boolean(item)));
 });
 
 export const getFeaturedServices = cache(async () => {
@@ -373,24 +394,14 @@ export const getFeaturedServices = cache(async () => {
     .filter((doc) => Boolean(doc.featured))
     .map(mapService)
     .filter((item): item is ServiceItem => Boolean(item));
-  const unique = new Map<string, ServiceItem>();
-  for (const item of mapped) {
-    if (!unique.has(item.title.toLowerCase())) {
-      unique.set(item.title.toLowerCase(), item);
-    }
-  }
-  return [...unique.values()].slice(0, 5);
+  return uniqueServicePillars(mapped).slice(0, 4);
 });
 
 export const getConstructionServiceNames = cache(async () => {
   const docs = await getServiceDocuments();
   if (docs === undefined) return constructionServices;
   const names = docs
-    .filter((doc) =>
-      ["Deacon Construction", "Build New", "Renovation", "Home Maintenance"].includes(
-        text(doc.category, ""),
-      ),
-    )
+    .filter((doc) => ["construction", "renovation"].includes(optionalText(doc.pillar) ?? "") || ["Deacon Construction", "Build New", "Renovation"].includes(text(doc.category, "")))
     .map((doc) => text(doc.title, ""))
     .filter(Boolean);
   return names;
@@ -400,7 +411,7 @@ export const getInteriorServiceNames = cache(async () => {
   const docs = await getServiceDocuments();
   if (docs === undefined) return interiorServices;
   const names = docs
-    .filter((doc) => text(doc.category, "") === "Deacon Interior")
+    .filter((doc) => optionalText(doc.pillar) === "interior-fit-out" || text(doc.category, "") === "Deacon Interior")
     .map((doc) => text(doc.title, ""))
     .filter(Boolean);
   return names;
@@ -412,6 +423,14 @@ export const getProjects = cache(async () => {
   const docs = await getProjectDocuments();
   if (docs === undefined) return fallbackProjects;
   return docs.map(mapProject).filter((item): item is Project => Boolean(item));
+});
+
+export const getServiceBySlug = cache(async (slug: string) => {
+  const docs = await getServiceDocuments();
+  if (docs === undefined) return fallbackServices.find((service) => service.slug === slug);
+  return uniqueServicePillars(docs.map(mapService).filter((item): item is ServiceItem => Boolean(item))).find(
+    (service) => service.slug === slug,
+  );
 });
 
 export const getProcessSteps = cache(async () => {
@@ -454,7 +473,8 @@ export async function getCompanyInfo(): Promise<CompanyInfo> {
     phone: settings.phone,
     phoneHref: settings.phoneHref,
     whatsapp: settings.whatsappNumber,
-    whatsappHref: settings.whatsappHref,
+    whatsappHref: createWhatsAppHref(settings.whatsappNumber, settings.whatsappPrefill),
+    whatsappPrefill: settings.whatsappPrefill,
     website: websiteHref.replace(/^https?:\/\//, "").replace(/\/$/, ""),
     websiteHref,
     address: contact.address,

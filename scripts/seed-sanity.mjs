@@ -6,8 +6,8 @@ const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-01-01";
 const token = process.env.SANITY_API_WRITE_TOKEN;
 
 if (!projectId || !token) {
-  console.error(
-    "Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN. Add them to .env.local before running this manual seed.",
+  process.stderr.write(
+    "Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN. Add them to .env.local before running this manual seed.\n",
   );
   process.exit(1);
 }
@@ -41,11 +41,19 @@ async function ensureSingleton(id, type, document) {
 
 async function ensureBySlug(type, slug, document) {
   const existing = await client.fetch(
-    `*[_type == $type && slug.current == $slug][0]._id`,
+    `*[_type == $type && slug.current == $slug][0]`,
     { type, slug },
   );
   if (existing) {
-    summary.skipped.push(`${type} (${slug})`);
+    const missingFields = Object.fromEntries(
+      Object.entries(document).filter(([field]) => !Object.hasOwn(existing, field)),
+    );
+    if (Object.keys(missingFields).length) {
+      await client.patch(existing._id).set(missingFields).commit();
+      summary.updated.push(`${type} (${slug})`);
+    } else {
+      summary.skipped.push(`${type} (${slug})`);
+    }
     return;
   }
 
@@ -55,11 +63,19 @@ async function ensureBySlug(type, slug, document) {
 
 async function ensureProcessStep(step) {
   const existing = await client.fetch(
-    `*[_type == "processStep" && title == $title][0]._id`,
+    `*[_type == "processStep" && title == $title][0]`,
     { title: step.title },
   );
   if (existing) {
-    summary.skipped.push(`processStep (${step.title})`);
+    const missingFields = Object.fromEntries(
+      Object.entries(step).filter(([field]) => !Object.hasOwn(existing, field)),
+    );
+    if (Object.keys(missingFields).length) {
+      await client.patch(existing._id).set(missingFields).commit();
+      summary.updated.push(`processStep (${step.title})`);
+    } else {
+      summary.skipped.push(`processStep (${step.title})`);
+    }
     return;
   }
 
@@ -76,6 +92,7 @@ await ensureSingleton("siteSettings", "siteSettings", {
   tagline: "Build New · Renovation · Home Maintenance",
   phone: "021-22459116",
   whatsappNumber: "081299375577",
+  whatsappPrefill: "Halo DEACON PRO, saya ingin konsultasi kebutuhan konstruksi/renovasi/interior.",
   websiteUrl: "https://deaconpro.co.id",
   instagramUrl: "https://www.instagram.com/deaconprocontractor",
   facebookUrl: "#",
@@ -88,15 +105,17 @@ await ensureSingleton("siteSettings", "siteSettings", {
 await ensureSingleton("homepage", "homepage", {
   heroEyebrow: "Deacon Pro",
   heroTitle: "DESIGN.\nCONSTRUCT.\nINSPIRE.",
-  heroSubtitle: "Construction, renovation, home maintenance, and interior work for homes and businesses across JABODETABEK, Bali, and Makassar.",
+  heroSubtitle: "A contractor for construction, interior fit-out, renovation, and home maintenance across JABODETABEK, Bali, and Makassar.",
+  primaryCta: { _type: "cta", label: "Consult on WhatsApp", href: "https://wa.me/6281299375577?text=Halo%20DEACON%20PRO%2C%20saya%20ingin%20konsultasi%20kebutuhan%20konstruksi%2Frenovasi%2Finterior." },
+  secondaryCta: { _type: "cta", label: "View Portfolio", href: "/#portfolio" },
   primaryButtonLabel: "WhatsApp",
   primaryButtonLink: "https://wa.me/6281299375577",
   secondaryButtonLabel: "View Portfolio",
   secondaryButtonLink: "/#portfolio",
   introTitle: "One team for construction, interior, and property care.",
   introText: "PT Deacon Pro Konstruksi Indonesia supports residential and commercial work with construction, interior fit-out, renovation, maintenance, and hands-on project management.",
-  servicesTitle: "Practical support from first build to ongoing care.",
-  servicesSubtitle: "Construction, interior, renovation, and maintenance services across JABODETABEK, Bali, and Makassar.",
+  servicesTitle: "Four practical service pillars for property delivery.",
+  servicesSubtitle: "Construction, interior fit-out, renovation, and home maintenance across JABODETABEK, Bali, and Makassar.",
   portfolioTitle: "Construction and interior project references.",
   portfolioSubtitle: "Browse work by project type and open each reference for scope and project details.",
   processTitle: "A straightforward route from survey to handover.",
@@ -151,18 +170,19 @@ await ensureSingleton("footer", "footer", {
 });
 
 const services = [
-  ["deacon-construction", "Deacon Construction", "Deacon Construction", "General contracting, site coordination, and project control for residential and commercial work."],
-  ["deacon-interior", "Deacon Interior", "Deacon Interior", "Interior design and fit-out for homes, offices, retail spaces, and custom furniture needs."],
-  ["build-new", "Build New", "Build New", "Planning and construction for new homes, commercial buildings, and hospitality spaces."],
-  ["renovation", "Renovation", "Renovation", "Measured renovation work for layout changes, building repairs, and finish upgrades."],
-  ["home-maintenance", "Home Maintenance", "Home Maintenance", "Scheduled and responsive maintenance to keep the property safe, functional, and well cared for."],
+  ["deacon-construction", "Deacon Construction", "Deacon Construction", "General contracting, site coordination, and project control for residential and commercial work.", "construction"],
+  ["deacon-interior", "Deacon Interior", "Deacon Interior", "Interior design and fit-out for homes, offices, retail spaces, and custom furniture needs.", "interior-fit-out"],
+  ["build-new", "Build New", "Build New", "Planning and construction for new homes, commercial buildings, and hospitality spaces.", "construction"],
+  ["renovation", "Renovation", "Renovation", "Measured renovation work for layout changes, building repairs, and finish upgrades.", "renovation"],
+  ["home-maintenance", "Home Maintenance", "Home Maintenance", "Scheduled and responsive maintenance to keep the property safe, functional, and well cared for.", "home-maintenance"],
 ];
 
-for (const [slug, title, category, shortDescription] of services) {
+for (const [slug, title, category, shortDescription, pillar] of services) {
   await ensureBySlug("service", slug, {
     title,
     slug: { _type: "slug", current: slug },
     category,
+    pillar,
     shortDescription,
     description: block(shortDescription, slug),
     order: services.findIndex((item) => item[0] === slug) + 1,
@@ -201,13 +221,13 @@ for (const [slug, title, category, location, year, scope, description, featured]
 }
 
 for (const step of [
-  [1, "Consultation", "Initial discussion to understand project needs, site condition, budget direction, and expected timeline.", "consultation"],
-  [2, "Site Survey", "On-site review to measure, document, and identify technical requirements before proposal.", "survey"],
-  [3, "Proposal", "Scope, work plan, material direction, and budget estimation are prepared for approval.", "proposal"],
-  [4, "Execution", "Work begins based on approved scope, timeline, coordination, and field supervision.", "execution"],
-  [5, "Handover", "Final checking, finishing review, and project handover after agreed works are completed.", "handover"],
+  [1, "Consultation", "Initial discussion to understand project needs, site condition, budget direction, and expected timeline.", "consultation", "Project brief"],
+  [2, "Site Survey", "On-site review to measure, document, and identify technical requirements before proposal.", "survey", "Survey notes"],
+  [3, "Proposal", "Scope, work plan, material direction, and budget estimation are prepared for approval.", "proposal", "Proposal & estimate"],
+  [4, "Execution", "Work begins based on approved scope, timeline, coordination, and field supervision.", "execution", "Construction progress"],
+  [5, "Handover", "Final checking, finishing review, and project handover after agreed works are completed.", "handover", "Completed work"],
 ]) {
-  await ensureProcessStep({ order: step[0], title: step[1], description: step[2], iconLabel: step[3], showOnWebsite: true, published: true });
+  await ensureProcessStep({ order: step[0], title: step[1], description: step[2], iconLabel: step[3], output: step[4], showOnWebsite: true, published: true });
 }
 
 const insights = [
@@ -234,7 +254,7 @@ for (const [slug, title, category, excerpt] of insights) {
   });
 }
 
-console.log("Sanity seed selesai.");
-console.log(`Dibuat (${summary.created.length}): ${summary.created.join(", ") || "-"}`);
-console.log(`Dilengkapi (${summary.updated.length}): ${summary.updated.join(", ") || "-"}`);
-console.log(`Dilewati (${summary.skipped.length}): ${summary.skipped.join(", ") || "-"}`);
+process.stdout.write("Sanity seed selesai.\n");
+process.stdout.write(`Dibuat (${summary.created.length}): ${summary.created.join(", ") || "-"}\n`);
+process.stdout.write(`Dilengkapi (${summary.updated.length}): ${summary.updated.join(", ") || "-"}\n`);
+process.stdout.write(`Dilewati (${summary.skipped.length}): ${summary.skipped.join(", ") || "-"}\n`);

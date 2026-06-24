@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: light;
+  --font-sans: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -12,6 +13,11 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 3px solid #b88a2a;
+  outline-offset: 4px;
 }
 
 #about,
@@ -30,6 +36,21 @@ body {
   color: #111111;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 ::selection {

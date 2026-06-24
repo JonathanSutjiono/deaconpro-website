@@ -1,6 +1,8 @@
 import { company, type CompanyInfo } from "@/data/company";
+import JsonLd from "@/components/JsonLd";
 
 export default function StructuredData({ companyInfo = company }: { companyInfo?: CompanyInfo }) {
+  const serviceAreas = companyInfo.serviceArea.split("·").map((area) => area.trim()).filter(Boolean);
   const data = [
     {
       "@context": "https://schema.org",
@@ -12,10 +14,11 @@ export default function StructuredData({ companyInfo = company }: { companyInfo?
     },
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
       name: companyInfo.name,
       url: companyInfo.websiteHref,
       telephone: companyInfo.phone,
+      image: companyInfo.logoUrl,
       address: {
         "@type": "PostalAddress",
         streetAddress: companyInfo.address,
@@ -24,14 +27,10 @@ export default function StructuredData({ companyInfo = company }: { companyInfo?
         postalCode: "14240",
         addressCountry: "ID",
       },
-      areaServed: companyInfo.serviceArea,
+      areaServed: serviceAreas.map((name) => ({ "@type": "AdministrativeArea", name })),
+      hasMap: companyInfo.googleMapsHref,
     },
   ];
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  return <JsonLd data={data} />;
 }

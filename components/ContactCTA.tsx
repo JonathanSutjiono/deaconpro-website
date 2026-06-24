@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { company, type CompanyInfo } from "@/data/company";
+import { company, createWhatsAppHref, type CompanyInfo } from "@/data/company";
 import type { ContactContent } from "@/sanity/lib/types";
 import ContactMapLoader from "@/components/ContactMapLoader";
 
@@ -20,7 +20,7 @@ export default function ContactCTA({
   const phone = contact?.phone ?? companyInfo.phone;
   const phoneLink = contact?.phoneHref ?? companyInfo.phoneHref;
   const whatsapp = contact?.whatsappNumber ?? companyInfo.whatsapp;
-  const whatsappLink = contact?.whatsappHref ?? companyInfo.whatsappHref;
+  const whatsappLink = createWhatsAppHref(whatsapp, companyInfo.whatsappPrefill);
   const address = contact?.address ?? companyInfo.address;
   const mapsLink = contact?.googleMapsUrl ?? companyInfo.googleMapsHref;
   const mapLatitude = contact?.mapLatitude ?? contact?.latitude ?? -6.1499;

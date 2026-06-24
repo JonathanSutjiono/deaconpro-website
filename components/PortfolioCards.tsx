@@ -54,6 +54,12 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
         : items.length === 4
           ? "grid auto-rows-fr gap-6 md:grid-cols-2"
           : "grid auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-3";
+  const imageSizes =
+    items.length === 1
+      ? "(min-width: 768px) 672px, 100vw"
+      : items.length === 2 || items.length === 4
+        ? "(min-width: 768px) 50vw, 100vw"
+        : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw";
 
   return (
     <div className={gridClass}>
@@ -82,7 +88,7 @@ export default function PortfolioCards({ items, dark = false }: { items: Item[];
               src={imageSrc}
               alt={"imageAlt" in item && item.imageAlt ? item.imageAlt : item.title}
               fill
-              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              sizes={imageSizes}
               className="object-cover transition duration-500 group-hover:scale-105"
               style={usesFallbackImage ? { objectPosition: fallbackPositions[index % fallbackPositions.length] } : undefined}
             />

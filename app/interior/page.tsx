@@ -35,7 +35,7 @@ export default async function InteriorPage() {
     ]);
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <Navbar companyInfo={companyInfo} />
       <Hero
         eyebrow="Interior"

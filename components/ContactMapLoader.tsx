@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 
 const ContactMap = dynamic(() => import("./ContactMap"), {
   ssr: false,
@@ -19,5 +20,31 @@ type ContactMapLoaderProps = {
 };
 
 export default function ContactMapLoader(props: ContactMapLoaderProps) {
-  return <ContactMap {...props} />;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !window.IntersectionObserver) {
+      setShouldLoad(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setShouldLoad(true);
+        observer.disconnect();
+      },
+      { rootMargin: "240px 0px" },
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef}>
+      {shouldLoad ? <ContactMap {...props} /> : <div className="h-[220px] bg-neutral-900 sm:h-[240px] md:h-[270px]" aria-hidden="true" />}
+    </div>
+  );
 }

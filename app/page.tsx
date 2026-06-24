@@ -56,7 +56,7 @@ export default async function Home() {
   ]);
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <Navbar companyInfo={companyInfo} />
       <Hero
         title={homepage.heroTitle}
@@ -64,11 +64,16 @@ export default async function Home() {
         eyebrow={homepage.heroEyebrow}
         description={homepage.heroSubtitle}
         imageSrc={homepage.heroImage}
-        imageAlt={`${companyInfo.shortName} construction and interior`}
-        primaryLabel={homepage.primaryButtonLink.includes("wa.me") ? homepage.primaryButtonLabel : "WhatsApp"}
+        imageAlt={homepage.heroImageAlt}
+        primaryLabel={
+          homepage.primaryButtonLink.includes("wa.me") && homepage.primaryButtonLabel !== "WhatsApp"
+            ? homepage.primaryButtonLabel
+            : "Consult on WhatsApp"
+        }
         primaryHref={companyInfo.whatsappHref}
         secondaryLabel={homepage.secondaryButtonLabel}
         secondaryHref={homepage.secondaryButtonLink}
+        servicePillars={["Construction", "Interior Fit-Out", "Renovation", "Home Maintenance"]}
       />
 
       <section id="about" className="section-space bg-white pb-16 pt-16 text-neutral-950 md:pb-20 md:pt-24">

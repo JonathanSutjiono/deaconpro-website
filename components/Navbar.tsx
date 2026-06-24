@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useId, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { company, type CompanyInfo } from "@/data/company";
 import { portfolioNavigation } from "@/data/portfolio";
 import { serviceNavigation } from "@/data/services";
@@ -26,17 +28,39 @@ function DesktopDropdown({
   label: string;
   items: { label: string; href: string }[];
 }) {
+  const [open, setOpen] = useState(false);
+  const menuId = useId();
+
   return (
-    <div className="group relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false);
+      }}
+    >
       <button
         className="flex h-[76px] items-center whitespace-nowrap text-[15px] font-semibold leading-5 text-neutral-800 transition hover:text-gold focus:outline-none focus-visible:text-gold"
         type="button"
         aria-haspopup="true"
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => setOpen((value) => !value)}
+        onFocus={() => setOpen(true)}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setOpen(false);
+        }}
       >
         {label}
-        <Chevron />
+        <Chevron open={open} />
       </button>
-      <div className="invisible absolute left-0 top-full z-20 w-64 translate-y-2 border border-neutral-200/90 bg-white p-1 opacity-0 shadow-surface transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+      <div
+        id={menuId}
+        className={`absolute left-0 top-full z-20 w-64 border border-neutral-200/90 bg-white p-1 shadow-surface transition duration-200 ${
+          open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
+        }`}
+      >
         {items.map((item) => (
           <Link
             key={item.href}
@@ -61,6 +85,7 @@ function MobileGroup({
   onNavigate: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const contentId = useId();
 
   return (
     <div className="border-b border-neutral-200">
@@ -69,12 +94,13 @@ function MobileGroup({
         onClick={() => setOpen((value) => !value)}
         type="button"
         aria-expanded={open}
+        aria-controls={contentId}
       >
         {label}
         <Chevron open={open} />
       </button>
       {open ? (
-        <div className="pb-3">
+        <div id={contentId} className="pb-3">
           {items.map((item) => (
             <Link
               key={item.href}
@@ -93,10 +119,11 @@ function MobileGroup({
 
 export default function Navbar({ companyInfo = company }: { companyInfo?: CompanyInfo }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/85 bg-white/95 text-neutral-950 shadow-[0_8px_30px_rgba(17,17,17,0.05)] backdrop-blur-md">
-      <nav className="mx-auto flex h-[76px] w-full max-w-[1536px] flex-nowrap items-center justify-between gap-3 px-4 sm:px-6 xl:gap-3 xl:px-8 2xl:gap-4">
+      <nav aria-label="Primary navigation" className="mx-auto flex h-[76px] w-full max-w-[1536px] flex-nowrap items-center justify-between gap-3 px-4 sm:px-6 xl:gap-3 xl:px-8 2xl:gap-4">
         <Link
           href="/"
           className="flex min-w-0 shrink-0 items-center gap-3"
@@ -131,7 +158,7 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
         </Link>
 
         <div className="hidden h-full flex-nowrap items-center gap-3 xl:flex 2xl:gap-4">
-          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/">
+          <Link aria-current={pathname === "/" ? "page" : undefined} className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/">
             Home
           </Link>
           <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#about">
@@ -142,7 +169,7 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
           <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#process">
             Process
           </Link>
-          <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/insight">
+          <Link aria-current={pathname === "/insight" ? "page" : undefined} className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/insight">
             Insight
           </Link>
           <Link className="whitespace-nowrap text-[15px] font-semibold leading-5 transition hover:text-gold focus:outline-none focus-visible:text-gold" href="/#contact">
@@ -166,19 +193,30 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
           WhatsApp
         </Link>
 
+        <Link
+          href={companyInfo.whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Consult via WhatsApp"
+          className="grid h-11 w-11 shrink-0 place-items-center border border-gold bg-gold text-white transition hover:bg-neutral-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold/25 md:hidden"
+        >
+          <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
+        </Link>
+
         <button
           className="grid h-11 w-11 shrink-0 place-items-center border border-neutral-300 text-neutral-950 transition hover:border-gold hover:text-gold xl:hidden"
           onClick={() => setOpen((value) => !value)}
           type="button"
           aria-label="Toggle navigation"
           aria-expanded={open}
+          aria-controls="mobile-navigation"
         >
           {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
         </button>
       </nav>
 
       {open ? (
-        <div className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
+        <div id="mobile-navigation" aria-label="Mobile navigation" className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
           <div className="container-x py-3">
             <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/" onClick={() => setOpen(false)}>
               Home

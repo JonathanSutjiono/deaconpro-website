@@ -52,12 +52,12 @@ No Sanity write token is required by the public frontend.
 The client can edit:
 
 - Company name, logo, logo mark, favicon, tagline, phone, WhatsApp, email, and social links
-- Homepage hero image, headings, text, and button labels/links
+- Homepage hero image, headings, text, and primary/secondary CTA objects
 - About text, image, highlights, and values
-- Services text and publishing order
-- Portfolio text, cover image, gallery, project details, and SEO fields
+- Service pillar, text, media alt text, visibility, and publishing order
+- Portfolio text, cover image/gallery alt text, project details, visibility, and SEO fields
 - Process steps
-- Insight articles, cover images, publish dates, and SEO fields
+- Insight articles, cover-image alt text, publish dates, visibility, and SEO fields
 - Contact address, service area, Google Maps link/embed, coordinates, and social links
 - Footer description, copyright, and links
 
@@ -84,10 +84,9 @@ The public website keeps its current static content in `data/`. Every CMS fetch 
 - Sanity environment variables are missing
 - The Sanity API request fails
 - A singleton document has not been created
-- A published collection is empty
 - An individual CMS project or insight cannot be found but a static item with the same slug exists
 
-This prevents an empty CMS dataset from making the live website blank.
+An intentionally empty published collection remains empty on the public website. This respects the editor's visibility choices instead of replacing hidden content with dummy content.
 
 ## Preview Safety
 

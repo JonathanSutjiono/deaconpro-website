@@ -19,11 +19,15 @@ export function createPageMetadata({
   description,
   path = "/",
   image = "/images/hero-architecture.png",
+  noIndex = false,
+  type = "website",
 }: {
   title: string;
   description: string;
   path?: string;
   image?: string;
+  noIndex?: boolean;
+  type?: "website" | "article";
 }): Metadata {
   const url = new URL(path, siteUrl);
 
@@ -34,6 +38,7 @@ export function createPageMetadata({
     alternates: {
       canonical: url,
     },
+    robots: noIndex ? { index: false, follow: false } : undefined,
     openGraph: {
       title,
       description,
@@ -41,7 +46,7 @@ export function createPageMetadata({
       siteName: company.name,
       images: [{ url: image, width: 1200, height: 630, alt: title }],
       locale: "id_ID",
-      type: "website",
+      type,
     },
     twitter: {
       card: "summary_large_image",

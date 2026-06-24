@@ -8,6 +8,7 @@ export type HomepageContent = {
   heroTitle: string[];
   heroSubtitle: string;
   heroImage: string;
+  heroImageAlt: string;
   primaryButtonLabel: string;
   primaryButtonLink: string;
   secondaryButtonLabel: string;
@@ -86,6 +87,7 @@ export type SiteSettingsContent = {
   phoneHref: string;
   whatsappNumber: string;
   whatsappHref: string;
+  whatsappPrefill?: string;
   email?: string;
   websiteUrl?: string;
   instagramUrl?: string;

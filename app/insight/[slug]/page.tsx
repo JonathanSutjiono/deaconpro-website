@@ -5,8 +5,9 @@ import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import PortableContent from "@/components/PortableContent";
+import JsonLd, { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { insights } from "@/data/insights";
-import { createPageMetadata } from "@/data/seo";
+import { createPageMetadata, siteUrl } from "@/data/seo";
 import {
   getCompanyInfo,
   getContact,
@@ -42,6 +43,7 @@ export async function generateMetadata({ params }: PageProps) {
     description: insight.seoDescription,
     path: `/insight/${insight.slug}`,
     image: insight.coverImage,
+    type: "article",
   });
 }
 
@@ -57,8 +59,28 @@ export default async function InsightDetailPage({ params }: PageProps) {
   if (!insight) notFound();
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <Navbar companyInfo={companyInfo} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: siteUrl },
+          { name: "Insight", item: `${siteUrl}/insight` },
+          { name: insight.title, item: `${siteUrl}/insight/${insight.slug}` },
+        ]}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: insight.title,
+          description: insight.excerpt,
+          image: insight.coverImage,
+          datePublished: insight.publishedAt,
+          mainEntityOfPage: `${siteUrl}/insight/${insight.slug}`,
+          author: { "@type": "Organization", name: companyInfo.name },
+          publisher: { "@type": "Organization", name: companyInfo.name },
+        }}
+      />
       <article>
         <section className="relative min-h-[68vh] overflow-hidden pt-20">
           <Image

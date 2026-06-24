@@ -15,6 +15,7 @@ type HeroProps = {
   tertiaryHref?: string;
   imageSrc?: string;
   imageAlt?: string;
+  servicePillars?: string[];
 };
 
 export default function Hero({
@@ -30,6 +31,7 @@ export default function Hero({
   tertiaryHref,
   imageSrc = "/images/hero-architecture.png",
   imageAlt = "",
+  servicePillars,
 }: HeroProps) {
   const lines = Array.isArray(title) ? title : [title];
   const primaryExternal = primaryHref.startsWith("http");
@@ -73,6 +75,16 @@ export default function Hero({
             <p className="mt-8 max-w-2xl text-base leading-8 text-white/82 md:text-lg md:leading-9">
               {description}
             </p>
+          ) : null}
+          {servicePillars?.length ? (
+            <ul className="mt-7 flex max-w-3xl flex-wrap gap-x-4 gap-y-2 text-[14px] font-bold uppercase leading-5 tracking-normal text-champagne sm:gap-x-5">
+              {servicePillars.map((pillar) => (
+                <li key={pillar} className="flex items-center gap-2">
+                  <span className="h-1 w-1 bg-champagne" aria-hidden="true" />
+                  {pillar}
+                </li>
+              ))}
+            </ul>
           ) : null}
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link

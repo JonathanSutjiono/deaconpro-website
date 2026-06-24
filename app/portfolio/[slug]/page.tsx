@@ -6,8 +6,9 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import PortfolioCards from "@/components/PortfolioCards";
 import PortableContent from "@/components/PortableContent";
+import JsonLd, { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { projects } from "@/data/projects";
-import { createPageMetadata } from "@/data/seo";
+import { createPageMetadata, siteUrl } from "@/data/seo";
 import {
   getCompanyInfo,
   getContact,
@@ -60,8 +61,31 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const relatedProjects = await getRelatedProjects(project);
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <Navbar companyInfo={companyInfo} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: siteUrl },
+          { name: "Portfolio", item: `${siteUrl}/#portfolio` },
+          { name: project.title, item: `${siteUrl}/portfolio/${project.slug}` },
+        ]}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.description,
+          image: project.coverImage,
+          url: `${siteUrl}/portfolio/${project.slug}`,
+          about: project.scopeOfWork,
+          provider: {
+            "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+            name: companyInfo.name,
+            url: companyInfo.websiteHref,
+          },
+        }}
+      />
       <section className="relative min-h-[72vh] overflow-hidden pt-20">
         <Image
           src={project.coverImage}
