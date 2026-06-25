@@ -57,7 +57,7 @@ function DesktopDropdown({
       </button>
       <div
         id={menuId}
-        className={`absolute left-0 top-full z-20 w-64 border border-neutral-200/90 bg-white p-1 shadow-surface transition duration-200 ${
+        className={`absolute left-0 top-full z-[1210] w-64 border border-neutral-200/90 bg-white p-1 shadow-surface transition duration-200 ${
           open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
         }`}
       >
@@ -122,7 +122,7 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
   const pathname = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/85 bg-white/95 text-neutral-950 shadow-[0_8px_30px_rgba(17,17,17,0.05)] backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-[1200] border-b border-neutral-200/85 bg-white/95 text-neutral-950 shadow-[0_8px_30px_rgba(17,17,17,0.05)] backdrop-blur-md">
       <nav aria-label="Primary navigation" className="mx-auto flex h-[76px] w-full max-w-[1536px] flex-nowrap items-center justify-between gap-3 px-4 sm:px-6 xl:gap-3 xl:px-8 2xl:gap-4">
         <Link
           href="/"
@@ -216,7 +216,7 @@ export default function Navbar({ companyInfo = company }: { companyInfo?: Compan
       </nav>
 
       {open ? (
-        <div id="mobile-navigation" aria-label="Mobile navigation" className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
+        <div id="mobile-navigation" aria-label="Mobile navigation" className="relative z-[1210] max-h-[calc(100vh-76px)] overflow-y-auto border-t border-neutral-200 bg-white xl:hidden">
           <div className="container-x py-3">
             <Link className="block border-b border-neutral-200 py-4 text-base font-bold text-neutral-900" href="/" onClick={() => setOpen(false)}>
               Home

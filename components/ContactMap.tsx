@@ -31,7 +31,7 @@ export default function ContactMap({
   );
 
   return (
-    <div className="deacon-contact-map relative h-[220px] overflow-hidden sm:h-[240px] md:h-[270px]" role="region" aria-label="Peta lokasi kantor Deacon Pro">
+    <div className="deacon-contact-map relative z-0 isolate h-[220px] overflow-hidden sm:h-[240px] md:h-[270px]" role="region" aria-label="Peta lokasi kantor Deacon Pro">
       <MapContainer
         center={[latitude, longitude]}
         zoom={zoom}
@@ -48,15 +48,60 @@ export default function ContactMap({
           <Popup>{markerLabel}</Popup>
         </Marker>
       </MapContainer>
-      <div className="pointer-events-none absolute inset-0 z-[400] bg-black/15" aria-hidden="true" />
       <style jsx global>{`
+        .deacon-contact-map {
+          contain: paint;
+          overflow: hidden;
+        }
+
         .deacon-contact-map .leaflet-container {
-          background: #171717;
+          background: #f6f4ef;
           font-family: var(--font-sans), Arial, sans-serif;
+          overflow: hidden;
+        }
+
+        .deacon-contact-map .leaflet-pane {
+          z-index: 1 !important;
         }
 
         .deacon-contact-map .leaflet-tile-pane {
-          filter: grayscale(0.32) sepia(0.12) saturate(0.76) brightness(0.82);
+          z-index: 1 !important;
+        }
+
+        /* Keep OSM tiles close to a clean default map while gently matching the premium contact frame. */
+        .deacon-contact-map .leaflet-tile {
+          filter: brightness(1.04) contrast(1.03) saturate(0.96);
+        }
+
+        .deacon-contact-map .leaflet-overlay-pane,
+        .deacon-contact-map .leaflet-shadow-pane {
+          z-index: 2 !important;
+        }
+
+        .deacon-contact-map .leaflet-marker-pane {
+          z-index: 6 !important;
+        }
+
+        .deacon-contact-map .leaflet-tooltip-pane {
+          z-index: 8 !important;
+        }
+
+        .deacon-contact-map .leaflet-popup-pane {
+          z-index: 10 !important;
+        }
+
+        .deacon-contact-map .leaflet-top,
+        .deacon-contact-map .leaflet-bottom {
+          z-index: 14 !important;
+        }
+
+        .deacon-contact-map .leaflet-control {
+          z-index: 14 !important;
+        }
+
+        .deacon-contact-map .leaflet-control-container {
+          position: relative;
+          z-index: 14 !important;
         }
 
         .deacon-contact-map .leaflet-control-zoom a {

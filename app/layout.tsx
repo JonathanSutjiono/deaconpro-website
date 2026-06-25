@@ -30,7 +30,7 @@ export default async function RootLayout({
       <body className="bg-ink text-white antialiased">
         <a
           href="#main-content"
-          className="sr-only fixed left-4 top-4 z-[110] bg-white px-5 py-3 text-sm font-black uppercase tracking-normal text-neutral-950 shadow-surface focus:not-sr-only"
+          className="sr-only fixed left-4 top-4 z-[1300] bg-white px-5 py-3 text-sm font-black uppercase tracking-normal text-neutral-950 shadow-surface focus:not-sr-only"
         >
           Skip to main content
         </a>

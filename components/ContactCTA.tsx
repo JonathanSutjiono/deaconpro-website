@@ -121,8 +121,8 @@ export default function ContactCTA({
           </div>
         </div>
         {showMap && hasMapCoordinates ? (
-          <div className="relative mt-8 grid gap-6 border-t border-white/15 pt-7 lg:grid-cols-[minmax(0,1.15fr)_minmax(220px,0.45fr)] lg:items-end">
-            <div className="overflow-hidden border border-white/20 bg-[#0b0b0b] p-1.5 shadow-[0_16px_34px_rgba(0,0,0,0.2)]">
+          <div className="relative z-0 mt-8 grid gap-6 border-t border-white/15 pt-7 lg:grid-cols-[minmax(0,1.15fr)_minmax(220px,0.45fr)] lg:items-end">
+            <div className="relative z-0 isolate overflow-hidden border border-white/20 bg-[#0b0b0b] p-1.5 shadow-[0_16px_34px_rgba(0,0,0,0.2)]">
               <ContactMapLoader
                 latitude={mapLatitude}
                 longitude={mapLongitude}

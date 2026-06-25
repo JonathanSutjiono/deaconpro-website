@@ -43,7 +43,7 @@ export default function ContactMapLoader(props: ContactMapLoaderProps) {
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="relative z-0 isolate overflow-hidden">
       {shouldLoad ? <ContactMap {...props} /> : <div className="h-[220px] bg-neutral-900 sm:h-[240px] md:h-[270px]" aria-hidden="true" />}
     </div>
   );
